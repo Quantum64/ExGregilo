@@ -7,4 +7,5 @@ public class ModData {
 	// Maybe these don't need to go in here
 	public static final String EX_NIHILO_ID = "exnihilo";
 	public static final String GREGTECH_ID = "gregtech";
+	public static final String EX_COMPRESSUM_ID = "excompressum";
 }
