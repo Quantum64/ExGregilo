@@ -26,6 +26,13 @@ minecraft {
     runDir = "eclipse"
 }
 
+repositories {
+    maven {
+        name 'tterrag'
+        url 'http://maven.tterrag.com/'
+    }
+}
+
 dependencies {
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
@@ -39,6 +46,8 @@ dependencies {
     // for more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
+	
+	compile "exnihilo:Ex-Nihilo:1.38-53:deobf"
 
 }
 
