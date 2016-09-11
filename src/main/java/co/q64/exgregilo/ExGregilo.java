@@ -1,6 +1,7 @@
 package co.q64.exgregilo;
 
 import co.q64.exgregilo.proxy.CommonProxy;
+import co.q64.exgregilo.util.GTSieveRegistration;
 import co.q64.exgregilo.util.SieveRegistryCleaner;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -30,6 +31,7 @@ public class ExGregilo {
 	@EventHandler
 	public void init(FMLPostInitializationEvent event) {
 		SieveRegistryCleaner.removeDefaultOres();
+		GTSieveRegistration.addGTOres();
 	}
 
 	public static CommonProxy getProxy() {
