@@ -31,6 +31,10 @@ repositories {
         name 'tterrag'
         url 'http://maven.tterrag.com/'
     }
+	maven {
+        name 'greg'
+        url 'http://files.minecraftforge.net/maven/'
+	}
 }
 
 dependencies {
@@ -48,6 +52,7 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 	
 	compile "exnihilo:Ex-Nihilo:1.38-53:deobf"
+    compile "com.gregoriust.gregtech:gregtech_1.7.10:5.07.07:dev"
 
 }
 
