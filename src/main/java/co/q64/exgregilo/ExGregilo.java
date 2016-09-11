@@ -5,8 +5,7 @@ import co.q64.exgregilo.config.ConfigManagerImpl;
 import co.q64.exgregilo.data.ModData;
 import co.q64.exgregilo.links.LinkManagerImpl;
 import co.q64.exgregilo.links.exnihilo.ExNihilo;
-import co.q64.exgregilo.links.exnihilo.SieveRegistryCleaner;
-import co.q64.exgregilo.links.gregtech.GTSieveRegistration;
+import co.q64.exgregilo.links.gregtech.GregTech;
 import co.q64.exgregilo.proxy.CommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -37,13 +36,11 @@ public class ExGregilo {
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
 		linkManager.registerLink(new ExNihilo());
+		linkManager.registerLink(new GregTech());
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		SieveRegistryCleaner.removeDefaultOres();
-		GTSieveRegistration.addGTOres();
-
 		getLinkManager().enableLinks();
 	}
 

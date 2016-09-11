@@ -18,7 +18,7 @@ import exnihilo.registries.helpers.SiftingResult;
 import exnihilo.utils.ItemInfo;
 
 public class SieveRegistryCleaner {
-	public static void removeDefaultOres() {
+	protected static void removeDefaultOres() {
 		Map<ItemInfo, ArrayList<SiftingResult>> rewards = SieveRegistry.getSiftables();
 		List<Pair<Item, Integer>> toRemove = new ArrayList<Pair<Item, Integer>>();
 		int foundForRemove = 0;
