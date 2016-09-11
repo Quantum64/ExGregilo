@@ -1,0 +1,16 @@
+[
+{
+  "modid": "exgregilo",
+  "name": "ExGregilo",
+  "description": "GregTech addon for Ex Nihlo",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Quantum64"],
+  "credits": "The r/feedthebeast subreddit",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
