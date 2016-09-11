@@ -1,8 +1,13 @@
 package co.q64.exgregilo;
 
+import co.q64.exgregilo.api.ExGregiloAPI;
+import co.q64.exgregilo.config.ConfigManagerImpl;
+import co.q64.exgregilo.data.ModData;
+import co.q64.exgregilo.links.LinkManagerImpl;
+import co.q64.exgregilo.links.exnihilo.ExNihilo;
+import co.q64.exgregilo.links.exnihilo.SieveRegistryCleaner;
+import co.q64.exgregilo.links.gregtech.GTSieveRegistration;
 import co.q64.exgregilo.proxy.CommonProxy;
-import co.q64.exgregilo.util.GTSieveRegistration;
-import co.q64.exgregilo.util.SieveRegistryCleaner;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -10,31 +15,47 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = ExGregilo.MODID, version = ExGregilo.VERSION)
+@Mod(modid = ModData.MODID, version = ModData.VERSION)
 public class ExGregilo {
-	public static final String MODID = "exgregilo";
-	public static final String VERSION = "1.0";
-
 	@SidedProxy(clientSide = "co.q64.exgregilo.proxy.ClientProxy", serverSide = "co.q64.exgregilo.proxy.ServerProxy")
 	public static CommonProxy proxy;
+
+	private static LinkManagerImpl linkManager;
+	private static ConfigManagerImpl configManager;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		proxy.setLogger(event.getModLog());
+		ExGregiloAPI.setMod(this);
+
+		linkManager = new LinkManagerImpl();
+		configManager = new ConfigManagerImpl();
+
+		getConfigManager().setConfigFile(event.getSuggestedConfigurationFile());
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-
+		linkManager.registerLink(new ExNihilo());
 	}
 
 	@EventHandler
-	public void init(FMLPostInitializationEvent event) {
+	public void postInit(FMLPostInitializationEvent event) {
 		SieveRegistryCleaner.removeDefaultOres();
 		GTSieveRegistration.addGTOres();
+
+		getLinkManager().enableLinks();
 	}
 
-	public static CommonProxy getProxy() {
+	public CommonProxy getProxy() {
 		return proxy;
+	}
+
+	public LinkManagerImpl getLinkManager() {
+		return linkManager;
+	}
+
+	public ConfigManagerImpl getConfigManager() {
+		return configManager;
 	}
 }

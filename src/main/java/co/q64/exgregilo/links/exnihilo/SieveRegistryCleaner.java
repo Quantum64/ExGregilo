@@ -1,4 +1,4 @@
-package co.q64.exgregilo.util;
+package co.q64.exgregilo.links.exnihilo;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -11,7 +11,7 @@ import net.minecraft.item.Item;
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
 
-import co.q64.exgregilo.ExGregilo;
+import co.q64.exgregilo.api.ExGregiloAPI;
 import exnihilo.items.ores.ItemOre;
 import exnihilo.registries.SieveRegistry;
 import exnihilo.registries.helpers.SiftingResult;
@@ -30,7 +30,7 @@ public class SieveRegistryCleaner {
 				}
 			}
 		}
-		ExGregilo.getProxy().getLogger().info("Found " + foundForRemove + " ore results to remove from sieve!");
+		ExGregiloAPI.getProxy().getLogger().info("Found " + foundForRemove + " ore results to remove from sieve!");
 		/* This causes a CMOD because of an extremely stupid mistake in the Ex Nihilo sieve registry, I can't even find where to report the issue...
 		for (Pair<Item, Integer> e : toRemove) {
 			SieveRegistry.unregisterRewardFromAllBlocks(e.getKey(), e.getValue());

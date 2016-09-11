@@ -1,4 +1,4 @@
-package co.q64.exgregilo.util;
+package co.q64.exgregilo.links.gregtech;
 
 import exnihilo.registries.SieveRegistry;
 import gregtech.api.enums.Materials;
@@ -6,6 +6,7 @@ import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GT_OreDictUnificator;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+
 
 public class GTSieveRegistration {
 	public static void addGTOres() {

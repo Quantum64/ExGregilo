@@ -1,0 +1,10 @@
+package co.q64.exgregilo.data;
+
+public class ModData {
+	public static final String MODID = "exgregilo";
+	public static final String VERSION = "1.0";
+
+	// Maybe these don't need to go in here
+	public static final String EX_NIHILO_ID = "exnihilo";
+	public static final String GREGTECH_ID = "gregtech";
+}
