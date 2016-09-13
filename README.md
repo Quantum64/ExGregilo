@@ -4,3 +4,8 @@ The mod will potentially add GregTech support for Ex Nihilo so I can finally Sky
 
 
 I'm going to target 1.7.10 support with GT5U.
+
+
+Credits:
+- Quantum64 - Programming
+- /u/Nturdnuggetha - Textures
