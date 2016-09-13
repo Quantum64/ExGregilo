@@ -14,7 +14,7 @@ import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 
-@Mod(modid = ModData.MODID, version = ModData.VERSION, dependencies = "after:" + ModData.EX_NIHILO_ID + "; before:" + ModData.EX_COMPRESSUM_ID)
+@Mod(modid = ModData.MODID, version = ModData.VERSION, dependencies = "after:" + ModData.EX_NIHILO_ID /*+ "; after:" + ModData.GREGTECH_ID */+ "; before:" + ModData.EX_COMPRESSUM_ID)
 public class ExGregilo {
 	@SidedProxy(clientSide = "co.q64.exgregilo.proxy.ClientProxy", serverSide = "co.q64.exgregilo.proxy.ServerProxy")
 	public static CommonProxy proxy;

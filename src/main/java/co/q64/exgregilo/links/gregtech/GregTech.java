@@ -1,6 +1,5 @@
 package co.q64.exgregilo.links.gregtech;
 
-import exnihilo.ENBlocks;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GT_OreDictUnificator;
@@ -11,16 +10,32 @@ import java.util.Map;
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
+import co.q64.exgregilo.api.ExGregiloAPI;
 import co.q64.exgregilo.api.links.LinkBase;
 import co.q64.exgregilo.api.links.ModLink;
 import co.q64.exgregilo.data.ModData;
+import co.q64.exgregilo.links.exnihilo.ExNihilo;
+import co.q64.exgregilo.links.gregtech.item.ItemList;
+import co.q64.exgregilo.links.gregtech.tile.AutoSieve;
 
 @ModLink(modName = "GregTech", modId = ModData.GREGTECH_ID)
 public class GregTech implements LinkBase {
 	private Map<Block, Map<ItemStack, Integer>> sifting = new HashMap<Block, Map<ItemStack, Integer>>();
 
 	@Override
-	public void loadLink() {
+	public void preLoadLink() {
+		ItemList.AUTO_SIEVE_LV.set(new AutoSieve(11200, "basicmachine.autosieve.tier.01", "Auto Sieve", 1).getStackForm(1L));
+		ItemList.AUTO_SIEVE_MV.set(new AutoSieve(11201, "basicmachine.autosieve.tier.02", "Advanced Auto Sieve", 2).getStackForm(1L));
+		ItemList.AUTO_SIEVE_HV.set(new AutoSieve(11202, "basicmachine.autosieve.tier.03", "Advanced Auto Sieve II", 3).getStackForm(1L));
+		ItemList.AUTO_SIEVE_EV.set(new AutoSieve(11203, "basicmachine.autosieve.tier.04", "Advanced Auto Sieve III", 4).getStackForm(1L));
+		ItemList.AUTO_SIEVE_IV.set(new AutoSieve(11204, "basicmachine.autosieve.tier.05", "Advanced Auto Sieve IV", 5).getStackForm(1L));
+		ItemList.AUTO_SIEVE_LuV.set(new AutoSieve(11205, "basicmachine.autosieve.tier.06", "Advanced Auto Sieve V", 6).getStackForm(1L));
+		ItemList.AUTO_SIEVE_ZPM.set(new AutoSieve(11206, "basicmachine.autosieve.tier.07", "Advanced Auto Sieve VI", 7).getStackForm(1L));
+		ItemList.AUTO_SIEVE_UV.set(new AutoSieve(11207, "basicmachine.autosieve.tier.08", "Advanced Auto Sieve VII", 8).getStackForm(1L));
+	}
+
+	@Override
+	public void postLoadLink() {
 		//addCrushed(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Naquadah, 1), 1);
 		// Coal
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Lignite, 1), 10);
@@ -86,7 +101,7 @@ public class GregTech implements LinkBase {
 	}
 
 	@Override
-	public void enableLink() {
+	public void afterPostLoadLink() {
 
 	}
 
@@ -108,7 +123,9 @@ public class GregTech implements LinkBase {
 	}
 
 	private void addDust(ItemStack is, int chance) {
-		getSubMap(ENBlocks.Dust).put(is, chance); // TODO This shouldn't go here
+		if (ExGregiloAPI.getLinkManager().isEnabled(ExNihilo.class)) {
+			getSubMap(ExGregiloAPI.getLinkManager().getLink(ExNihilo.class).getDustBlock()).put(is, chance);
+		}
 	}
 
 	public Map<Block, Map<ItemStack, Integer>> getSiftingMap() {
