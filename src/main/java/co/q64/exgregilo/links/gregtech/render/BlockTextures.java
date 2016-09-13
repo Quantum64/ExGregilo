@@ -9,7 +9,9 @@ import net.minecraft.util.ResourceLocation;
 
 public enum BlockTextures implements IIconContainer, Runnable {
 	//formatter:off
-	OVERLAY_AUTO_SIEVE("OVERLAY_AUTO_SIEVE")
+	BLANK("BLANK"),
+	OVERLAY_AUTO_SIEVE_TOP("OVERLAY_AUTO_SIEVE_TOP"),
+	OVERLAY_AUTO_SIEVE_BASIC_TOP("OVERLAY_AUTO_SIEVE_BASIC_TOP");
 	//formatter:on
 	;
 

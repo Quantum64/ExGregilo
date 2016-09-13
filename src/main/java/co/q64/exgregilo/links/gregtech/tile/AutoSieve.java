@@ -1,8 +1,6 @@
 package co.q64.exgregilo.links.gregtech.tile;
 
-import co.q64.exgregilo.links.gregtech.render.BlockTextures;
 import gregtech.api.GregTech_API;
-import gregtech.api.enums.Textures;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -11,10 +9,21 @@ import gregtech.api.objects.GT_RenderedTexture;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_Utility;
 import net.minecraft.item.ItemStack;
+import co.q64.exgregilo.links.gregtech.render.BlockTextures;
 
 public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 	public AutoSieve(int aID, String aName, String aNameRegional, int aTier) {
-		super(aID, aName, aNameRegional, aTier, 1, "It's like sieving... but more auto", 1, 1, "Massfabricator.png", "sieve", new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE), new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE), new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE), new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE), new GT_RenderedTexture(Textures.BlockIcons.OVERLAY_TOP_STEAM_FURNACE_ACTIVE), new GT_RenderedTexture(Textures.BlockIcons.OVERLAY_TOP_STEAM_FURNACE), new GT_RenderedTexture(Textures.BlockIcons.OVERLAY_BOTTOM_STEAM_FURNACE_ACTIVE), new GT_RenderedTexture(Textures.BlockIcons.OVERLAY_BOTTOM_STEAM_FURNACE));
+		super(aID, aName, aNameRegional, aTier, 1, "It's like sieving... but more auto", 1, 1, "Massfabricator.png", "sieve",
+				//formatter:off
+				new GT_RenderedTexture(BlockTextures.BLANK),
+				new GT_RenderedTexture(BlockTextures.BLANK),
+				new GT_RenderedTexture(BlockTextures.BLANK),
+				new GT_RenderedTexture(BlockTextures.BLANK),
+				aTier == 1 ? new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE_BASIC_TOP) : new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE_TOP),
+				aTier == 1 ? new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE_BASIC_TOP) : new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE_TOP),
+				new GT_RenderedTexture(BlockTextures.BLANK),
+				new GT_RenderedTexture(BlockTextures.BLANK));
+				//formatter:on
 	}
 
 	public AutoSieve(String aName, int aTier, String aDescription, ITexture[][][] aTextures, String aGUIName, String aNEIName) {
