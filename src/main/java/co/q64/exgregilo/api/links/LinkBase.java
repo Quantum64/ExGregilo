@@ -1,7 +1,9 @@
 package co.q64.exgregilo.api.links;
 
 public interface LinkBase {
-	public void loadLink();
+	public void preLoadLink();
 
-	public void enableLink();
+	public void postLoadLink();
+
+	public void afterPostLoadLink();
 }

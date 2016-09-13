@@ -61,10 +61,13 @@ public class LinkManagerImpl implements LinkManager {
 		}
 		pendingLinks.clear();
 		for (LinkBase link : enabledLinks) {
-			link.loadLink();
+			link.preLoadLink(); // TODO Move if this doesn't work
 		}
 		for (LinkBase link : enabledLinks) {
-			link.enableLink();
+			link.postLoadLink();
+		}
+		for (LinkBase link : enabledLinks) {
+			link.afterPostLoadLink();
 		}
 		enabled = true;
 	}
