@@ -1,20 +1,36 @@
 package co.q64.exgregilo.links.gregtech.tile;
 
 import gregtech.api.GregTech_API;
+import gregtech.api.enums.GT_Values;
+import gregtech.api.enums.Materials;
+import gregtech.api.enums.OrePrefixes;
+import gregtech.api.gui.GT_Container_BasicMachine;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_BasicMachine;
+import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_BasicMachine_GT_Recipe.X;
 import gregtech.api.objects.GT_RenderedTexture;
 import gregtech.api.util.GT_ModHandler;
+import gregtech.api.util.GT_Recipe;
+import gregtech.api.util.GT_Recipe.GT_Recipe_Map;
 import gregtech.api.util.GT_Utility;
+import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
+import co.q64.exgregilo.links.gregtech.crafting.MachineRecipeHelper;
+import co.q64.exgregilo.links.gregtech.crafting.OreDictAddons;
+import co.q64.exgregilo.links.gregtech.crafting.RecipeMap;
+import co.q64.exgregilo.links.gregtech.gui.ExGT_GUIContainer_BasicMachine;
 import co.q64.exgregilo.links.gregtech.render.BlockTextures;
 
 public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
+	private static final int IN_SLOTS = 1;
+	private static final int OUT_SLOTS = 6;
+
 	public AutoSieve(int aID, String aName, String aNameRegional, int aTier) {
-		super(aID, aName, aNameRegional, aTier, 1, "It's like sieving... but more auto", 1, 1, "Massfabricator.png", "sieve",
-				//formatter:off
+		super(aID, aName, aNameRegional, aTier, 1, "It's like sieving... but more auto", IN_SLOTS, OUT_SLOTS, "Autosieve.png", "sieve",
+//formatter:off
 				new GT_RenderedTexture(BlockTextures.BLANK),
 				new GT_RenderedTexture(BlockTextures.BLANK),
 				new GT_RenderedTexture(BlockTextures.BLANK),
@@ -23,11 +39,23 @@ public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 				aTier == 1 ? new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE_BASIC_TOP) : new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE_TOP),
 				new GT_RenderedTexture(BlockTextures.BLANK),
 				new GT_RenderedTexture(BlockTextures.BLANK));
-				//formatter:on
+
+		MachineRecipeHelper.addMachineRecipe(this, aTier, new Object[] { 
+				"WUW",
+				"WMW",
+				"CSC", 
+				Character.valueOf('M'), X.HULL, 
+				Character.valueOf('E'), X.MOTOR, 
+				Character.valueOf('C'), X.CIRCUIT, 
+				Character.valueOf('W'), X.WIRE, 
+				Character.valueOf('S'), OrePrefixes.spring.get(Materials.Titanium),
+				Character.valueOf('U'), OreDictAddons.SILK_MESH });
+		
+//formatter:on
 	}
 
 	public AutoSieve(String aName, int aTier, String aDescription, ITexture[][][] aTextures, String aGUIName, String aNEIName) {
-		super(aName, aTier, 1, aDescription, aTextures, 1, 1, aGUIName, aNEIName);
+		super(aName, aTier, 1, aDescription, aTextures, IN_SLOTS, OUT_SLOTS, aGUIName, aNEIName);
 	}
 
 	@Override
@@ -37,12 +65,51 @@ public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 
 	@Override
 	public int checkRecipe() {
-		if (null != (mOutputItems[0] = GT_ModHandler.getSmeltingOutput(getInputAt(0), true, getOutputAt(0)))) {
-			mEUt = 4 * (1 << (mTier - 1)) * (1 << (mTier - 1));
-			mMaxProgresstime = 128 / (1 << (mTier - 1));
-			return 2;
+		GT_Recipe_Map tMap = getRecipeList();
+		if (tMap == null)
+			return DID_NOT_FIND_RECIPE;
+		GT_Recipe tRecipe = tMap.findRecipe(getBaseMetaTileEntity(), mLastRecipe, false, GT_Values.V[mTier], new FluidStack[] { getFillableStack() }, getSpecialSlot(), getAllInputs());
+		if (tRecipe == null)
+			return DID_NOT_FIND_RECIPE;
+		if (tRecipe.mCanBeBuffered)
+			mLastRecipe = tRecipe;
+		/*
+		if (!canOutput(tRecipe)) {
+			mOutputBlocked++;
+			return FOUND_RECIPE_BUT_DID_NOT_MEET_REQUIREMENTS;
 		}
-		return 0;
+		*/
+		if (!tRecipe.isRecipeInputEqual(true, new FluidStack[] { getFillableStack() }, getAllInputs()))
+			return FOUND_RECIPE_BUT_DID_NOT_MEET_REQUIREMENTS;
+
+		boolean foundNull = false;
+		for (ItemStack is : mOutputItems) {
+			if (is == null) {
+				foundNull = true;
+			}
+		}
+		if (!foundNull) {
+			return FOUND_RECIPE_BUT_DID_NOT_MEET_REQUIREMENTS;
+		}
+
+		int outputIndex = 0;
+		for (int i = 0; i < tRecipe.mOutputs.length; i++) {
+			if (getBaseMetaTileEntity().getRandomNumber(tRecipe.getOutputChance(i) / 4) == 0) {
+				if (outputIndex >= mOutputItems.length) {
+					break;
+				}
+				mOutputItems[outputIndex] = tRecipe.getOutput(i);
+				outputIndex++;
+			}
+		}
+		mOutputFluid = tRecipe.getFluidOutput(0);
+		calculateOverclockedNess(tRecipe);
+		return FOUND_AND_SUCCESSFULLY_USED_RECIPE;
+	}
+
+	@Override
+	public GT_Recipe_Map getRecipeList() {
+		return RecipeMap.AUTO_SIEVE_RECIPES;
 	}
 
 	@Override
@@ -60,5 +127,15 @@ public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 	@Override
 	public void startProcess() {
 		sendLoopStart((byte) 1);
+	}
+
+	@Override
+	public Object getServerGUI(int aID, InventoryPlayer aPlayerInventory, IGregTechTileEntity aBaseMetaTileEntity) {
+		return new GT_Container_BasicMachine(aPlayerInventory, aBaseMetaTileEntity);
+	}
+
+	@Override
+	public Object getClientGUI(int aID, InventoryPlayer aPlayerInventory, IGregTechTileEntity aBaseMetaTileEntity) {
+		return new ExGT_GUIContainer_BasicMachine(aPlayerInventory, aBaseMetaTileEntity, getLocalName(), mGUIName, GT_Utility.isStringValid(mNEIName) ? mNEIName : getRecipeList() != null ? getRecipeList().mUnlocalizedName : "");
 	}
 }
