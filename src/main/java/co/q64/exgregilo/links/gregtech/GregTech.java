@@ -4,17 +4,24 @@ import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.util.GT_OreDictUnificator;
 
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
+import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidStack;
 import co.q64.exgregilo.api.ExGregiloAPI;
 import co.q64.exgregilo.api.links.LinkBase;
 import co.q64.exgregilo.api.links.ModLink;
 import co.q64.exgregilo.data.ModData;
 import co.q64.exgregilo.links.exnihilo.ExNihilo;
+import co.q64.exgregilo.links.gregtech.crafting.OreDictAddons;
+import co.q64.exgregilo.links.gregtech.crafting.RecipeMap;
 import co.q64.exgregilo.links.gregtech.item.ItemList;
 import co.q64.exgregilo.links.gregtech.tile.AutoSieve;
 
@@ -24,6 +31,12 @@ public class GregTech implements LinkBase {
 
 	@Override
 	public void preLoadLink() {
+		if (ExGregiloAPI.getLinkManager().isEnabled(ExNihilo.class)) {
+			GT_OreDictUnificator.registerOre(OreDictAddons.SILK_MESH, new ItemStack(ExGregiloAPI.getLinkManager().getLink(ExNihilo.class).getSilkMesh(), 1));
+		} else {
+			GT_OreDictUnificator.registerOre(OreDictAddons.SILK_MESH, new ItemStack(Items.string, 1));
+		}
+
 		ItemList.AUTO_SIEVE_LV.set(new AutoSieve(11200, "basicmachine.autosieve.tier.01", "Auto Sieve", 1).getStackForm(1L));
 		ItemList.AUTO_SIEVE_MV.set(new AutoSieve(11201, "basicmachine.autosieve.tier.02", "Advanced Auto Sieve", 2).getStackForm(1L));
 		ItemList.AUTO_SIEVE_HV.set(new AutoSieve(11202, "basicmachine.autosieve.tier.03", "Advanced Auto Sieve II", 3).getStackForm(1L));
@@ -98,6 +111,23 @@ public class GregTech implements LinkBase {
 
 		// Lithium
 		addDust(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Lithium, 1), 100);
+
+		List<Block> blocks = new ArrayList<Block>();
+		blocks.add(Blocks.gravel);
+		blocks.add(Blocks.sand);
+		blocks.add(getDustBlock());
+		for (Block b : blocks) {
+			ItemStack[] outputs = new ItemStack[getSubMap(b).size()];
+			int[] chances = new int[getSubMap(b).size()];
+			int i = 0;
+			for (Entry<ItemStack, Integer> e : getSubMap(b).entrySet()) {
+				outputs[i] = e.getKey();
+				//chances[i] = (int) Math.round(Math.ceil((1f / e.getValue()) * 100));
+				chances[i] = e.getValue() * 4;
+				i++;
+			}
+			RecipeMap.AUTO_SIEVE_RECIPES.addRecipe(false, new ItemStack[] { (new ItemStack(b, 1)) }, outputs, null, chances, new FluidStack[0], new FluidStack[0], 10, 10, 0);
+		}
 	}
 
 	@Override
@@ -126,6 +156,13 @@ public class GregTech implements LinkBase {
 		if (ExGregiloAPI.getLinkManager().isEnabled(ExNihilo.class)) {
 			getSubMap(ExGregiloAPI.getLinkManager().getLink(ExNihilo.class).getDustBlock()).put(is, chance);
 		}
+	}
+
+	private Block getDustBlock() {
+		if (ExGregiloAPI.getLinkManager().isEnabled(ExNihilo.class)) {
+			return ExGregiloAPI.getLinkManager().getLink(ExNihilo.class).getDustBlock();
+		}
+		return Blocks.stonebrick;
 	}
 
 	public Map<Block, Map<ItemStack, Integer>> getSiftingMap() {
