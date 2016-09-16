@@ -2,6 +2,7 @@ package co.q64.exgregilo.links.gregtech;
 
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
+import gregtech.api.items.GT_MetaGenerated_Tool;
 import gregtech.api.util.GT_OreDictUnificator;
 
 import java.util.ArrayList;
@@ -24,13 +25,19 @@ import co.q64.exgregilo.links.gregtech.crafting.OreDictAddons;
 import co.q64.exgregilo.links.gregtech.crafting.RecipeMap;
 import co.q64.exgregilo.links.gregtech.item.ItemList;
 import co.q64.exgregilo.links.gregtech.tile.AutoSieve;
+import co.q64.exgregilo.links.gregtech.tools.MetaGeneratedTools;
+import co.q64.exgregilo.links.gregtech.tools.ToolCrafting;
 
 @ModLink(modName = "GregTech", modId = ModData.GREGTECH_ID)
 public class GregTech implements LinkBase {
 	private Map<Block, Map<ItemStack, Integer>> sifting = new HashMap<Block, Map<ItemStack, Integer>>();
+	private GT_MetaGenerated_Tool tools;
 
 	@Override
-	public void preLoadLink() {
+	public void loadLink() {
+		this.tools = new MetaGeneratedTools();
+		OrePrefixes.tool.add(new ToolCrafting()); // Why exactly is it done like this...?
+
 		if (ExGregiloAPI.getLinkManager().isEnabled(ExNihilo.class)) {
 			GT_OreDictUnificator.registerOre(OreDictAddons.SILK_MESH, new ItemStack(ExGregiloAPI.getLinkManager().getLink(ExNihilo.class).getSilkMesh(), 1));
 		} else {
@@ -167,5 +174,9 @@ public class GregTech implements LinkBase {
 
 	public Map<Block, Map<ItemStack, Integer>> getSiftingMap() {
 		return sifting;
+	}
+
+	public GT_MetaGenerated_Tool getTools() {
+		return tools;
 	}
 }

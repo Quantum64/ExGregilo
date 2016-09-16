@@ -11,6 +11,7 @@ public enum BlockTextures implements IIconContainer, Runnable {
 	//formatter:off
 	BLANK("BLANK"),
 	OVERLAY_AUTO_SIEVE_TOP("OVERLAY_AUTO_SIEVE_TOP"),
+	OVERLAY_AUTO_SIEVE_FRONT("OVERLAY_AUTO_SIEVE_FRONT"),
 	OVERLAY_AUTO_SIEVE_BASIC_TOP("OVERLAY_AUTO_SIEVE_BASIC_TOP");
 	//formatter:on
 	;
@@ -25,7 +26,7 @@ public enum BlockTextures implements IIconContainer, Runnable {
 
 	@Override
 	public void run() {
-		icon = GregTech_API.sBlockIcons.registerIcon(ModData.ICON_TEX_PATH + textureName);
+		icon = GregTech_API.sBlockIcons.registerIcon(ModData.BLOCK_ICON_TEX_PATH + textureName);
 	}
 
 	@Override

@@ -9,6 +9,7 @@ public class ModData {
 	public static final String GREGTECH_ID = "gregtech";
 	public static final String EX_COMPRESSUM_ID = "excompressum";
 
-	public static final String ICON_TEX_PATH = MODID + ":icons/";
+	public static final String BLOCK_ICON_TEX_PATH = MODID + ":icons/";
 	public static final String GUI_TEX_PATH = MODID + ":textures/gui/";
+	public static final String ITEM_ICON_TEX_PATH = MODID + ":icons/";
 }

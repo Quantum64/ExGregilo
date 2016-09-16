@@ -21,7 +21,7 @@ public class LinkManagerImpl implements LinkManager {
 	@Override
 	public void registerLink(LinkBase base) {
 		if (enabled) {
-			throw new IllegalStateException("Links must be registered before PostEnable");
+			throw new IllegalStateException("Links need to be registered in PreLoad");
 		}
 		ModLink link = getModLink(base.getClass());
 		if (link == null) {
@@ -51,6 +51,15 @@ public class LinkManagerImpl implements LinkManager {
 	}
 
 	public void enableLinks() {
+		for (LinkBase link : enabledLinks) {
+			link.postLoadLink();
+		}
+		for (LinkBase link : enabledLinks) {
+			link.afterPostLoadLink();
+		}
+	}
+
+	public void loadLinks() {
 		if (enabled) {
 			throw new IllegalStateException("Links have already been enabled!");
 		}
@@ -61,13 +70,7 @@ public class LinkManagerImpl implements LinkManager {
 		}
 		pendingLinks.clear();
 		for (LinkBase link : enabledLinks) {
-			link.preLoadLink(); // TODO Move if this doesn't work
-		}
-		for (LinkBase link : enabledLinks) {
-			link.postLoadLink();
-		}
-		for (LinkBase link : enabledLinks) {
-			link.afterPostLoadLink();
+			link.loadLink(); // TODO Move if this doesn't work
 		}
 		enabled = true;
 	}

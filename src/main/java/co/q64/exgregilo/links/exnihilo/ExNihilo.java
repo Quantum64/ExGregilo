@@ -38,7 +38,7 @@ public class ExNihilo implements LinkBase {
 	}
 
 	@Override
-	public void preLoadLink() {
+	public void loadLink() {
 
 	}
 

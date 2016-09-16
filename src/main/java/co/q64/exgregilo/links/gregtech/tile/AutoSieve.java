@@ -33,8 +33,8 @@ public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 //formatter:off
 				new GT_RenderedTexture(BlockTextures.BLANK),
 				new GT_RenderedTexture(BlockTextures.BLANK),
-				new GT_RenderedTexture(BlockTextures.BLANK),
-				new GT_RenderedTexture(BlockTextures.BLANK),
+				new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE_FRONT),
+				new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE_FRONT),
 				aTier == 1 ? new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE_BASIC_TOP) : new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE_TOP),
 				aTier == 1 ? new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE_BASIC_TOP) : new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE_TOP),
 				new GT_RenderedTexture(BlockTextures.BLANK),

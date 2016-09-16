@@ -37,6 +37,7 @@ public class ExGregilo {
 	public void init(FMLInitializationEvent event) {
 		linkManager.registerLink(new ExNihilo());
 		linkManager.registerLink(new GregTech());
+		getLinkManager().loadLinks();
 	}
 
 	@EventHandler
