@@ -9,3 +9,4 @@ I'm going to target 1.7.10 support with GT5U.
 Credits:
 - Quantum64 - Programming
 - /u/Nturdnuggetha - Textures
+- Part of the rendering code from Ex Nihilo has been used under the conditions of the GPLv3.
