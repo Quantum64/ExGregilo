@@ -35,6 +35,14 @@ repositories {
         name 'greg'
         url 'http://files.minecraftforge.net/maven/'
 	}
+    maven { // This is needed to get my meta tools to compile
+        name = "ic2, forestry"
+        url = "http://maven.ic2.player.to/"
+    }
+    ivy {
+        name 'Railcraft'
+        artifactPattern "http://addons-origin.cursecdn.com/files/2219/321/[module]_[revision].[ext]"
+    }
 }
 
 dependencies {
@@ -53,6 +61,8 @@ dependencies {
 	
 	compile "exnihilo:Ex-Nihilo:1.38-53:deobf"
     compile "com.gregoriust.gregtech:gregtech_1.7.10:5.07.07:dev"
+    compile "net.sengir.forestry:forestry_1.7.10:4.2.10.58:dev"
+    compile name: 'Railcraft', version: '1.7.10-9.4.0.0', ext: 'jar'
 
 }
 
