@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import co.q64.exgregilo.data.ModData;
 
 public enum ItemTextures implements IIconContainer, Runnable {
-	WIRE_MESH("WIRE_MESH");
+	BLANK("BLANK"), WIRE_MESH("WIRE_MESH");
 
 	private static final String BLANK_OVERLAY = "BLANK";
 	private String textureName;
@@ -45,5 +45,6 @@ public enum ItemTextures implements IIconContainer, Runnable {
 	public void run() {
 		mIcon = GregTech_API.sItemIcons.registerIcon(ModData.ITEM_ICON_TEX_PATH + textureName);
 		mOverlay = GregTech_API.sItemIcons.registerIcon(ModData.ITEM_ICON_TEX_PATH + overlayName);
+		//ExGregiloAPI.getProxy().getLogger().info("Register item!");
 	}
 }
