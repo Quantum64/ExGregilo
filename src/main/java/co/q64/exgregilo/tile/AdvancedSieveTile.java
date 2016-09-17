@@ -1,11 +1,13 @@
 package co.q64.exgregilo.tile;
 
+import exnihilo.particles.ParticleSieve;
+import exnihilo.registries.SieveRegistry;
+import exnihilo.registries.helpers.SiftingResult;
+import gregtech.api.interfaces.IToolStats;
+
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import co.q64.exgregilo.api.ExGregiloAPI;
-import co.q64.exgregilo.links.gregtech.tools.MetaGeneratedTools;
-import co.q64.exgregilo.links.gregtech.tools.WireMesh;
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.entity.item.EntityItem;
@@ -16,12 +18,11 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import co.q64.exgregilo.api.ExGregiloAPI;
+import co.q64.exgregilo.links.gregtech.tools.MetaGeneratedTools;
+import co.q64.exgregilo.links.gregtech.tools.WireMesh;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import exnihilo.particles.ParticleSieve;
-import exnihilo.registries.SieveRegistry;
-import exnihilo.registries.helpers.SiftingResult;
-import gregtech.api.interfaces.IToolStats;
 
 public class AdvancedSieveTile extends TileEntity {
 	private static final float MIN_RENDER_CAPACITY = 0.70f;
@@ -127,7 +128,7 @@ public class AdvancedSieveTile extends TileEntity {
 					if (mesh.getItem() instanceof MetaGeneratedTools) {
 						MetaGeneratedTools tool = (MetaGeneratedTools) mesh.getItem();
 						tool.doDamage(mesh, 1);
-						if (tool.getMaxDamage() - tool.getDamage(mesh) <= 0) {
+						if (MetaGeneratedTools.getToolMaxDamage(mesh) - MetaGeneratedTools.getToolDamage(mesh) <= 0) {
 							mesh = null;
 							update();
 						}

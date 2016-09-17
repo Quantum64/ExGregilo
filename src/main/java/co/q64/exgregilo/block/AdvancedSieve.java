@@ -12,7 +12,6 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
-import co.q64.exgregilo.api.ExGregiloAPI;
 import co.q64.exgregilo.data.ModData;
 import co.q64.exgregilo.links.gregtech.tools.MetaGeneratedTools;
 import co.q64.exgregilo.tile.AdvancedSieveTile;
