@@ -31,18 +31,31 @@ repositories {
         name 'tterrag'
         url 'http://maven.tterrag.com/'
     }
-	maven {
-        name 'greg'
-        url 'http://files.minecraftforge.net/maven/'
-	}
+	//maven {
+    //    name 'greg'
+    //    url 'http://files.minecraftforge.net/maven/'
+	//}
     maven { // This is needed to get my meta tools to compile
         name = "ic2, forestry"
         url = "http://maven.ic2.player.to/"
+    }
+    maven {
+        name = "chickenbones"
+        url = "http://chickenbones.net/maven/"
+    }
+    maven { // EnderIO & EnderCore
+        name 'tterrag Repo'
+        url "http://maven.tterrag.com"
     }
     ivy {
         name 'Railcraft'
         artifactPattern "http://addons-origin.cursecdn.com/files/2219/321/[module]_[revision].[ext]"
     }
+    maven { // The repo from which to get waila
+        name "Mobius Repo"
+        url "http://mobiusstrip.eu/maven"
+    }
+    
 }
 
 dependencies {
@@ -60,10 +73,11 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 	
 	compile "exnihilo:Ex-Nihilo:1.38-53:deobf"
-    compile "com.gregoriust.gregtech:gregtech_1.7.10:5.07.07:dev"
+    //compile "com.gregoriust.gregtech:gregtech_1.7.10:5.07.07:dev"  I can't put this in here because of API differences with GT5U, so it's going in the libs folder
     compile "net.sengir.forestry:forestry_1.7.10:4.2.10.58:dev"
     compile name: 'Railcraft', version: '1.7.10-9.4.0.0', ext: 'jar'
-
+    compile "codechicken:NotEnoughItems:1.7.10-1.0.3.57:dev"
+	compile "com.enderio:EnderIO:1.7.10-2.3.0.417_beta:dev"
 }
 
 processResources
