@@ -6,7 +6,9 @@ import co.q64.exgregilo.data.ModData;
 import co.q64.exgregilo.links.LinkManagerImpl;
 import co.q64.exgregilo.links.exnihilo.ExNihilo;
 import co.q64.exgregilo.links.gregtech.GregTech;
+import co.q64.exgregilo.links.nei.NEI;
 import co.q64.exgregilo.proxy.CommonProxy;
+import co.q64.exgregilo.types.GregiloBlocks;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -37,7 +39,11 @@ public class ExGregilo {
 	public void init(FMLInitializationEvent event) {
 		linkManager.registerLink(new ExNihilo());
 		linkManager.registerLink(new GregTech());
+		linkManager.registerLink(new NEI());
 		getLinkManager().loadLinks();
+
+		GregiloBlocks.registerBlocks();
+		proxy.init();
 	}
 
 	@EventHandler
