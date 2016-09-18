@@ -5,7 +5,7 @@ import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
 public class AdvancedSieveItemBlock extends ItemBlock {
-	private static final String NAME = "exgregilo.advsieve";
+	private static final String NAME = "exgregilo.advancedsieve";
 
 	public AdvancedSieveItemBlock(Block block) {
 		super(block);

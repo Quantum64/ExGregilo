@@ -156,7 +156,7 @@ public class GregTech implements LinkBase {
 		"RPR", 
 		"R R", 
 		Character.valueOf('P'), GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Iron, 1), 
-		Character.valueOf('R'), GT_OreDictUnificator.get(OrePrefixes.rod, Materials.Iron, 1)});
+		Character.valueOf('R'), GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Iron, 1)});
 		//formatter:on
 	}
 
