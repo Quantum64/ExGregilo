@@ -1,5 +1,6 @@
 package co.q64.exgregilo.links.exnihilo;
 
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
@@ -14,6 +15,7 @@ import co.q64.exgregilo.links.gregtech.GregTech;
 import exnihilo.ENBlocks;
 import exnihilo.ENItems;
 import exnihilo.registries.SieveRegistry;
+import exnihilo.registries.helpers.SiftingResult;
 
 @ModLink(modName = "Ex Nihilo", modId = ModData.EX_NIHILO_ID)
 public class ExNihilo implements LinkBase {
@@ -48,5 +50,13 @@ public class ExNihilo implements LinkBase {
 
 	public Item getSilkMesh() {
 		return ENItems.Mesh;
+	}
+
+	public Map<ItemStack, Integer> getAdditionalResults(Block b) {
+		Map<ItemStack, Integer> result = new HashMap<ItemStack, Integer>();
+		for (SiftingResult s : SieveRegistry.getSiftingOutput(b, 0)) {
+			result.put(new ItemStack(s.item, 1, s.meta), s.rarity);
+		}
+		return result;
 	}
 }

@@ -2,6 +2,8 @@ package co.q64.exgregilo.links.gregtech;
 
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
+import gregtech.api.enums.SubTag;
+import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
 
 import java.util.ArrayList;
@@ -15,6 +17,9 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+
+import org.apache.commons.lang3.text.WordUtils;
+
 import co.q64.exgregilo.api.ExGregiloAPI;
 import co.q64.exgregilo.api.links.LinkBase;
 import co.q64.exgregilo.api.links.ModLink;
@@ -25,6 +30,8 @@ import co.q64.exgregilo.links.gregtech.crafting.RecipeMap;
 import co.q64.exgregilo.links.gregtech.item.ItemList;
 import co.q64.exgregilo.links.gregtech.tile.AutoSieve;
 import co.q64.exgregilo.links.gregtech.tools.MetaGeneratedTools;
+import co.q64.exgregilo.types.GregiloBlocks;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 @ModLink(modName = "GregTech", modId = ModData.GREGTECH_ID)
 public class GregTech implements LinkBase {
@@ -93,11 +100,11 @@ public class GregTech implements LinkBase {
 		addSand(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Nickel, 1), 50);
 
 		// Iridium/Osmium
-		addDust(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Iridium, 1), 500);
-		addDust(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Osmiridium, 1), 500);
-		addDust(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Platinum, 1), 500);
-		addDust(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Chrome, 1), 500);
-		addDust(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Osmium, 1), 100);
+		addDust(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Iridium, 1), 300);
+		addDust(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Osmiridium, 1), 400);
+		addDust(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Platinum, 1), 300);
+		addDust(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Chrome, 1), 300);
+		addDust(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Osmium, 1), 500);
 
 		// Vanadium Magnetite
 		addDust(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.VanadiumMagnetite, 1), 100);
@@ -122,8 +129,12 @@ public class GregTech implements LinkBase {
 		blocks.add(Blocks.sand);
 		blocks.add(getDustBlock());
 		for (Block b : blocks) {
-			ItemStack[] outputs = new ItemStack[getSubMap(b).size()];
-			int[] chances = new int[getSubMap(b).size()];
+			Map<ItemStack, Integer> additional = new HashMap<ItemStack, Integer>();
+			if (ExGregiloAPI.getLinkManager().isEnabled(ExNihilo.class)) {
+				additional.putAll(ExGregiloAPI.getLinkManager().getLink(ExNihilo.class).getAdditionalResults(b));
+			}
+			ItemStack[] outputs = new ItemStack[getSubMap(b).size() + additional.size()];
+			int[] chances = new int[getSubMap(b).size() + additional.size()];
 			int i = 0;
 			for (Entry<ItemStack, Integer> e : getSubMap(b).entrySet()) {
 				outputs[i] = e.getKey();
@@ -131,8 +142,22 @@ public class GregTech implements LinkBase {
 				chances[i] = e.getValue() * 4;
 				i++;
 			}
-			RecipeMap.AUTO_SIEVE_RECIPES.addRecipe(false, new ItemStack[] { (new ItemStack(b, 1)) }, outputs, null, chances, new FluidStack[0], new FluidStack[0], 10, 10, 0);
+			for (Entry<ItemStack, Integer> e : additional.entrySet()) {
+				outputs[i] = e.getKey();
+				chances[i] = e.getValue() * 4;
+				i++;
+			}
+			RecipeMap.AUTO_SIEVE_RECIPES.addRecipe(false, new ItemStack[] { (new ItemStack(b, 1)) }, outputs, null, chances, new FluidStack[0], new FluidStack[0], -1, -1, 0);
 		}
+
+		//formatter:off
+		GameRegistry.addRecipe(new ItemStack(GregiloBlocks.ADVANCED_SIEVE.getRealBlock(), 1), new Object[]{
+		"   ", 
+		"RPR", 
+		"R R", 
+		Character.valueOf('P'), GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Iron, 1), 
+		Character.valueOf('R'), GT_OreDictUnificator.get(OrePrefixes.rod, Materials.Iron, 1)});
+		//formatter:on
 	}
 
 	@Override
@@ -176,5 +201,17 @@ public class GregTech implements LinkBase {
 
 	public MetaGeneratedTools getTools() {
 		return tools;
+	}
+
+	public void populateSplashList(List<String> list) {
+		for (Materials m : Materials.class.getEnumConstants()) {
+			if (m.contains(SubTag.METAL)) {
+				list.add("Tiny Piles of " + WordUtils.capitalizeFully(m.name()) + " Dust!");
+			}
+		}
+	}
+
+	public void removeRecipe(ItemStack output) {
+		GT_ModHandler.removeRecipeByOutput(output);
 	}
 }
