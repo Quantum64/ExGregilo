@@ -8,7 +8,7 @@ import net.minecraftforge.client.IItemRenderer;
 
 import org.lwjgl.opengl.GL11;
 
-import co.q64.exgregilo.links.gregtech.render.ItemTextures;
+import co.q64.exgregilo.block.AdvancedSieve;
 
 public class AdvancedSieveItemRender implements IItemRenderer {
 	private AdvancedSieveModel model;
@@ -124,7 +124,7 @@ public class AdvancedSieveItemRender implements IItemRenderer {
 			break;
 		}
 		bindMeshTexture();
-		mesh.render(ItemTextures.WIRE_MESH.getIcon());
+		mesh.render(AdvancedSieve.meshIcon);
 		GL11.glPopMatrix();
 	}
 
