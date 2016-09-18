@@ -48,7 +48,7 @@ public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 				Character.valueOf('E'), X.MOTOR, 
 				Character.valueOf('C'), X.CIRCUIT, 
 				Character.valueOf('W'), X.WIRE, 
-				Character.valueOf('S'), OrePrefixes.spring.get(Materials.Titanium),
+				Character.valueOf('S'), OrePrefixes.spring.get(Materials.StainlessSteel),
 				Character.valueOf('U'), OreDictAddons.SILK_MESH });
 		
 //formatter:on
@@ -83,7 +83,7 @@ public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 			return FOUND_RECIPE_BUT_DID_NOT_MEET_REQUIREMENTS;
 
 		boolean foundNull = false;
-		for (ItemStack is : mOutputItems) {
+		for (ItemStack is : mInventory) {
 			if (is == null) {
 				foundNull = true;
 			}
@@ -103,7 +103,9 @@ public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 			}
 		}
 		mOutputFluid = tRecipe.getFluidOutput(0);
-		calculateOverclockedNess(tRecipe);
+		//calculateOverclockedNess(tRecipe);
+		mMaxProgresstime = 512 / (1 << (mTier - 1));
+		mEUt = 4 * (1 << (mTier - 1)) * (1 << (mTier - 1));
 		return FOUND_AND_SUCCESSFULLY_USED_RECIPE;
 	}
 
