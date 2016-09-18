@@ -4,6 +4,8 @@ import co.q64.exgregilo.api.ExGregiloAPI;
 import co.q64.exgregilo.config.ConfigManagerImpl;
 import co.q64.exgregilo.data.ModData;
 import co.q64.exgregilo.links.LinkManagerImpl;
+import co.q64.exgregilo.links.exastris.ExAstris;
+import co.q64.exgregilo.links.excompressum.ExCompressum;
 import co.q64.exgregilo.links.exnihilo.ExNihilo;
 import co.q64.exgregilo.links.gregtech.GregTech;
 import co.q64.exgregilo.links.nei.NEI;
@@ -15,6 +17,7 @@ import cpw.mods.fml.common.SidedProxy;
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
+import cpw.mods.fml.common.event.FMLServerAboutToStartEvent;
 
 @Mod(modid = ModData.MODID, version = ModData.VERSION, dependencies = "after:" + ModData.EX_NIHILO_ID /*+ "; after:" + ModData.GREGTECH_ID */+ "; before:" + ModData.EX_COMPRESSUM_ID)
 public class ExGregilo {
@@ -40,6 +43,8 @@ public class ExGregilo {
 		linkManager.registerLink(new ExNihilo());
 		linkManager.registerLink(new GregTech());
 		linkManager.registerLink(new NEI());
+		linkManager.registerLink(new ExAstris());
+		linkManager.registerLink(new ExCompressum());
 		getLinkManager().loadLinks();
 
 		GregiloBlocks.registerBlocks();
@@ -49,6 +54,13 @@ public class ExGregilo {
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
 		getLinkManager().enableLinks();
+	}
+
+	@EventHandler
+	public void preServerStart(FMLServerAboutToStartEvent event) {
+		if (ExGregiloAPI.getLinkManager().isEnabled(ExCompressum.class)) {
+			ExGregiloAPI.getLinkManager().getLink(ExCompressum.class).fixThisModsDumbRegistrationTime();
+		}
 	}
 
 	public CommonProxy getProxy() {
