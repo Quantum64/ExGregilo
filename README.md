@@ -3,7 +3,7 @@
 This mod adds GregTech support for Ex Nihilo, new machines, and other things.  Check out the project page [here](https://minecraft.curseforge.com/projects/exgregilo).
 
 
-I'm going to target 1.7.10 support with GT5U.
+Currently it supports Minecraft 1.7.10 with [GregTech 5U](https://github.com/Blood-Asp/GT5-Unofficial/).
 
 
 Credits:
