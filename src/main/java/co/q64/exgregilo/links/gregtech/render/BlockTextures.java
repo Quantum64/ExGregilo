@@ -1,11 +1,11 @@
 package co.q64.exgregilo.links.gregtech.render;
 
-import co.q64.exgregilo.data.ModData;
 import gregtech.api.GregTech_API;
 import gregtech.api.interfaces.IIconContainer;
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
+import co.q64.exgregilo.data.ModData;
 
 public enum BlockTextures implements IIconContainer, Runnable {
 	//formatter:off

@@ -1,10 +1,10 @@
 package co.q64.exgregilo.render;
 
-import co.q64.exgregilo.data.ModData;
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import co.q64.exgregilo.data.ModData;
 
 public class AdvancedSieveModel extends ModelBase {
 	private static final String TEX_NAME = "ADVANCED_SIEVE.png";

@@ -2,11 +2,11 @@ package co.q64.exgregilo.config;
 
 import java.io.File;
 
+import net.minecraftforge.common.config.Configuration;
 import co.q64.exgregilo.api.ExGregiloAPI;
 import co.q64.exgregilo.api.config.ConfigManager;
 import co.q64.exgregilo.api.links.LinkBase;
 import co.q64.exgregilo.api.links.ModLink;
-import net.minecraftforge.common.config.Configuration;
 
 public class ConfigManagerImpl implements ConfigManager {
 	private Configuration config;

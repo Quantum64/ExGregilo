@@ -7,8 +7,8 @@ import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import java.util.ArrayList;
 import java.util.List;
 
-import co.q64.exgregilo.data.ModData;
 import net.minecraft.entity.player.InventoryPlayer;
+import co.q64.exgregilo.data.ModData;
 
 /**
  * I wouldn't need to copy GT_GUIContainer_BasicMachine if it had a custom gui path constructor
