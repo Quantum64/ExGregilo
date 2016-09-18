@@ -83,7 +83,7 @@ public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 			return FOUND_RECIPE_BUT_DID_NOT_MEET_REQUIREMENTS;
 
 		boolean foundNull = false;
-		for (ItemStack is : mInventory) {
+		for (ItemStack is : getAllOutputs()) {
 			if (is == null) {
 				foundNull = true;
 			}
