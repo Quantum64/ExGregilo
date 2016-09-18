@@ -1,12 +1,16 @@
 package co.q64.exgregilo.links.gregtech.tools;
 
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.relauncher.Side;
 import gregtech.api.interfaces.IIconContainer;
 import gregtech.common.tools.GT_Tool;
 
 public abstract class CustomMetaTool extends GT_Tool {
 	public CustomMetaTool() {
-		for (IIconContainer icon : getTextureClass().getEnumConstants()) {
-			icon.getTextureFile();
+		if (FMLCommonHandler.instance().getSide() == Side.CLIENT) {
+			for (IIconContainer icon : getTextureClass().getEnumConstants()) {
+				icon.getTextureFile();
+			}
 		}
 	}
 

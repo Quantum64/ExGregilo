@@ -40,11 +40,11 @@ public class ExGregilo {
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		linkManager.registerLink(new ExNihilo());
-		linkManager.registerLink(new GregTech());
-		linkManager.registerLink(new NEI());
-		linkManager.registerLink(new ExAstris());
-		linkManager.registerLink(new ExCompressum());
+		linkManager.registerLink(ExNihilo.class);
+		linkManager.registerLink(GregTech.class);
+		linkManager.registerLink(NEI.class);
+		linkManager.registerLink(ExAstris.class);
+		linkManager.registerLink(ExCompressum.class);
 		getLinkManager().loadLinks();
 
 		GregiloBlocks.registerBlocks();

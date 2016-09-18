@@ -14,20 +14,20 @@ import co.q64.exgregilo.api.links.ModLink;
 import cpw.mods.fml.common.Loader;
 
 public class LinkManagerImpl implements LinkManager {
-	private Map<LinkBase, ModLink> pendingLinks = new HashMap<LinkBase, ModLink>();
+	private Map<Class<? extends LinkBase>, ModLink> pendingLinks = new HashMap<Class<? extends LinkBase>, ModLink>();
 	private List<LinkBase> enabledLinks = new ArrayList<LinkBase>();
 	private boolean enabled;
 
 	@Override
-	public void registerLink(LinkBase base) {
+	public void registerLink(Class<? extends LinkBase> linkClass) {
 		if (enabled) {
 			throw new IllegalStateException("Links need to be registered in PreLoad");
 		}
-		ModLink link = getModLink(base.getClass());
+		ModLink link = getModLink(linkClass);
 		if (link == null) {
 			throw new MalformedLinkException("The main link class must contain the ModLink annotation");
 		}
-		pendingLinks.put(base, link);
+		pendingLinks.put(linkClass, link);
 	}
 
 	@Override
@@ -63,11 +63,17 @@ public class LinkManagerImpl implements LinkManager {
 		if (enabled) {
 			throw new IllegalStateException("Links have already been enabled!");
 		}
-		for (Entry<LinkBase, ModLink> e : pendingLinks.entrySet()) {
+		for (Entry<Class<? extends LinkBase>, ModLink> e : pendingLinks.entrySet()) {
 			boolean loaded = Loader.isModLoaded(e.getValue().modId());
 			ExGregiloAPI.getProxy().getLogger().info("ExGregilo " + (loaded ? "linked to " : "did not link to ") + e.getValue().modName());
 			if (loaded) {
-				enabledLinks.add(e.getKey());
+				try {
+					enabledLinks.add(e.getKey().newInstance());
+				} catch (InstantiationException e1) {
+					e1.printStackTrace();
+				} catch (IllegalAccessException e1) {
+					e1.printStackTrace();
+				}
 			}
 		}
 		pendingLinks.clear();

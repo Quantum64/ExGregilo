@@ -5,7 +5,7 @@ public interface LinkManager {
 
 	public <T> T getLink(Class<T> linkClass);
 
-	public void registerLink(LinkBase base);
+	public void registerLink(Class<? extends LinkBase> linkClass);
 
 	public ModLink getModLink(Class<? extends LinkBase> linkClass);
 }
