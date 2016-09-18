@@ -66,7 +66,9 @@ public class LinkManagerImpl implements LinkManager {
 		for (Entry<LinkBase, ModLink> e : pendingLinks.entrySet()) {
 			boolean loaded = Loader.isModLoaded(e.getValue().modId());
 			ExGregiloAPI.getProxy().getLogger().info("ExGregilo " + (loaded ? "linked to " : "did not link to ") + e.getValue().modName());
-			enabledLinks.add(e.getKey());
+			if (loaded) {
+				enabledLinks.add(e.getKey());
+			}
 		}
 		pendingLinks.clear();
 		for (LinkBase link : enabledLinks) {
