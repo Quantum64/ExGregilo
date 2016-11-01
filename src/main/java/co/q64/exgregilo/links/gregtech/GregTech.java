@@ -1,5 +1,6 @@
 package co.q64.exgregilo.links.gregtech;
 
+import gregtech.api.GregTech_API;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.SubTag;
@@ -204,9 +205,10 @@ public class GregTech implements LinkBase {
 	}
 
 	public void populateSplashList(List<String> list) {
-		for (Materials m : Materials.class.getEnumConstants()) {
-			if (m.contains(SubTag.METAL)) {
-				list.add("Tiny Piles of " + WordUtils.capitalizeFully(m.name()) + " Dust!");
+		ExGregiloAPI.getProxy().getLogger().info(Materials.class.getEnumConstants());
+		for (Entry<String, Materials> m : Materials.getMaterialsMap().entrySet()) {
+			if (m.getValue().contains(SubTag.METAL)) {
+				list.add("Tiny Piles of " + WordUtils.capitalizeFully(m.getKey()) + " Dust!");
 			}
 		}
 	}
