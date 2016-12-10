@@ -50,14 +50,14 @@ public class GregTech implements LinkBase {
 			GT_OreDictUnificator.registerOre(OreDictAddons.SILK_MESH, new ItemStack(Items.string, 1));
 		}
 
-		ItemList.AUTO_SIEVE_LV.set(new AutoSieve(11200, "basicmachine.autosieve.tier.01", "Auto Sieve", 1).getStackForm(1L));
-		ItemList.AUTO_SIEVE_MV.set(new AutoSieve(11201, "basicmachine.autosieve.tier.02", "Advanced Auto Sieve", 2).getStackForm(1L));
-		ItemList.AUTO_SIEVE_HV.set(new AutoSieve(11202, "basicmachine.autosieve.tier.03", "Advanced Auto Sieve II", 3).getStackForm(1L));
-		ItemList.AUTO_SIEVE_EV.set(new AutoSieve(11203, "basicmachine.autosieve.tier.04", "Advanced Auto Sieve III", 4).getStackForm(1L));
-		ItemList.AUTO_SIEVE_IV.set(new AutoSieve(11204, "basicmachine.autosieve.tier.05", "Advanced Auto Sieve IV", 5).getStackForm(1L));
-		ItemList.AUTO_SIEVE_LuV.set(new AutoSieve(11205, "basicmachine.autosieve.tier.06", "Advanced Auto Sieve V", 6).getStackForm(1L));
-		ItemList.AUTO_SIEVE_ZPM.set(new AutoSieve(11206, "basicmachine.autosieve.tier.07", "Advanced Auto Sieve VI", 7).getStackForm(1L));
-		ItemList.AUTO_SIEVE_UV.set(new AutoSieve(11207, "basicmachine.autosieve.tier.08", "Advanced Auto Sieve VII", 8).getStackForm(1L));
+		ItemList.AUTO_SIEVE_LV.set(new AutoSieve(11300, "basicmachine.autosieve.tier.01", "Auto Sieve", 1).getStackForm(1L));
+		ItemList.AUTO_SIEVE_MV.set(new AutoSieve(11301, "basicmachine.autosieve.tier.02", "Advanced Auto Sieve", 2).getStackForm(1L));
+		ItemList.AUTO_SIEVE_HV.set(new AutoSieve(11302, "basicmachine.autosieve.tier.03", "Advanced Auto Sieve II", 3).getStackForm(1L));
+		ItemList.AUTO_SIEVE_EV.set(new AutoSieve(11303, "basicmachine.autosieve.tier.04", "Advanced Auto Sieve III", 4).getStackForm(1L));
+		ItemList.AUTO_SIEVE_IV.set(new AutoSieve(11304, "basicmachine.autosieve.tier.05", "Advanced Auto Sieve IV", 5).getStackForm(1L));
+		ItemList.AUTO_SIEVE_LuV.set(new AutoSieve(11305, "basicmachine.autosieve.tier.06", "Advanced Auto Sieve V", 6).getStackForm(1L));
+		ItemList.AUTO_SIEVE_ZPM.set(new AutoSieve(11306, "basicmachine.autosieve.tier.07", "Advanced Auto Sieve VI", 7).getStackForm(1L));
+		ItemList.AUTO_SIEVE_UV.set(new AutoSieve(11307, "basicmachine.autosieve.tier.08", "Advanced Auto Sieve VII", 8).getStackForm(1L));
 	}
 
 	@Override
@@ -205,7 +205,6 @@ public class GregTech implements LinkBase {
 	}
 
 	public void populateSplashList(List<String> list) {
-		ExGregiloAPI.getProxy().getLogger().info(Materials.class.getEnumConstants());
 		for (Entry<String, Materials> m : Materials.getMaterialsMap().entrySet()) {
 			if (m.getValue().contains(SubTag.METAL)) {
 				list.add("Tiny Piles of " + WordUtils.capitalizeFully(m.getKey()) + " Dust!");
