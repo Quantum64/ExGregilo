@@ -48,6 +48,7 @@ public class ExGregilo {
 		getLinkManager().loadLinks();
 
 		GregiloBlocks.registerBlocks();
+
 		proxy.init();
 	}
 
