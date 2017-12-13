@@ -1,10 +1,12 @@
 package co.q64.exgregilo.link.gregtech;
 
+import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.SubTag;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
+import gregtech.api.util.GT_Utility;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -165,6 +167,12 @@ public class GregTech implements LinkBase {
 		Character.valueOf('P'), GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Iron, 1), 
 		Character.valueOf('R'), GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Iron, 1)});
 		//formatter:on
+
+		if (linkManager.isEnabled(ExNihilo.class)) {
+			ItemStack dust = new ItemStack(linkManager.getLink(ExNihilo.class).getDustBlock());
+			ItemStack sand = new ItemStack(Blocks.sand);
+			GT_Values.RA.addForgeHammerRecipe(sand, dust, 16, 10);
+		}
 	}
 
 	@Override
