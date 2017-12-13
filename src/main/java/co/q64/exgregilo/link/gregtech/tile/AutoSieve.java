@@ -2,8 +2,6 @@ package co.q64.exgregilo.link.gregtech.tile;
 
 import gregtech.api.GregTech_API;
 import gregtech.api.enums.GT_Values;
-import gregtech.api.enums.Materials;
-import gregtech.api.enums.OrePrefixes;
 import gregtech.api.gui.GT_Container_BasicMachine;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
@@ -28,7 +26,7 @@ public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 	private static final int IN_SLOTS = 1;
 	private static final int OUT_SLOTS = 6;
 
-	public AutoSieve(int aID, String aName, String aNameRegional, int aTier) {
+	public AutoSieve(int aID, String aName, String aNameRegional, int aTier, MachineRecipeHelper helper) {
 		super(aID, aName, aNameRegional, aTier, 1, "It's like sieving... but more auto", IN_SLOTS, OUT_SLOTS, "Autosieve.png", "sieve",
 //formatter:off
 				new GT_RenderedTexture(BlockTextures.BLANK),
@@ -40,16 +38,17 @@ public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 				new GT_RenderedTexture(BlockTextures.BLANK),
 				new GT_RenderedTexture(BlockTextures.BLANK));
 
-		MachineRecipeHelper.addMachineRecipe(this, aTier, new Object[] { 
-				"WUW",
-				"WMW",
-				"CSC", 
-				Character.valueOf('M'), X.HULL, 
-				Character.valueOf('E'), X.MOTOR, 
-				Character.valueOf('C'), X.CIRCUIT, 
+		helper.addMachineRecipe(this, aTier, new Object[] { 
+				"PEP",
+				"AMC",
+				"PHP", 
+				Character.valueOf('H'), X.HULL, 
+				Character.valueOf('M'), X.MOTOR, 
+				Character.valueOf('C'), X.CONVEYOR, 
 				Character.valueOf('W'), X.WIRE, 
-				Character.valueOf('S'), OrePrefixes.spring.get(Materials.StainlessSteel),
-				Character.valueOf('U'), OreDictAddons.SILK_MESH });
+				Character.valueOf('A'), X.ROBOT_ARM,
+				Character.valueOf('P'), X.PLATE,
+				Character.valueOf('E'), X.PISTON });
 		
 //formatter:on
 	}

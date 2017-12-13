@@ -28,6 +28,7 @@ import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.api.link.ModLink;
 import co.q64.exgregilo.data.ModData;
 import co.q64.exgregilo.link.exnihilo.ExNihilo;
+import co.q64.exgregilo.link.gregtech.crafting.MachineRecipeHelper;
 import co.q64.exgregilo.link.gregtech.crafting.OreDictAddons;
 import co.q64.exgregilo.link.gregtech.crafting.RecipeMap;
 import co.q64.exgregilo.link.gregtech.item.ItemList;
@@ -41,6 +42,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class GregTech implements LinkBase {
 	private @Inject LinkManager linkManager;
 	private @Inject MetaGeneratedTools tools;
+	private @Inject MachineRecipeHelper helper;
 
 	private Map<Block, Map<ItemStack, Integer>> sifting = new HashMap<Block, Map<ItemStack, Integer>>();
 
@@ -54,14 +56,14 @@ public class GregTech implements LinkBase {
 			GT_OreDictUnificator.registerOre(OreDictAddons.SILK_MESH, new ItemStack(Items.string, 1));
 		}
 
-		ItemList.AUTO_SIEVE_LV.set(new AutoSieve(11300, "basicmachine.autosieve.tier.01", "Auto Sieve", 1).getStackForm(1L));
-		ItemList.AUTO_SIEVE_MV.set(new AutoSieve(11301, "basicmachine.autosieve.tier.02", "Advanced Auto Sieve", 2).getStackForm(1L));
-		ItemList.AUTO_SIEVE_HV.set(new AutoSieve(11302, "basicmachine.autosieve.tier.03", "Advanced Auto Sieve II", 3).getStackForm(1L));
-		ItemList.AUTO_SIEVE_EV.set(new AutoSieve(11303, "basicmachine.autosieve.tier.04", "Advanced Auto Sieve III", 4).getStackForm(1L));
-		ItemList.AUTO_SIEVE_IV.set(new AutoSieve(11304, "basicmachine.autosieve.tier.05", "Advanced Auto Sieve IV", 5).getStackForm(1L));
-		ItemList.AUTO_SIEVE_LuV.set(new AutoSieve(11305, "basicmachine.autosieve.tier.06", "Advanced Auto Sieve V", 6).getStackForm(1L));
-		ItemList.AUTO_SIEVE_ZPM.set(new AutoSieve(11306, "basicmachine.autosieve.tier.07", "Advanced Auto Sieve VI", 7).getStackForm(1L));
-		ItemList.AUTO_SIEVE_UV.set(new AutoSieve(11307, "basicmachine.autosieve.tier.08", "Advanced Auto Sieve VII", 8).getStackForm(1L));
+		ItemList.AUTO_SIEVE_LV.set(new AutoSieve(11300, "basicmachine.autosieve.tier.01", "Auto Sieve", 1, helper).getStackForm(1L));
+		ItemList.AUTO_SIEVE_MV.set(new AutoSieve(11301, "basicmachine.autosieve.tier.02", "Advanced Auto Sieve", 2, helper).getStackForm(1L));
+		ItemList.AUTO_SIEVE_HV.set(new AutoSieve(11302, "basicmachine.autosieve.tier.03", "Advanced Auto Sieve II", 3, helper).getStackForm(1L));
+		ItemList.AUTO_SIEVE_EV.set(new AutoSieve(11303, "basicmachine.autosieve.tier.04", "Advanced Auto Sieve III", 4, helper).getStackForm(1L));
+		ItemList.AUTO_SIEVE_IV.set(new AutoSieve(11304, "basicmachine.autosieve.tier.05", "Advanced Auto Sieve IV", 5, helper).getStackForm(1L));
+		ItemList.AUTO_SIEVE_LuV.set(new AutoSieve(11305, "basicmachine.autosieve.tier.06", "Advanced Auto Sieve V", 6, helper).getStackForm(1L));
+		ItemList.AUTO_SIEVE_ZPM.set(new AutoSieve(11306, "basicmachine.autosieve.tier.07", "Advanced Auto Sieve VI", 7, helper).getStackForm(1L));
+		ItemList.AUTO_SIEVE_UV.set(new AutoSieve(11307, "basicmachine.autosieve.tier.08", "Advanced Auto Sieve VII", 8, helper).getStackForm(1L));
 	}
 
 	@Override

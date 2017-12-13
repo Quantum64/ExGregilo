@@ -9,11 +9,26 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_BasicMachine_GT_Recipe.X;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_ModHandler.RecipeBits;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 
+import org.apache.logging.log4j.Logger;
+
+import scala.actors.threadpool.Arrays;
+import co.q64.exgregilo.api.link.LinkManager;
+import co.q64.exgregilo.link.gregtech.GregTech;
+import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
+
+@Singleton
 public class MachineRecipeHelper {
-	public static void addMachineRecipe(MetaTileEntity tile, int mTier, Object[] aRecipe) {
+	private @Inject Logger logger;
+	private @Inject LinkManager linkManager;
+
+	public void addMachineRecipe(MetaTileEntity tile, int mTier, Object[] aRecipe) {
 		for (int i = 3; i < aRecipe.length; i++) {
 			if (aRecipe[i] == X.CIRCUIT) {
 				aRecipe[i] = Tier.ELECTRIC[mTier].mManagingObject;
@@ -52,7 +67,6 @@ public class MachineRecipeHelper {
 
 			if (aRecipe[i] == X.PLATE) {
 				switch (mTier) {
-				case 0:
 				case 1:
 					aRecipe[i] = OrePrefixes.plate.get(Materials.Steel);
 					break;
@@ -88,7 +102,6 @@ public class MachineRecipeHelper {
 
 			if (aRecipe[i] == X.PIPE) {
 				switch (mTier) {
-				case 0:
 				case 1:
 					aRecipe[i] = OrePrefixes.pipeMedium.get(Materials.Bronze);
 					break;
@@ -122,7 +135,6 @@ public class MachineRecipeHelper {
 
 			if (aRecipe[i] == X.COIL_HEATING) {
 				switch (mTier) {
-				case 0:
 				case 1:
 					aRecipe[i] = OrePrefixes.wireGt02.get(Materials.AnyCopper);
 					break;
@@ -157,7 +169,6 @@ public class MachineRecipeHelper {
 
 			if (aRecipe[i] == X.COIL_HEATING_DOUBLE) {
 				switch (mTier) {
-				case 0:
 				case 1:
 					aRecipe[i] = OrePrefixes.wireGt04.get(Materials.AnyCopper);
 					break;
@@ -201,7 +212,6 @@ public class MachineRecipeHelper {
 
 			if (aRecipe[i] == X.STICK_MAGNETIC) {
 				switch (mTier) {
-				case 0:
 				case 1:
 					aRecipe[i] = OrePrefixes.stick.get(Materials.IronMagnetic);
 					break;
@@ -226,7 +236,6 @@ public class MachineRecipeHelper {
 
 			if (aRecipe[i] == X.STICK_ELECTROMAGNETIC) {
 				switch (mTier) {
-				case 0:
 				case 1:
 					aRecipe[i] = OrePrefixes.stick.get(Materials.AnyIron);
 					break;
@@ -246,9 +255,6 @@ public class MachineRecipeHelper {
 
 			if (aRecipe[i] == X.COIL_ELECTRIC) {
 				switch (mTier) {
-				case 0:
-					aRecipe[i] = OrePrefixes.wireGt01.get(Materials.Tin);
-					break;
 				case 1:
 					aRecipe[i] = OrePrefixes.wireGt02.get(Materials.Tin);
 					break;
@@ -279,7 +285,6 @@ public class MachineRecipeHelper {
 
 			if (aRecipe[i] == X.ROBOT_ARM) {
 				switch (mTier) {
-				case 0:
 				case 1:
 					aRecipe[i] = ItemList.Robot_Arm_LV;
 					break;
@@ -310,7 +315,6 @@ public class MachineRecipeHelper {
 
 			if (aRecipe[i] == X.PUMP) {
 				switch (mTier) {
-				case 0:
 				case 1:
 					aRecipe[i] = ItemList.Electric_Pump_LV;
 					break;
@@ -341,7 +345,6 @@ public class MachineRecipeHelper {
 
 			if (aRecipe[i] == X.ROTOR) {
 				switch (mTier) {
-				case 0:
 				case 1:
 					aRecipe[i] = OrePrefixes.rotor.get(Materials.Tin);
 					break;
@@ -372,7 +375,6 @@ public class MachineRecipeHelper {
 
 			if (aRecipe[i] == X.MOTOR) {
 				switch (mTier) {
-				case 0:
 				case 1:
 					aRecipe[i] = ItemList.Electric_Motor_LV;
 					break;
@@ -403,7 +405,6 @@ public class MachineRecipeHelper {
 
 			if (aRecipe[i] == X.PISTON) {
 				switch (mTier) {
-				case 0:
 				case 1:
 					aRecipe[i] = ItemList.Electric_Piston_LV;
 					break;
@@ -434,7 +435,6 @@ public class MachineRecipeHelper {
 
 			if (aRecipe[i] == X.CONVEYOR) {
 				switch (mTier) {
-				case 0:
 				case 1:
 					aRecipe[i] = ItemList.Conveyor_Module_LV;
 					break;
@@ -465,7 +465,6 @@ public class MachineRecipeHelper {
 
 			if (aRecipe[i] == X.EMITTER) {
 				switch (mTier) {
-				case 0:
 				case 1:
 					aRecipe[i] = ItemList.Emitter_LV;
 					break;
@@ -496,7 +495,6 @@ public class MachineRecipeHelper {
 
 			if (aRecipe[i] == X.SENSOR) {
 				switch (mTier) {
-				case 0:
 				case 1:
 					aRecipe[i] = ItemList.Sensor_LV;
 					break;
@@ -527,7 +525,6 @@ public class MachineRecipeHelper {
 
 			if (aRecipe[i] == X.FIELD_GENERATOR) {
 				switch (mTier) {
-				case 0:
 				case 1:
 					aRecipe[i] = ItemList.Field_Generator_LV;
 					break;
@@ -556,12 +553,17 @@ public class MachineRecipeHelper {
 				continue;
 			}
 
+			if (aRecipe[i].equals(OreDictAddons.WIRE_MESH)) {
+				aRecipe[i] = linkManager.getLink(GregTech.class).getTools().getMeshWithStats(MetaGeneratedTools.WIRE_MESH_ID, 1, Materials.Tin, Materials.Tin, null);
+			}
+
 			if (aRecipe[i] instanceof X)
 				throw new IllegalArgumentException("MISSING TIER MAPPING FOR: " + aRecipe[i] + " AT TIER " + mTier);
 		}
 
-		if (!GT_ModHandler.addCraftingRecipe(tile.getStackForm(1), RecipeBits.DISMANTLEABLE | RecipeBits.BUFFERED | RecipeBits.NOT_REMOVABLE | RecipeBits.REVERSIBLE, aRecipe)) {
+		if (!GT_ModHandler.addCraftingRecipe(tile.getStackForm(1), RecipeBits.DISMANTLEABLE | RecipeBits.BUFFERED | RecipeBits.NOT_REMOVABLE | RecipeBits.REVERSIBLE | RecipeBits.KEEPNBT, aRecipe)) {
 			throw new IllegalArgumentException("INVALID CRAFTING RECIPE FOR: " + tile.getStackForm(1).getDisplayName());
 		}
+		logger.info("Added recipe: " + Arrays.asList(aRecipe));
 	}
 }
