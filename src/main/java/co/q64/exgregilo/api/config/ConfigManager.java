@@ -1,6 +1,6 @@
 package co.q64.exgregilo.api.config;
 
-import co.q64.exgregilo.api.links.LinkBase;
+import co.q64.exgregilo.api.link.LinkBase;
 
 public interface ConfigManager {
 	public int getInt(Class<? extends LinkBase> linkClass, String key, int def);

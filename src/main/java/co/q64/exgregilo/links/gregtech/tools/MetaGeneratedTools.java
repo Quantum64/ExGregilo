@@ -6,19 +6,26 @@ import gregtech.api.items.GT_MetaGenerated_Tool;
 
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
 import co.q64.exgregilo.links.gregtech.crafting.OreDictAddons;
 
+@Singleton
 public class MetaGeneratedTools extends GT_MetaGenerated_Tool {
 	public static final int WIRE_MESH_ID = 0;
-	private WireMesh wireMesh;
+	private @Inject WireMesh wireMesh;
 
 	public MetaGeneratedTools() {
 		super("exgregilo.metatool.01");
-		this.wireMesh = new WireMesh();
+	}
+
+	@Inject
+	public void init() {
 		addTool(WIRE_MESH_ID, "Wire Mesh", "Place in an Advanced Sieve", wireMesh, new Object[] { OreDictAddons.WIRE_MESH });
 	}
 

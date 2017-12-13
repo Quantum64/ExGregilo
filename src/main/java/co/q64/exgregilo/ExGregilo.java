@@ -1,16 +1,18 @@
 package co.q64.exgregilo;
 
-import co.q64.exgregilo.api.ExGregiloAPI;
-import co.q64.exgregilo.config.ConfigManagerImpl;
+import javax.inject.Inject;
+
+import org.apache.logging.log4j.Logger;
+
+import co.q64.com.google.inject.Guice;
+import co.q64.com.google.inject.Injector;
+import co.q64.exgregilo.api.binders.ConstantBinders.Name;
+import co.q64.exgregilo.api.config.ConfigManager;
+import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.data.ModData;
-import co.q64.exgregilo.links.LinkManagerImpl;
-import co.q64.exgregilo.links.exastris.ExAstris;
 import co.q64.exgregilo.links.excompressum.ExCompressum;
-import co.q64.exgregilo.links.exnihilo.ExNihilo;
-import co.q64.exgregilo.links.gregtech.GregTech;
-import co.q64.exgregilo.links.nei.NEI;
 import co.q64.exgregilo.proxy.CommonProxy;
-import co.q64.exgregilo.types.GregiloBlocks;
+import co.q64.exgregilo.util.BlockRegistration;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -22,57 +24,44 @@ import cpw.mods.fml.common.event.FMLServerAboutToStartEvent;
 @Mod(modid = ModData.MODID, version = ModData.VERSION, dependencies = "after:" + ModData.EX_NIHILO_ID /*+ "; after:" + ModData.GREGTECH_ID */+ "; before:" + ModData.EX_COMPRESSUM_ID)
 public class ExGregilo {
 	@SidedProxy(clientSide = "co.q64.exgregilo.proxy.ClientProxy", serverSide = "co.q64.exgregilo.proxy.ServerProxy")
-	public static CommonProxy proxy;
+	public static CommonProxy staticAccessProxy;
 
-	private static LinkManagerImpl linkManager;
-	private static ConfigManagerImpl configManager;
+	private @Inject LinkManager linkManager;
+	private @Inject ConfigManager configManager;
+	private @Inject BlockRegistration blockRegistration;
+
+	private @Inject Logger logger;
+	private @Inject CommonProxy proxy;
+	private @Inject @Name String name;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		proxy.setLogger(event.getModLog());
-		ExGregiloAPI.setMod(this);
-
-		linkManager = new LinkManagerImpl();
-		configManager = new ConfigManagerImpl();
-
-		getConfigManager().setConfigFile(event.getSuggestedConfigurationFile());
+		Injector injector = Guice.createInjector(new ExGregiloModule(this, event, staticAccessProxy));
+		injector.injectMembers(this);
+		injector.injectMembers(proxy);
+		logger.info("This is " + name);
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		linkManager.registerLink(ExNihilo.class);
-		linkManager.registerLink(GregTech.class);
-		linkManager.registerLink(NEI.class);
-		linkManager.registerLink(ExAstris.class);
-		linkManager.registerLink(ExCompressum.class);
-		getLinkManager().loadLinks();
-
-		GregiloBlocks.registerBlocks();
-
+		linkManager.loadLinks();
+		blockRegistration.registerBlocks();
 		proxy.init();
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		getLinkManager().enableLinks();
+		linkManager.enableLinks();
 	}
 
 	@EventHandler
 	public void preServerStart(FMLServerAboutToStartEvent event) {
-		if (ExGregiloAPI.getLinkManager().isEnabled(ExCompressum.class)) {
-			ExGregiloAPI.getLinkManager().getLink(ExCompressum.class).fixThisModsDumbRegistrationTime();
+		if (linkManager.isEnabled(ExCompressum.class)) {
+			linkManager.getLink(ExCompressum.class).fixThisModsDumbRegistrationTime();
 		}
 	}
 
 	public CommonProxy getProxy() {
 		return proxy;
-	}
-
-	public LinkManagerImpl getLinkManager() {
-		return linkManager;
-	}
-
-	public ConfigManagerImpl getConfigManager() {
-		return configManager;
 	}
 }

@@ -4,13 +4,16 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.item.Item;
 import net.minecraftforge.client.MinecraftForgeClient;
 import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import scala.util.Random;
-import co.q64.exgregilo.api.ExGregiloAPI;
+import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.links.gregtech.GregTech;
 import co.q64.exgregilo.render.AdvancedSieveItemRender;
 import co.q64.exgregilo.render.AdvancedSieveMeshModel;
@@ -21,7 +24,10 @@ import co.q64.exgregilo.types.GregiloBlocks;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
+@Singleton
 public class ClientProxy extends CommonProxy {
+	private @Inject LinkManager linkManager;
+
 	private static final int SPLASH_ID = 3;
 	private List<String> splashes = new ArrayList<String>();
 	private Random r = new Random();
@@ -35,8 +41,8 @@ public class ClientProxy extends CommonProxy {
 			ClientRegistry.bindTileEntitySpecialRenderer(AdvancedSieveTile.class, new AdvancedSieveRender(sieve, mesh));
 			MinecraftForgeClient.registerItemRenderer(Item.getItemFromBlock(GregiloBlocks.ADVANCED_SIEVE.getRealBlock()), new AdvancedSieveItemRender(sieve, mesh));
 		}
-		if (ExGregiloAPI.getLinkManager().isEnabled(GregTech.class)) {
-			ExGregiloAPI.getLinkManager().getLink(GregTech.class).populateSplashList(splashes);
+		if (linkManager.isEnabled(GregTech.class)) {
+			linkManager.getLink(GregTech.class).populateSplashList(splashes);
 		}
 		/*	
 		try {

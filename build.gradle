@@ -17,13 +17,18 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "1.0.4"
+version = "1.1.0"
 group= "co.q64.exgregilo" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "exgregilo"
 
 minecraft {
     version = "1.7.10-10.13.4.1558-1.7.10"
     runDir = "eclipse"
+}
+
+configurations {
+    embed
+    compile.extendsFrom(embed)
 }
 
 repositories {
@@ -43,6 +48,10 @@ repositories {
         name = "chickenbones"
         url = "http://chickenbones.net/maven/"
     }
+	maven {
+		name = "quantum"
+		url = "http://quantum64.github.io/ExGregilo/"
+	}
     maven { // EnderIO & EnderCore
         name 'tterrag Repo'
         url "http://maven.tterrag.com"
@@ -74,11 +83,14 @@ dependencies {
 	
 	compile "exnihilo:Ex-Nihilo:1.38-53:deobf"
     //compile "com.gregoriust.gregtech:gregtech_1.7.10:5.07.07:dev"  I can't put this in here because of API differences with GT5U, so it's going in the libs folder
-    compile "net.sengir.forestry:forestry_1.7.10:4.2.10.58:dev"
+    //compile "net.sengir.forestry:forestry_1.7.10:4.2.10.58:dev"
     compile name: 'Railcraft', version: '1.7.10-9.4.0.0', ext: 'jar'
-    compile "codechicken:NotEnoughItems:1.7.10-1.0.3.57:dev"
+    compile "codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev"
 	compile "com.enderio:EnderIO:1.7.10-2.3.0.417_beta:dev"
 	// ExAstris and ExCompressum are also in the libs folder since I couldn't find a repo for them
+	
+	embed "com.google:guice:q64"
+	embed "com.google:guice-multibindings:q64"
 }
 
 processResources
@@ -99,4 +111,8 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
+}
+
+jar {
+    from configurations.embed.collect { it.isDirectory() ? it : zipTree(it) }
 }

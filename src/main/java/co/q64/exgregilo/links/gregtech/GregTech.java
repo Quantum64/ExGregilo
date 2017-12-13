@@ -1,6 +1,5 @@
 package co.q64.exgregilo.links.gregtech;
 
-import gregtech.api.GregTech_API;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.SubTag;
@@ -13,6 +12,9 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
@@ -21,9 +23,9 @@ import net.minecraftforge.fluids.FluidStack;
 
 import org.apache.commons.lang3.text.WordUtils;
 
-import co.q64.exgregilo.api.ExGregiloAPI;
-import co.q64.exgregilo.api.links.LinkBase;
-import co.q64.exgregilo.api.links.ModLink;
+import co.q64.exgregilo.api.link.LinkBase;
+import co.q64.exgregilo.api.link.LinkManager;
+import co.q64.exgregilo.api.link.ModLink;
 import co.q64.exgregilo.data.ModData;
 import co.q64.exgregilo.links.exnihilo.ExNihilo;
 import co.q64.exgregilo.links.gregtech.crafting.OreDictAddons;
@@ -34,18 +36,20 @@ import co.q64.exgregilo.links.gregtech.tools.MetaGeneratedTools;
 import co.q64.exgregilo.types.GregiloBlocks;
 import cpw.mods.fml.common.registry.GameRegistry;
 
+@Singleton
 @ModLink(modName = "GregTech", modId = ModData.GREGTECH_ID)
 public class GregTech implements LinkBase {
+	private @Inject LinkManager linkManager;
+	private @Inject MetaGeneratedTools tools;
+
 	private Map<Block, Map<ItemStack, Integer>> sifting = new HashMap<Block, Map<ItemStack, Integer>>();
-	private MetaGeneratedTools tools;
 
 	@Override
 	public void loadLink() {
-		this.tools = new MetaGeneratedTools();
 		tools.addCrafting();
 
-		if (ExGregiloAPI.getLinkManager().isEnabled(ExNihilo.class)) {
-			GT_OreDictUnificator.registerOre(OreDictAddons.SILK_MESH, new ItemStack(ExGregiloAPI.getLinkManager().getLink(ExNihilo.class).getSilkMesh(), 1));
+		if (linkManager.isEnabled(ExNihilo.class)) {
+			GT_OreDictUnificator.registerOre(OreDictAddons.SILK_MESH, new ItemStack(linkManager.getLink(ExNihilo.class).getSilkMesh(), 1));
 		} else {
 			GT_OreDictUnificator.registerOre(OreDictAddons.SILK_MESH, new ItemStack(Items.string, 1));
 		}
@@ -131,8 +135,8 @@ public class GregTech implements LinkBase {
 		blocks.add(getDustBlock());
 		for (Block b : blocks) {
 			Map<ItemStack, Integer> additional = new HashMap<ItemStack, Integer>();
-			if (ExGregiloAPI.getLinkManager().isEnabled(ExNihilo.class)) {
-				additional.putAll(ExGregiloAPI.getLinkManager().getLink(ExNihilo.class).getAdditionalResults(b));
+			if (linkManager.isEnabled(ExNihilo.class)) {
+				additional.putAll(linkManager.getLink(ExNihilo.class).getAdditionalResults(b));
 			}
 			ItemStack[] outputs = new ItemStack[getSubMap(b).size() + additional.size()];
 			int[] chances = new int[getSubMap(b).size() + additional.size()];
@@ -184,14 +188,14 @@ public class GregTech implements LinkBase {
 	}
 
 	private void addDust(ItemStack is, int chance) {
-		if (ExGregiloAPI.getLinkManager().isEnabled(ExNihilo.class)) {
-			getSubMap(ExGregiloAPI.getLinkManager().getLink(ExNihilo.class).getDustBlock()).put(is, chance);
+		if (linkManager.isEnabled(ExNihilo.class)) {
+			getSubMap(linkManager.getLink(ExNihilo.class).getDustBlock()).put(is, chance);
 		}
 	}
 
 	private Block getDustBlock() {
-		if (ExGregiloAPI.getLinkManager().isEnabled(ExNihilo.class)) {
-			return ExGregiloAPI.getLinkManager().getLink(ExNihilo.class).getDustBlock();
+		if (linkManager.isEnabled(ExNihilo.class)) {
+			return linkManager.getLink(ExNihilo.class).getDustBlock();
 		}
 		return Blocks.stonebrick;
 	}

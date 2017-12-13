@@ -6,21 +6,28 @@ import gregtech.api.enums.SubTag;
 import gregtech.api.interfaces.IIconContainer;
 import gregtech.api.items.GT_MetaGenerated_Tool;
 import gregtech.api.util.GT_ModHandler;
+
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
-import co.q64.exgregilo.api.ExGregiloAPI;
+import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.links.gregtech.GregTech;
 import co.q64.exgregilo.links.gregtech.render.ItemTextures;
 import co.q64.exgregilo.links.nei.NEI;
 
+@Singleton
 public class WireMesh extends CustomMetaTool {
 	public static final int MAX_SPEED = 14;
 
+	private @Inject LinkManager linkManager;
+
 	public void addCrafting() {
-		boolean useNEI = ExGregiloAPI.getLinkManager().isEnabled(NEI.class);
+		boolean useNEI = linkManager.isEnabled(NEI.class);
 		for (Materials material : Materials.values()) {
 			if (material.contains(SubTag.METAL) && material.mDurability > 0) {
-				ItemStack result = ExGregiloAPI.getLinkManager().getLink(GregTech.class).getTools().getMeshWithStats(MetaGeneratedTools.WIRE_MESH_ID, 1, material, material, null);
+				ItemStack result = linkManager.getLink(GregTech.class).getTools().getMeshWithStats(MetaGeneratedTools.WIRE_MESH_ID, 1, material, material, null);
 				//formatter:off
 				boolean added = GT_ModHandler.addCraftingRecipe(result, GT_ModHandler.RecipeBits.DO_NOT_CHECK_FOR_COLLISIONS | GT_ModHandler.RecipeBits.BUFFERED, new Object[]{
 				"WWW", 
@@ -30,7 +37,7 @@ public class WireMesh extends CustomMetaTool {
 				Character.valueOf('G'), OrePrefixes.gearGtSmall.get(material)});
 				//formatter:on
 				if (useNEI && added) {
-					ExGregiloAPI.getLinkManager().getLink(NEI.class).addItemVariant(ExGregiloAPI.getLinkManager().getLink(GregTech.class).getTools(), result);
+					linkManager.getLink(NEI.class).addItemVariant(linkManager.getLink(GregTech.class).getTools(), result);
 				}
 			}
 		}

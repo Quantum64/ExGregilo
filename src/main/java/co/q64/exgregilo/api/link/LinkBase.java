@@ -1,4 +1,4 @@
-package co.q64.exgregilo.api.links;
+package co.q64.exgregilo.api.link;
 
 public interface LinkBase {
 	public void loadLink();

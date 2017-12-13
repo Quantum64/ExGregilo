@@ -1,4 +1,4 @@
-package co.q64.exgregilo.api.links;
+package co.q64.exgregilo.api.link;
 
 public class MalformedLinkException extends RuntimeException {
 	private static final long serialVersionUID = 1L;

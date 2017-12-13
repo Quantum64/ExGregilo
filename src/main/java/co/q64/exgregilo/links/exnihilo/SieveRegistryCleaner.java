@@ -5,20 +5,26 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
+import org.apache.logging.log4j.Logger;
 
-import co.q64.exgregilo.api.ExGregiloAPI;
 import exnihilo.items.ores.ItemOre;
 import exnihilo.registries.SieveRegistry;
 import exnihilo.registries.helpers.SiftingResult;
 import exnihilo.utils.ItemInfo;
 
+@Singleton
 public class SieveRegistryCleaner {
-	protected static void removeDefaultOres() {
+	private @Inject Logger logger;
+
+	public void removeDefaultOres() {
 		Map<ItemInfo, ArrayList<SiftingResult>> rewards = SieveRegistry.getSiftables();
 		List<Pair<Item, Integer>> toRemove = new ArrayList<Pair<Item, Integer>>();
 		int foundForRemove = 0;
@@ -30,7 +36,7 @@ public class SieveRegistryCleaner {
 				}
 			}
 		}
-		ExGregiloAPI.getProxy().getLogger().info("Found " + foundForRemove + " ore results to remove from sieve!");
+		logger.info("Found " + foundForRemove + " ore results to remove from sieve!");
 		/* This causes a CMOD because of an extremely stupid mistake in the Ex Nihilo sieve registry, I can't even find where to report the issue...
 		for (Pair<Item, Integer> e : toRemove) {
 			SieveRegistry.unregisterRewardFromAllBlocks(e.getKey(), e.getValue());

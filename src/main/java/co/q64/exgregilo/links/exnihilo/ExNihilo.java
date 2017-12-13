@@ -4,12 +4,16 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import net.minecraft.block.Block;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import co.q64.exgregilo.api.ExGregiloAPI;
-import co.q64.exgregilo.api.links.LinkBase;
-import co.q64.exgregilo.api.links.ModLink;
+import co.q64.exgregilo.api.config.ConfigManager;
+import co.q64.exgregilo.api.link.LinkBase;
+import co.q64.exgregilo.api.link.LinkManager;
+import co.q64.exgregilo.api.link.ModLink;
 import co.q64.exgregilo.data.ModData;
 import co.q64.exgregilo.links.gregtech.GregTech;
 import exnihilo.ENBlocks;
@@ -17,20 +21,24 @@ import exnihilo.ENItems;
 import exnihilo.registries.SieveRegistry;
 import exnihilo.registries.helpers.SiftingResult;
 
+@Singleton
 @ModLink(modName = "Ex Nihilo", modId = ModData.EX_NIHILO_ID)
 public class ExNihilo implements LinkBase {
+	private @Inject LinkManager linkManager;
+	private @Inject ConfigManager configManager;
+	private @Inject SieveRegistryCleaner cleaner;
 
 	@Override
 	public void postLoadLink() {
-		if (ExGregiloAPI.getConfigManager().getBoolean(ExNihilo.class, "removeDefaultSiftOres", true)) {
-			SieveRegistryCleaner.removeDefaultOres();
+		if (configManager.getBoolean(ExNihilo.class, "removeDefaultSiftOres", true)) {
+			cleaner.removeDefaultOres();
 		}
 	}
 
 	@Override
 	public void afterPostLoadLink() {
-		if (ExGregiloAPI.getLinkManager().isEnabled(GregTech.class)) {
-			GregTech gt = ExGregiloAPI.getLinkManager().getLink(GregTech.class);
+		if (linkManager.isEnabled(GregTech.class)) {
+			GregTech gt = linkManager.getLink(GregTech.class);
 			for (Entry<Block, Map<ItemStack, Integer>> block : gt.getSiftingMap().entrySet()) {
 				for (Entry<ItemStack, Integer> e : block.getValue().entrySet()) {
 					SieveRegistry.register(block.getKey(), e.getKey().getItem(), e.getKey().getItemDamage(), e.getValue());

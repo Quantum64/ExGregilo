@@ -2,23 +2,32 @@ package co.q64.exgregilo.config;
 
 import java.io.File;
 
-import net.minecraftforge.common.config.Configuration;
-import co.q64.exgregilo.api.ExGregiloAPI;
-import co.q64.exgregilo.api.config.ConfigManager;
-import co.q64.exgregilo.api.links.LinkBase;
-import co.q64.exgregilo.api.links.ModLink;
+import javax.inject.Inject;
+import javax.inject.Singleton;
 
-public class ConfigManagerImpl implements ConfigManager {
+import net.minecraftforge.common.config.Configuration;
+import co.q64.exgregilo.api.binders.ConstantBinders.ConfigFile;
+import co.q64.exgregilo.api.config.ConfigManager;
+import co.q64.exgregilo.api.link.LinkBase;
+import co.q64.exgregilo.api.link.LinkManager;
+import co.q64.exgregilo.api.link.ModLink;
+
+@Singleton
+public class SimpleConfigManager implements ConfigManager {
+	private @Inject LinkManager linkManager;
+	private @Inject @ConfigFile File file;
+
 	private Configuration config;
 	private final String CORE_CAT = "core";
 
-	public void setConfigFile(File file) {
+	@Inject
+	public void init() {
 		config = new Configuration(file);
 	}
 
 	@Override
 	public int getInt(Class<? extends LinkBase> linkClass, String key, int def) {
-		ModLink link = ExGregiloAPI.getLinkManager().getModLink(linkClass);
+		ModLink link = linkManager.getModLink(linkClass);
 		if (link == null) {
 			return def;
 		}
@@ -32,7 +41,7 @@ public class ConfigManagerImpl implements ConfigManager {
 
 	@Override
 	public boolean getBoolean(Class<? extends LinkBase> linkClass, String key, boolean def) {
-		ModLink link = ExGregiloAPI.getLinkManager().getModLink(linkClass);
+		ModLink link = linkManager.getModLink(linkClass);
 		if (link == null) {
 			return def;
 		}
