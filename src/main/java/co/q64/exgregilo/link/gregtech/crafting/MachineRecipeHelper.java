@@ -10,6 +10,8 @@ import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_BasicMachin
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_ModHandler.RecipeBits;
 
+import java.util.Arrays;
+
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
@@ -18,7 +20,6 @@ import net.minecraft.item.ItemStack;
 
 import org.apache.logging.log4j.Logger;
 
-import scala.actors.threadpool.Arrays;
 import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.link.gregtech.GregTech;
 import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
