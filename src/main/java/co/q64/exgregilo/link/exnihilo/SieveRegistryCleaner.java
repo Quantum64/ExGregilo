@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import net.minecraft.block.Block;
+import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
@@ -30,7 +31,7 @@ public class SieveRegistryCleaner {
 		int foundForRemove = 0;
 		for (Entry<ItemInfo, ArrayList<SiftingResult>> e : rewards.entrySet()) {
 			for (SiftingResult result : e.getValue()) {
-				if (result.item instanceof ItemOre) {
+				if (result.item instanceof ItemOre || result.item == Items.emerald || result.item == Items.diamond) {
 					toRemove.add(new ImmutablePair<Item, Integer>(result.item, result.meta));
 					foundForRemove++;
 				}

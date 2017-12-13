@@ -17,24 +17,23 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import co.q64.exgregilo.link.gregtech.crafting.MachineRecipeHelper;
-import co.q64.exgregilo.link.gregtech.crafting.OreDictAddons;
 import co.q64.exgregilo.link.gregtech.crafting.RecipeMap;
 import co.q64.exgregilo.link.gregtech.gui.ExGT_GUIContainer_BasicMachine;
 import co.q64.exgregilo.link.gregtech.render.BlockTextures;
 
-public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
+public class GemExtractor extends GT_MetaTileEntity_BasicMachine {
 	private static final int IN_SLOTS = 1;
 	private static final int OUT_SLOTS = 6;
 
-	public AutoSieve(int aID, String aName, String aNameRegional, int aTier, MachineRecipeHelper helper) {
-		super(aID, aName, aNameRegional, aTier, 1, "It's like sieving... but more auto", IN_SLOTS, OUT_SLOTS, "autosieve.png", "sieve",
+	public GemExtractor(int aID, String aName, String aNameRegional, int aTier, MachineRecipeHelper helper) {
+		super(aID, aName, aNameRegional, aTier, 1, "Shiny!", IN_SLOTS, OUT_SLOTS, "gemextractor.png", "gemext",
 //formatter:off
 				new GT_RenderedTexture(BlockTextures.BLANK),
 				new GT_RenderedTexture(BlockTextures.BLANK),
-				new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE_FRONT),
-				new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE_FRONT),
-				aTier == 1 ? new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE_BASIC_TOP) : new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE_TOP),
-				aTier == 1 ? new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE_BASIC_TOP) : new GT_RenderedTexture(BlockTextures.OVERLAY_AUTO_SIEVE_TOP),
+				new GT_RenderedTexture(BlockTextures.OVERLAY_GEM_EXTRACTOR_FRONT),
+				new GT_RenderedTexture(BlockTextures.OVERLAY_GEM_EXTRACTOR_FRONT),
+				new GT_RenderedTexture(BlockTextures.OVERLAY_GEM_EXTRACTOR_TOP),
+				new GT_RenderedTexture(BlockTextures.OVERLAY_GEM_EXTRACTOR_TOP),
 				new GT_RenderedTexture(BlockTextures.BLANK),
 				new GT_RenderedTexture(BlockTextures.BLANK));
 
@@ -48,18 +47,18 @@ public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 				Character.valueOf('W'), X.WIRE, 
 				Character.valueOf('A'), X.ROBOT_ARM,
 				Character.valueOf('P'), X.PLATE,
-				Character.valueOf('E'), X.PISTON });
+				Character.valueOf('E'), X.COIL_HEATING_DOUBLE });
 		
 //formatter:on
 	}
 
-	public AutoSieve(String aName, int aTier, String aDescription, ITexture[][][] aTextures, String aGUIName, String aNEIName) {
+	public GemExtractor(String aName, int aTier, String aDescription, ITexture[][][] aTextures, String aGUIName, String aNEIName) {
 		super(aName, aTier, 1, aDescription, aTextures, IN_SLOTS, OUT_SLOTS, aGUIName, aNEIName);
 	}
 
 	@Override
 	public MetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-		return new AutoSieve(mName, mTier, mDescription, mTextures, mGUIName, mNEIName);
+		return new GemExtractor(mName, mTier, mDescription, mTextures, mGUIName, mNEIName);
 	}
 
 	@Override
@@ -110,7 +109,7 @@ public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 
 	@Override
 	public GT_Recipe_Map getRecipeList() {
-		return RecipeMap.AUTO_SIEVE_RECIPES;
+		return RecipeMap.GEM_EXTRACTOR_RECIPES;
 	}
 
 	@Override

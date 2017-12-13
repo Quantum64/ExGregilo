@@ -8,17 +8,24 @@ import net.minecraft.item.ItemBlock;
 import co.q64.exgregilo.api.link.LinkBase;
 import co.q64.exgregilo.block.AdvancedSieve;
 import co.q64.exgregilo.block.AdvancedSieveItemBlock;
+import co.q64.exgregilo.block.GemSand;
 import co.q64.exgregilo.function.BlockProvider;
 import co.q64.exgregilo.link.exnihilo.ExNihilo;
 import co.q64.exgregilo.link.gregtech.GregTech;
 
+@SuppressWarnings("unchecked")
 public enum GregiloBlocks {
-	@SuppressWarnings("unchecked")
 	ADVANCED_SIEVE(AdvancedSieve.BLOCK_NAME, new BlockProvider() {
 		public Block newBlock() {
 			return new AdvancedSieve();
 		}
-	}, AdvancedSieveItemBlock.class, Arrays.asList(ExNihilo.class, GregTech.class));
+	}, AdvancedSieveItemBlock.class, Arrays.asList(ExNihilo.class, GregTech.class)), GEM_SAND(GemSand.BLOCK_NAME, new BlockProvider() {
+
+		@Override
+		public Block newBlock() {
+			return new GemSand();
+		}
+	}, Arrays.asList(ExNihilo.class, GregTech.class));
 
 	private String name;
 	private BlockProvider block;

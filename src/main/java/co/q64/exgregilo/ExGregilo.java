@@ -13,6 +13,7 @@ import co.q64.exgregilo.data.ModData;
 import co.q64.exgregilo.link.excompressum.ExCompressum;
 import co.q64.exgregilo.proxy.CommonProxy;
 import co.q64.exgregilo.util.BlockRegistration;
+import co.q64.exgregilo.util.ItemRegistration;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.SidedProxy;
@@ -29,6 +30,7 @@ public class ExGregilo {
 	private @Inject LinkManager linkManager;
 	private @Inject ConfigManager configManager;
 	private @Inject BlockRegistration blockRegistration;
+	private @Inject ItemRegistration itemRegistration;
 
 	private @Inject Logger logger;
 	private @Inject CommonProxy proxy;
@@ -46,6 +48,7 @@ public class ExGregilo {
 	public void init(FMLInitializationEvent event) {
 		linkManager.loadLinks();
 		blockRegistration.registerBlocks();
+		itemRegistration.registerItems();
 		proxy.init();
 	}
 
