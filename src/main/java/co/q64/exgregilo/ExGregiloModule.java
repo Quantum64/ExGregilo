@@ -20,6 +20,7 @@ import co.q64.exgregilo.link.exastris.ExAstris;
 import co.q64.exgregilo.link.excompressum.ExCompressum;
 import co.q64.exgregilo.link.exnihilo.ExNihilo;
 import co.q64.exgregilo.link.gregtech.GregTech;
+import co.q64.exgregilo.link.minetweaker.MineTweaker;
 import co.q64.exgregilo.link.nei.NEI;
 import co.q64.exgregilo.proxy.CommonProxy;
 import cpw.mods.fml.common.LoaderState.ModState;
@@ -50,6 +51,7 @@ public class ExGregiloModule extends AbstractModule {
 		links.addBinding().toInstance(NEI.class);
 		links.addBinding().toInstance(ExAstris.class);
 		links.addBinding().toInstance(ExCompressum.class);
+		links.addBinding().toInstance(MineTweaker.class);
 
 		bind(Logger.class).toInstance(event.getModLog());
 		bind(Side.class).toInstance(event.getSide());

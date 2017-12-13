@@ -88,6 +88,7 @@ dependencies {
     compile "codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev"
 	compile "com.enderio:EnderIO:1.7.10-2.3.0.417_beta:dev"
 	// ExAstris and ExCompressum are also in the libs folder since I couldn't find a repo for them
+	// MineTweaker3 API is also in the libs folder, their maven repo is down
 	
 	embed "com.google:guice:q64"
 	embed "com.google:guice-multibindings:q64"

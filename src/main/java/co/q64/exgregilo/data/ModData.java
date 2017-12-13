@@ -9,6 +9,7 @@ public class ModData {
 	public static final String GREGTECH_ID = "gregtech";
 	public static final String EX_COMPRESSUM_ID = "excompressum";
 	public static final String EX_ASTRIS_ID = "exastris";
+	public static final String MINE_TWEAKER_ID = "MineTweaker3";
 
 	public static final String BLOCK_TEX_PATH = "textures/blocks/";
 	public static final String DOMAIN_PATH = MODID + ":";

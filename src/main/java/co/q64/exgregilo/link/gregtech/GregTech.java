@@ -180,7 +180,7 @@ public class GregTech implements LinkBase {
 
 	}
 
-	private Map<ItemStack, Integer> getSubMap(Block block) {
+	public Map<ItemStack, Integer> getSubMap(Block block) {
 		Map<ItemStack, Integer> map = sifting.get(block);
 		if (map == null) {
 			map = new HashMap<ItemStack, Integer>();
