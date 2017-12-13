@@ -13,7 +13,7 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
 import co.q64.exgregilo.data.ModData;
-import co.q64.exgregilo.links.gregtech.tools.MetaGeneratedTools;
+import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
 import co.q64.exgregilo.tile.AdvancedSieveTile;
 import co.q64.exgregilo.tile.AdvancedSieveTile.SieveMode;
 import cpw.mods.fml.common.registry.GameRegistry;

@@ -1,4 +1,4 @@
-package co.q64.exgregilo.links.exnihilo;
+package co.q64.exgregilo.link.exnihilo;
 
 import java.util.ArrayList;
 import java.util.List;

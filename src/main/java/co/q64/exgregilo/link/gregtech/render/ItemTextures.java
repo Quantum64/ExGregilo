@@ -1,4 +1,4 @@
-package co.q64.exgregilo.links.gregtech.render;
+package co.q64.exgregilo.link.gregtech.render;
 
 import gregtech.api.GregTech_API;
 import gregtech.api.interfaces.IIconContainer;

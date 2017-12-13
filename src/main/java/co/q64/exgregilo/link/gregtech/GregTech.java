@@ -1,4 +1,4 @@
-package co.q64.exgregilo.links.gregtech;
+package co.q64.exgregilo.link.gregtech;
 
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
@@ -27,12 +27,12 @@ import co.q64.exgregilo.api.link.LinkBase;
 import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.api.link.ModLink;
 import co.q64.exgregilo.data.ModData;
-import co.q64.exgregilo.links.exnihilo.ExNihilo;
-import co.q64.exgregilo.links.gregtech.crafting.OreDictAddons;
-import co.q64.exgregilo.links.gregtech.crafting.RecipeMap;
-import co.q64.exgregilo.links.gregtech.item.ItemList;
-import co.q64.exgregilo.links.gregtech.tile.AutoSieve;
-import co.q64.exgregilo.links.gregtech.tools.MetaGeneratedTools;
+import co.q64.exgregilo.link.exnihilo.ExNihilo;
+import co.q64.exgregilo.link.gregtech.crafting.OreDictAddons;
+import co.q64.exgregilo.link.gregtech.crafting.RecipeMap;
+import co.q64.exgregilo.link.gregtech.item.ItemList;
+import co.q64.exgregilo.link.gregtech.tile.AutoSieve;
+import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
 import co.q64.exgregilo.types.GregiloBlocks;
 import cpw.mods.fml.common.registry.GameRegistry;
 

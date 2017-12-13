@@ -1,4 +1,4 @@
-package co.q64.exgregilo.links.gregtech.gui;
+package co.q64.exgregilo.link.gregtech.gui;
 
 import gregtech.api.gui.GT_Container_BasicMachine;
 import gregtech.api.gui.GT_GUIContainerMetaTile_Machine;

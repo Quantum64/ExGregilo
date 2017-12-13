@@ -1,4 +1,4 @@
-package co.q64.exgregilo.links.gregtech.crafting;
+package co.q64.exgregilo.link.gregtech.crafting;
 
 import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.ItemList;

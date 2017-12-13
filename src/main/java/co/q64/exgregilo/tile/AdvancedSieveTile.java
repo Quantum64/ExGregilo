@@ -18,8 +18,8 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
-import co.q64.exgregilo.links.gregtech.tools.MetaGeneratedTools;
-import co.q64.exgregilo.links.gregtech.tools.WireMesh;
+import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
+import co.q64.exgregilo.link.gregtech.tools.WireMesh;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

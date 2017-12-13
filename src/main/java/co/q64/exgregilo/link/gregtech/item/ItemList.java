@@ -1,4 +1,4 @@
-package co.q64.exgregilo.links.gregtech.item;
+package co.q64.exgregilo.link.gregtech.item;
 
 import gregtech.api.enums.GT_Values;
 import gregtech.api.interfaces.IItemContainer;

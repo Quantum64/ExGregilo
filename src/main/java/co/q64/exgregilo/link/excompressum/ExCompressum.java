@@ -1,4 +1,4 @@
-package co.q64.exgregilo.links.excompressum;
+package co.q64.exgregilo.link.excompressum;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -9,7 +9,7 @@ import co.q64.exgregilo.api.link.LinkBase;
 import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.api.link.ModLink;
 import co.q64.exgregilo.data.ModData;
-import co.q64.exgregilo.links.gregtech.GregTech;
+import co.q64.exgregilo.link.gregtech.GregTech;
 
 @Singleton
 @ModLink(modId = ModData.EX_COMPRESSUM_ID, modName = "ExCompressum")

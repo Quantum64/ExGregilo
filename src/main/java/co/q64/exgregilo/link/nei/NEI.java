@@ -1,4 +1,4 @@
-package co.q64.exgregilo.links.nei;
+package co.q64.exgregilo.link.nei;
 
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;

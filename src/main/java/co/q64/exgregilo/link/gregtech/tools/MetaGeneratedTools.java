@@ -1,4 +1,4 @@
-package co.q64.exgregilo.links.gregtech.tools;
+package co.q64.exgregilo.link.gregtech.tools;
 
 import gregtech.api.enums.Materials;
 import gregtech.api.interfaces.IToolStats;
@@ -13,7 +13,7 @@ import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.EnumChatFormatting;
-import co.q64.exgregilo.links.gregtech.crafting.OreDictAddons;
+import co.q64.exgregilo.link.gregtech.crafting.OreDictAddons;
 
 @Singleton
 public class MetaGeneratedTools extends GT_MetaGenerated_Tool {

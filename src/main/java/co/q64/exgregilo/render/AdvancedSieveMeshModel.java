@@ -7,7 +7,7 @@ import net.minecraft.util.IIcon;
 
 import org.lwjgl.opengl.GL11;
 
-import co.q64.exgregilo.links.gregtech.tools.MetaGeneratedTools;
+import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
 
 public class AdvancedSieveMeshModel {
 	public void render(IIcon icon) {

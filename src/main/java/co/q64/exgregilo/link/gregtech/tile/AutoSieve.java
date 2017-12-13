@@ -1,4 +1,4 @@
-package co.q64.exgregilo.links.gregtech.tile;
+package co.q64.exgregilo.link.gregtech.tile;
 
 import gregtech.api.GregTech_API;
 import gregtech.api.enums.GT_Values;
@@ -18,11 +18,11 @@ import gregtech.api.util.GT_Utility;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
-import co.q64.exgregilo.links.gregtech.crafting.MachineRecipeHelper;
-import co.q64.exgregilo.links.gregtech.crafting.OreDictAddons;
-import co.q64.exgregilo.links.gregtech.crafting.RecipeMap;
-import co.q64.exgregilo.links.gregtech.gui.ExGT_GUIContainer_BasicMachine;
-import co.q64.exgregilo.links.gregtech.render.BlockTextures;
+import co.q64.exgregilo.link.gregtech.crafting.MachineRecipeHelper;
+import co.q64.exgregilo.link.gregtech.crafting.OreDictAddons;
+import co.q64.exgregilo.link.gregtech.crafting.RecipeMap;
+import co.q64.exgregilo.link.gregtech.gui.ExGT_GUIContainer_BasicMachine;
+import co.q64.exgregilo.link.gregtech.render.BlockTextures;
 
 public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 	private static final int IN_SLOTS = 1;

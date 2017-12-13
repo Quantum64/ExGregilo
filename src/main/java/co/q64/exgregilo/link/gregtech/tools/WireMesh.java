@@ -1,4 +1,4 @@
-package co.q64.exgregilo.links.gregtech.tools;
+package co.q64.exgregilo.link.gregtech.tools;
 
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
@@ -13,9 +13,9 @@ import javax.inject.Singleton;
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemStack;
 import co.q64.exgregilo.api.link.LinkManager;
-import co.q64.exgregilo.links.gregtech.GregTech;
-import co.q64.exgregilo.links.gregtech.render.ItemTextures;
-import co.q64.exgregilo.links.nei.NEI;
+import co.q64.exgregilo.link.gregtech.GregTech;
+import co.q64.exgregilo.link.gregtech.render.ItemTextures;
+import co.q64.exgregilo.link.nei.NEI;
 
 @Singleton
 public class WireMesh extends CustomMetaTool {

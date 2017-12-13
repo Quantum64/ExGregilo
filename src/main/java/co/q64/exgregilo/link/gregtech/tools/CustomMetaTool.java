@@ -1,4 +1,4 @@
-package co.q64.exgregilo.links.gregtech.tools;
+package co.q64.exgregilo.link.gregtech.tools;
 
 import gregtech.api.interfaces.IIconContainer;
 import gregtech.common.tools.GT_Tool;

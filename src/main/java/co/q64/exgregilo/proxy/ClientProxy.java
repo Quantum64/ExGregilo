@@ -14,7 +14,7 @@ import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.common.MinecraftForge;
 import scala.util.Random;
 import co.q64.exgregilo.api.link.LinkManager;
-import co.q64.exgregilo.links.gregtech.GregTech;
+import co.q64.exgregilo.link.gregtech.GregTech;
 import co.q64.exgregilo.render.AdvancedSieveItemRender;
 import co.q64.exgregilo.render.AdvancedSieveMeshModel;
 import co.q64.exgregilo.render.AdvancedSieveModel;

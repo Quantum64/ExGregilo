@@ -1,4 +1,4 @@
-package co.q64.exgregilo.links.exastris;
+package co.q64.exgregilo.link.exastris;
 
 import javax.inject.Inject;
 
@@ -9,7 +9,7 @@ import co.q64.exgregilo.api.link.LinkBase;
 import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.api.link.ModLink;
 import co.q64.exgregilo.data.ModData;
-import co.q64.exgregilo.links.gregtech.GregTech;
+import co.q64.exgregilo.link.gregtech.GregTech;
 
 @Singleton
 @ModLink(modId = ModData.EX_ASTRIS_ID, modName = "Ex Astris")

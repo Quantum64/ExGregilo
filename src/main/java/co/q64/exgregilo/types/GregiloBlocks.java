@@ -9,8 +9,8 @@ import co.q64.exgregilo.api.link.LinkBase;
 import co.q64.exgregilo.block.AdvancedSieve;
 import co.q64.exgregilo.block.AdvancedSieveItemBlock;
 import co.q64.exgregilo.function.BlockProvider;
-import co.q64.exgregilo.links.exnihilo.ExNihilo;
-import co.q64.exgregilo.links.gregtech.GregTech;
+import co.q64.exgregilo.link.exnihilo.ExNihilo;
+import co.q64.exgregilo.link.gregtech.GregTech;
 
 public enum GregiloBlocks {
 	@SuppressWarnings("unchecked")

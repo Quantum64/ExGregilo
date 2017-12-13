@@ -10,7 +10,7 @@ import co.q64.exgregilo.api.binders.ConstantBinders.Name;
 import co.q64.exgregilo.api.config.ConfigManager;
 import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.data.ModData;
-import co.q64.exgregilo.links.excompressum.ExCompressum;
+import co.q64.exgregilo.link.excompressum.ExCompressum;
 import co.q64.exgregilo.proxy.CommonProxy;
 import co.q64.exgregilo.util.BlockRegistration;
 import cpw.mods.fml.common.Mod;
