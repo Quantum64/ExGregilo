@@ -42,7 +42,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 @Singleton
 @ModLink(modName = "GregTech", modId = ModData.GREGTECH_ID)
-public class GregTech implements LinkBase {
+public class GregTech extends LinkBase {
 	private static final int CHANCE_CONSTANT = 4;
 	private static final int DEFAULT_ID_START = 11264;
 	private static final int DEFAULT_ID_OFFSET = 36;
@@ -56,7 +56,7 @@ public class GregTech implements LinkBase {
 	private int idStart = DEFAULT_ID_START + DEFAULT_ID_OFFSET;
 
 	@Override
-	public void loadLink() {
+	public void preloadLink() {
 		tools.addCrafting();
 
 		if (linkManager.isEnabled(ExNihilo.class)) {
@@ -85,7 +85,7 @@ public class GregTech implements LinkBase {
 	}
 
 	@Override
-	public void postLoadLink() {
+	public void loadLink() {
 		//addCrushed(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Naquadah, 1), 1);
 		// Coal
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Lignite, 1), 10);
@@ -229,7 +229,7 @@ public class GregTech implements LinkBase {
 	}
 
 	@Override
-	public void afterPostLoadLink() {
+	public void postloadLink() {
 
 	}
 

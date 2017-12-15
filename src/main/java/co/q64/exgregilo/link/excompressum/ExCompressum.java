@@ -13,14 +13,11 @@ import co.q64.exgregilo.link.gregtech.GregTech;
 
 @Singleton
 @ModLink(modId = ModData.EX_COMPRESSUM_ID, modName = "ExCompressum")
-public class ExCompressum implements LinkBase {
+public class ExCompressum extends LinkBase {
 	private @Inject LinkManager linkManager;
 
 	@Override
-	public void loadLink() {}
-
-	@Override
-	public void postLoadLink() {
+	public void loadLink() {
 		if (linkManager.isEnabled(GregTech.class)) {
 			GregTech gt = linkManager.getLink(GregTech.class);
 			gt.removeRecipe(new ItemStack(ModBlocks.autoCompressedHammer, 1));
@@ -30,10 +27,7 @@ public class ExCompressum implements LinkBase {
 		}
 	}
 
-	@Override
-	public void afterPostLoadLink() {}
-
 	public void fixThisModsDumbRegistrationTime() {
-		postLoadLink();
+		loadLink();
 	}
 }

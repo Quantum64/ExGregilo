@@ -11,23 +11,16 @@ import co.q64.exgregilo.link.gregtech.GregTech;
 
 @Singleton
 @ModLink(modName = "DreamCraft NH Core", modId = ModData.DREAMCRAFT_ID)
-public class DreamCraft implements LinkBase {
+public class DreamCraft extends LinkBase {
 	private static final int NH_OFFSET = 10000;
 
 	private @Inject LinkManager linkManager;
 
 	@Override
-	public void loadLink() {
+	public void initLink() {
 		if (linkManager.isEnabled(GregTech.class)) {
 			GregTech gt = linkManager.getLink(GregTech.class);
 			gt.setIdStart(gt.getIdStart() + NH_OFFSET);
 		}
 	}
-
-	@Override
-	public void postLoadLink() {}
-
-	@Override
-	public void afterPostLoadLink() {}
-
 }

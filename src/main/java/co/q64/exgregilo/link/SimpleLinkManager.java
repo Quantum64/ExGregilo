@@ -69,10 +69,10 @@ public class SimpleLinkManager implements LinkManager {
 
 	public void enableLinks() {
 		for (LinkBase link : enabledLinks) {
-			link.postLoadLink();
+			link.loadLink();
 		}
 		for (LinkBase link : enabledLinks) {
-			link.afterPostLoadLink();
+			link.postloadLink();
 		}
 	}
 
@@ -88,8 +88,17 @@ public class SimpleLinkManager implements LinkManager {
 			}
 		}
 		pendingLinks.clear();
-		for (LinkBase link : enabledLinks) {
-			link.loadLink(); // TODO Move if this doesn't work
+		for (int i = 0; i < 2; i++) {
+			for (LinkBase link : enabledLinks) {
+				switch (i) {
+				case 0:
+					link.initLink();
+					break;
+				case 1:
+					link.preloadLink();
+					break;
+				}
+			}
 		}
 		enabled = true;
 	}
