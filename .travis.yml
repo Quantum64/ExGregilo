@@ -4,7 +4,6 @@ jdk:
 - oraclejdk8
 script: 
   - gradle build
-  - make dist
 deploy:
   provider: releases
   api_key:
