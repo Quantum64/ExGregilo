@@ -2,6 +2,16 @@ language: java
 install: true
 jdk:
 - oraclejdk8
-script: gradle build
+script: 
+  - gradle build
+  - make dist
+deploy:
+  provider: releases
+  api_key:
+    secure: "y0Y3NDmxUAr+JkCgEuoVqlIb+EICXtw7QuXty7749tstIwuIXGuB2ialiKNDic4SUMTVwhPIpNclnly5lVFCJP01qsumL0mP9vj3E+YjiIej1+Cgo3wCbLEPFtKQh1E4zUxMbo6nPyM3N5F6i7ez9P38dfCYYq6MTLIJb6FXycAZiMgbKTjJJ5KRBLTUpir6nI+nLpVqShD1szj6EXZ6FJJ57zyVsaIuXkpieQFOVli/ldFUQhqNgn9OtVwRi1+ffYJqQareQBRR7kshzcE+l7XOzu02rnRKt7cWduO5y3Y+uL1jUI5geQd7lGqJqaMggNGT8hVV3/SjQC8eX8F76xUuPwNKGEf4OWWYmXfdLT8nurf+lCuWsD0fEpN67mMKThUNxHQylQQnQEWkIaeQCcwMVgtWc7xOoLRk4BELIAJ89G30xomZIX9/tOjIit+q5b5wsaYU20Nvv4vGzf0Maf3+pPhnlg7YYf6/qmlRHAJkYTH38141VmQNQ+H4e33fEUS1zeqawQTVsyUtmDUrMnDL7i+/yoG6DurKgi9Cg+Wsz7gFsPIwdBg/ZNd4IvbmfbdEBy1368UMUmwfeJwuA9OWZfKKtarnt3X08j7pILN1mtNatstQEro+nxKBSQHD1Wy1h7UqDIowNXjdjYRJavhpwbtwu3rQMwqliq4vz2c="
+  file: 'release.zip'
+  skip_cleanup: true
+  on:
+    tags
 notifications:
   email: false
