@@ -16,6 +16,7 @@ import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.binders.ConstantPool;
 import co.q64.exgregilo.config.SimpleConfigManager;
 import co.q64.exgregilo.link.SimpleLinkManager;
+import co.q64.exgregilo.link.dreamcraft.DreamCraft;
 import co.q64.exgregilo.link.exastris.ExAstris;
 import co.q64.exgregilo.link.excompressum.ExCompressum;
 import co.q64.exgregilo.link.exnihilo.ExNihilo;
@@ -52,6 +53,7 @@ public class ExGregiloModule extends AbstractModule {
 		links.addBinding().toInstance(ExAstris.class);
 		links.addBinding().toInstance(ExCompressum.class);
 		links.addBinding().toInstance(MineTweaker.class);
+		links.addBinding().toInstance(DreamCraft.class);
 
 		bind(Logger.class).toInstance(event.getModLog());
 		bind(Side.class).toInstance(event.getSide());
