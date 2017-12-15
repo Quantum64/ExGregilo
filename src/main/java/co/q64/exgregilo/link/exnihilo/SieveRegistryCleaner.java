@@ -1,6 +1,7 @@
 package co.q64.exgregilo.link.exnihilo;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -31,7 +32,7 @@ public class SieveRegistryCleaner {
 		int foundForRemove = 0;
 		for (Entry<ItemInfo, ArrayList<SiftingResult>> e : rewards.entrySet()) {
 			for (SiftingResult result : e.getValue()) {
-				if (result.item instanceof ItemOre || result.item == Items.emerald || result.item == Items.diamond) {
+				if (result.item instanceof ItemOre || Arrays.asList(Items.diamond, Items.emerald, Items.dye, Items.coal).contains(result.item)) {
 					toRemove.add(new ImmutablePair<Item, Integer>(result.item, result.meta));
 					foundForRemove++;
 				}
