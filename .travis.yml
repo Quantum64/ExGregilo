@@ -1,9 +1,16 @@
 language: java
 install: true
+branches:
+  only:
+  - master
 jdk:
 - oraclejdk8
+before_script:
+- npm install --save github-remove-all-releases
 script:
 - gradle build
+- node cleanup-releases.js
+- sh cleanup-tags.sh
 notifications:
   email: false
 deploy:
