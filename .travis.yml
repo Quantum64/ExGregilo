@@ -1,5 +1,8 @@
 language: java
 install: true
+branches:
+  only:
+  - master
 jdk:
 - oraclejdk8
 before_script:
