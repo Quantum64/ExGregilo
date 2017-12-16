@@ -6,7 +6,8 @@ before_script:
 - npm install --save github-remove-all-releases
 script:
 - gradle build
-- node cleanup.js
+- node cleanup-releases.js
+- sh cleanup-tags.sh
 notifications:
   email: false
 deploy:
