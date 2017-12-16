@@ -31,8 +31,9 @@ import co.q64.exgregilo.data.ModData;
 import co.q64.exgregilo.link.exnihilo.ExNihilo;
 import co.q64.exgregilo.link.gregtech.crafting.MachineRecipeHelper;
 import co.q64.exgregilo.link.gregtech.crafting.OreDictAddons;
-import co.q64.exgregilo.link.gregtech.crafting.RecipeMap;
 import co.q64.exgregilo.link.gregtech.item.ItemList;
+import co.q64.exgregilo.link.gregtech.recipe.AutoSieveRecipes;
+import co.q64.exgregilo.link.gregtech.recipe.GemExtractorRecipes;
 import co.q64.exgregilo.link.gregtech.tile.AutoSieve;
 import co.q64.exgregilo.link.gregtech.tile.GemExtractor;
 import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
@@ -51,6 +52,9 @@ public class GregTech extends LinkBase {
 	private @Inject MetaGeneratedTools tools;
 	private @Inject MachineRecipeHelper helper;
 
+	private @Inject AutoSieveRecipes asr;
+	private @Inject GemExtractorRecipes ger;
+
 	private Map<Block, Map<ItemStack, Integer>> sifting = new HashMap<Block, Map<ItemStack, Integer>>();
 	private Map<ItemStack, Integer> gems = new HashMap<ItemStack, Integer>();
 	private int idStart = DEFAULT_ID_START + DEFAULT_ID_OFFSET;
@@ -65,23 +69,23 @@ public class GregTech extends LinkBase {
 			GT_OreDictUnificator.registerOre(OreDictAddons.SILK_MESH, new ItemStack(Items.string, 1));
 		}
 
-		ItemList.AUTO_SIEVE_LV.set(new AutoSieve(id(0), "basicmachine.autosieve.tier.01", "Auto Sieve", 1, helper).getStackForm(1L));
-		ItemList.AUTO_SIEVE_MV.set(new AutoSieve(id(1), "basicmachine.autosieve.tier.02", "Advanced Auto Sieve", 2, helper).getStackForm(1L));
-		ItemList.AUTO_SIEVE_HV.set(new AutoSieve(id(2), "basicmachine.autosieve.tier.03", "Advanced Auto Sieve II", 3, helper).getStackForm(1L));
-		ItemList.AUTO_SIEVE_EV.set(new AutoSieve(id(3), "basicmachine.autosieve.tier.04", "Advanced Auto Sieve III", 4, helper).getStackForm(1L));
-		ItemList.AUTO_SIEVE_IV.set(new AutoSieve(id(4), "basicmachine.autosieve.tier.05", "Advanced Auto Sieve IV", 5, helper).getStackForm(1L));
-		ItemList.AUTO_SIEVE_LuV.set(new AutoSieve(id(5), "basicmachine.autosieve.tier.06", "Advanced Auto Sieve V", 6, helper).getStackForm(1L));
-		ItemList.AUTO_SIEVE_ZPM.set(new AutoSieve(id(6), "basicmachine.autosieve.tier.07", "Advanced Auto Sieve VI", 7, helper).getStackForm(1L));
-		ItemList.AUTO_SIEVE_UV.set(new AutoSieve(id(7), "basicmachine.autosieve.tier.08", "Advanced Auto Sieve VII", 8, helper).getStackForm(1L));
+		ItemList.AUTO_SIEVE_LV.set(new AutoSieve(id(0), "basicmachine.autosieve.tier.01", "Auto Sieve", 1, helper, asr).getStackForm(1L));
+		ItemList.AUTO_SIEVE_MV.set(new AutoSieve(id(1), "basicmachine.autosieve.tier.02", "Advanced Auto Sieve", 2, helper, asr).getStackForm(1L));
+		ItemList.AUTO_SIEVE_HV.set(new AutoSieve(id(2), "basicmachine.autosieve.tier.03", "Advanced Auto Sieve II", 3, helper, asr).getStackForm(1L));
+		ItemList.AUTO_SIEVE_EV.set(new AutoSieve(id(3), "basicmachine.autosieve.tier.04", "Advanced Auto Sieve III", 4, helper, asr).getStackForm(1L));
+		ItemList.AUTO_SIEVE_IV.set(new AutoSieve(id(4), "basicmachine.autosieve.tier.05", "Advanced Auto Sieve IV", 5, helper, asr).getStackForm(1L));
+		ItemList.AUTO_SIEVE_LuV.set(new AutoSieve(id(5), "basicmachine.autosieve.tier.06", "Advanced Auto Sieve V", 6, helper, asr).getStackForm(1L));
+		ItemList.AUTO_SIEVE_ZPM.set(new AutoSieve(id(6), "basicmachine.autosieve.tier.07", "Advanced Auto Sieve VI", 7, helper, asr).getStackForm(1L));
+		ItemList.AUTO_SIEVE_UV.set(new AutoSieve(id(7), "basicmachine.autosieve.tier.08", "Advanced Auto Sieve VII", 8, helper, asr).getStackForm(1L));
 
-		ItemList.GEM_EXTRACTOR_LV.set(new GemExtractor(id(10), "basicmachine.gemextractor.tier.01", "Gem Extractor", 1, helper).getStackForm(1L));
-		ItemList.GEM_EXTRACTOR_MV.set(new GemExtractor(id(11), "basicmachine.gemextractor.tier.02", "Advanced Gem Extractor", 2, helper).getStackForm(1L));
-		ItemList.GEM_EXTRACTOR_HV.set(new GemExtractor(id(12), "basicmachine.gemextractor.tier.03", "Advanced Gem Extractor II", 3, helper).getStackForm(1L));
-		ItemList.GEM_EXTRACTOR_EV.set(new GemExtractor(id(13), "basicmachine.gemextractor.tier.04", "Advanced Gem Extractor III", 4, helper).getStackForm(1L));
-		ItemList.GEM_EXTRACTOR_IV.set(new GemExtractor(id(14), "basicmachine.gemextractor.tier.05", "Advanced Gem Extractor IV", 5, helper).getStackForm(1L));
-		ItemList.GEM_EXTRACTOR_LuV.set(new GemExtractor(id(15), "basicmachine.gemextractor.tier.06", "Advanced Gem Extractor V", 6, helper).getStackForm(1L));
-		ItemList.GEM_EXTRACTOR_ZPM.set(new GemExtractor(id(16), "basicmachine.gemextractor.tier.07", "Advanced Gem Extractor VI", 7, helper).getStackForm(1L));
-		ItemList.GEM_EXTRACTOR_UV.set(new GemExtractor(id(17), "basicmachine.gemextractor.tier.08", "Advanced Gem Extractor VII", 8, helper).getStackForm(1L));
+		ItemList.GEM_EXTRACTOR_LV.set(new GemExtractor(id(10), "basicmachine.gemextractor.tier.01", "Gem Extractor", 1, helper, ger).getStackForm(1L));
+		ItemList.GEM_EXTRACTOR_MV.set(new GemExtractor(id(11), "basicmachine.gemextractor.tier.02", "Advanced Gem Extractor", 2, helper, ger).getStackForm(1L));
+		ItemList.GEM_EXTRACTOR_HV.set(new GemExtractor(id(12), "basicmachine.gemextractor.tier.03", "Advanced Gem Extractor II", 3, helper, ger).getStackForm(1L));
+		ItemList.GEM_EXTRACTOR_EV.set(new GemExtractor(id(13), "basicmachine.gemextractor.tier.04", "Advanced Gem Extractor III", 4, helper, ger).getStackForm(1L));
+		ItemList.GEM_EXTRACTOR_IV.set(new GemExtractor(id(14), "basicmachine.gemextractor.tier.05", "Advanced Gem Extractor IV", 5, helper, ger).getStackForm(1L));
+		ItemList.GEM_EXTRACTOR_LuV.set(new GemExtractor(id(15), "basicmachine.gemextractor.tier.06", "Advanced Gem Extractor V", 6, helper, ger).getStackForm(1L));
+		ItemList.GEM_EXTRACTOR_ZPM.set(new GemExtractor(id(16), "basicmachine.gemextractor.tier.07", "Advanced Gem Extractor VI", 7, helper, ger).getStackForm(1L));
+		ItemList.GEM_EXTRACTOR_UV.set(new GemExtractor(id(17), "basicmachine.gemextractor.tier.08", "Advanced Gem Extractor VII", 8, helper, ger).getStackForm(1L));
 	}
 
 	@Override
@@ -193,7 +197,7 @@ public class GregTech extends LinkBase {
 				chances[i] = e.getValue() * CHANCE_CONSTANT;
 				i++;
 			}
-			RecipeMap.AUTO_SIEVE_RECIPES.addRecipe(false, new ItemStack[] { (new ItemStack(b, 1)) }, outputs, null, chances, new FluidStack[0], new FluidStack[0], -1, -1, 0);
+			asr.addRecipe(false, new ItemStack[] { (new ItemStack(b, 1)) }, outputs, null, chances, new FluidStack[0], new FluidStack[0], -1, -1, 0);
 		}
 
 		// Gemextractor recipie
@@ -205,7 +209,7 @@ public class GregTech extends LinkBase {
 			chances[i] = e.getValue() * CHANCE_CONSTANT;
 			i++;
 		}
-		RecipeMap.GEM_EXTRACTOR_RECIPES.addRecipe(false, new ItemStack[] { (new ItemStack(GregiloBlocks.GEM_SAND.getRealBlock(), 1)) }, outputs, null, chances, new FluidStack[0], new FluidStack[0], -1, -1, 0);
+		ger.addRecipe(false, new ItemStack[] { (new ItemStack(GregiloBlocks.GEM_SAND.getRealBlock(), 1)) }, outputs, null, chances, new FluidStack[0], new FluidStack[0], -1, -1, 0);
 
 		//ItemStack shard = new ItemStack(GregiloItems.GEM_SHARDS.getRealItem());
 		//GT_Values.RA.addMixerRecipe(new ItemStack(Blocks.sand), shard, shard, shard, null, null, new ItemStack(this), 400, 16);

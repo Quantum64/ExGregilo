@@ -2,7 +2,6 @@ package co.q64.exgregilo.link.gregtech.tile;
 
 import gregtech.api.GregTech_API;
 import gregtech.api.enums.GT_Values;
-import gregtech.api.gui.GT_Container_BasicMachine;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
@@ -13,19 +12,19 @@ import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_Recipe;
 import gregtech.api.util.GT_Recipe.GT_Recipe_Map;
 import gregtech.api.util.GT_Utility;
-import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import co.q64.exgregilo.link.gregtech.crafting.MachineRecipeHelper;
-import co.q64.exgregilo.link.gregtech.crafting.RecipeMap;
-import co.q64.exgregilo.link.gregtech.gui.ExGT_GUIContainer_BasicMachine;
+import co.q64.exgregilo.link.gregtech.recipe.GemExtractorRecipes;
 import co.q64.exgregilo.link.gregtech.render.BlockTextures;
 
 public class GemExtractor extends GT_MetaTileEntity_BasicMachine {
 	private static final int IN_SLOTS = 1;
 	private static final int OUT_SLOTS = 6;
 
-	public GemExtractor(int aID, String aName, String aNameRegional, int aTier, MachineRecipeHelper helper) {
+	private GemExtractorRecipes map;
+
+	public GemExtractor(int aID, String aName, String aNameRegional, int aTier, MachineRecipeHelper helper, GemExtractorRecipes map) {
 		super(aID, aName, aNameRegional, aTier, 1, "Shiny!", IN_SLOTS, OUT_SLOTS, "gemextractor.png", "gemext",
 //formatter:off
 				new GT_RenderedTexture(BlockTextures.BLANK),
@@ -48,8 +47,9 @@ public class GemExtractor extends GT_MetaTileEntity_BasicMachine {
 				Character.valueOf('A'), X.ROBOT_ARM,
 				Character.valueOf('P'), X.PLATE,
 				Character.valueOf('E'), X.COIL_HEATING_DOUBLE });
-		
 //formatter:on
+
+		this.map = map;
 	}
 
 	public GemExtractor(String aName, int aTier, String aDescription, ITexture[][][] aTextures, String aGUIName, String aNEIName) {
@@ -109,7 +109,7 @@ public class GemExtractor extends GT_MetaTileEntity_BasicMachine {
 
 	@Override
 	public GT_Recipe_Map getRecipeList() {
-		return RecipeMap.GEM_EXTRACTOR_RECIPES;
+		return map;
 	}
 
 	@Override
@@ -127,15 +127,5 @@ public class GemExtractor extends GT_MetaTileEntity_BasicMachine {
 	@Override
 	public void startProcess() {
 		sendLoopStart((byte) 1);
-	}
-
-	@Override
-	public Object getServerGUI(int aID, InventoryPlayer aPlayerInventory, IGregTechTileEntity aBaseMetaTileEntity) {
-		return new GT_Container_BasicMachine(aPlayerInventory, aBaseMetaTileEntity);
-	}
-
-	@Override
-	public Object getClientGUI(int aID, InventoryPlayer aPlayerInventory, IGregTechTileEntity aBaseMetaTileEntity) {
-		return new ExGT_GUIContainer_BasicMachine(aPlayerInventory, aBaseMetaTileEntity, getLocalName(), mGUIName, GT_Utility.isStringValid(mNEIName) ? mNEIName : getRecipeList() != null ? getRecipeList().mUnlocalizedName : "");
 	}
 }

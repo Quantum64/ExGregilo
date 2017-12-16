@@ -10,10 +10,12 @@ import co.q64.com.google.inject.multibindings.Multibinder;
 import co.q64.exgregilo.api.binders.ConstantBinders.Author;
 import co.q64.exgregilo.api.binders.ConstantBinders.ConfigFile;
 import co.q64.exgregilo.api.binders.ConstantBinders.Name;
+import co.q64.exgregilo.api.binders.ModDataBinders.GUITexPath;
 import co.q64.exgregilo.api.config.ConfigManager;
 import co.q64.exgregilo.api.link.LinkBase;
 import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.binders.ConstantPool;
+import co.q64.exgregilo.binders.ModDataPool;
 import co.q64.exgregilo.config.SimpleConfigManager;
 import co.q64.exgregilo.link.SimpleLinkManager;
 import co.q64.exgregilo.link.dreamcraft.DreamCraft;
@@ -65,6 +67,8 @@ public class ExGregiloModule extends AbstractModule {
 
 		bindConstant().annotatedWith(Name.class).to(ConstantPool.NAME);
 		bindConstant().annotatedWith(Author.class).to(ConstantPool.AUTHOR);
+
+		bindConstant().annotatedWith(GUITexPath.class).to(ModDataPool.GUI_TEX_PATH);
 	}
 
 }
