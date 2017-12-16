@@ -27,8 +27,6 @@ public class AdvancedSieveModel extends ModelBase {
 	private ModelRenderer boxSide4;
 
 	public AdvancedSieveModel() {
-		texture = new ResourceLocation(ModData.MODID, blockTexPath + TEX_NAME);
-
 		textureWidth = 128;
 		textureHeight = 128;
 		leg1 = new ModelRenderer(this, 0, 0);
@@ -79,6 +77,11 @@ public class AdvancedSieveModel extends ModelBase {
 		boxSide4.setTextureSize(128, 128);
 		boxSide4.mirror = true;
 		setRotation(boxSide4, 0F, 0F, 0F);
+	}
+
+	@Inject
+	public void init() {
+		texture = new ResourceLocation(ModData.MODID, blockTexPath + TEX_NAME);
 	}
 
 	public void render(Entity entity, float f, float f1, float f2, float f3, float f4, float f5) {

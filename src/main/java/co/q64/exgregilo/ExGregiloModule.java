@@ -10,6 +10,7 @@ import co.q64.exgregilo.api.binders.ConstantBinders.Author;
 import co.q64.exgregilo.api.binders.ConstantBinders.ConfigFile;
 import co.q64.exgregilo.api.binders.ConstantBinders.Name;
 import co.q64.exgregilo.api.binders.ConstantBinders.Version;
+import co.q64.exgregilo.api.binders.ModDataBinders.BlockTexPath;
 import co.q64.exgregilo.api.binders.ModDataBinders.DomainPath;
 import co.q64.exgregilo.api.binders.ModDataBinders.GtGUITexPath;
 import co.q64.exgregilo.api.config.ConfigManager;
@@ -79,7 +80,7 @@ public class ExGregiloModule extends AbstractModule {
 		bind(File.class).annotatedWith(ConfigFile.class).toInstance(event.getSuggestedConfigurationFile());
 		bind(ExGregilo.class).toInstance(mod);
 		bind(CommonProxy.class).toInstance(proxy);
-		bind(DecimalFormat.class).toInstance(new DecimalFormat("00.00"));
+		bind(DecimalFormat.class).toInstance(new DecimalFormat("0.00"));
 
 		bindConstant().annotatedWith(Name.class).to(ConstantPool.NAME);
 		bindConstant().annotatedWith(Author.class).to(ConstantPool.AUTHOR);
@@ -87,6 +88,7 @@ public class ExGregiloModule extends AbstractModule {
 
 		bindConstant().annotatedWith(GtGUITexPath.class).to(ModDataPool.GT_GUI_TEX_PATH);
 		bindConstant().annotatedWith(DomainPath.class).to(ModDataPool.DOMAIN_PATH);
+		bindConstant().annotatedWith(BlockTexPath.class).to(ModDataPool.BLOCK_TEX_PATH);
 	}
 
 }

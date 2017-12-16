@@ -12,7 +12,7 @@ import co.q64.exgregilo.data.ModIds;
 import co.q64.exgregilo.link.minetweaker.machines.ZenAutoSieve;
 
 @Singleton
-@ModLink(modName = "MineTweaker", modId = ModIds.GREGTECH_ID)
+@ModLink(modName = "MineTweaker", modId = ModIds.MINE_TWEAKER_ID)
 public class MineTweaker extends LinkBase {
 	private @Inject LinkManager linkManager;
 
