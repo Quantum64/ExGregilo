@@ -185,9 +185,9 @@ public class GregTech extends LinkBase {
 		blocks.add(getDustBlock());
 		for (Block b : blocks) {
 			Map<ItemStack, Integer> additional = new HashMap<ItemStack, Integer>();
-			if (linkManager.isEnabled(ExNihilo.class)) {
-				additional.putAll(linkManager.getLink(ExNihilo.class).getAdditionalResults(b));
-			}
+			//if (linkManager.isEnabled(ExNihilo.class)) {
+			//	additional.putAll(linkManager.getLink(ExNihilo.class).getAdditionalResults(b));
+			//}
 			ItemStack[] outputs = new ItemStack[getSubMap(b).size() + additional.size()];
 			int[] chances = new int[getSubMap(b).size() + additional.size()];
 			int i = 0;
@@ -197,11 +197,11 @@ public class GregTech extends LinkBase {
 				chances[i] = e.getValue() * CHANCE_CONSTANT;
 				i++;
 			}
-			for (Entry<ItemStack, Integer> e : additional.entrySet()) {
-				outputs[i] = e.getKey();
-				chances[i] = e.getValue() * CHANCE_CONSTANT;
-				i++;
-			}
+			//for (Entry<ItemStack, Integer> e : additional.entrySet()) {
+			//	outputs[i] = e.getKey();
+			//	chances[i] = e.getValue() * CHANCE_CONSTANT;
+			//	i++;
+			//}
 			asr.addRecipe(false, new ItemStack[] { (new ItemStack(b, 1)) }, outputs, null, chances, new FluidStack[0], new FluidStack[0], -1, -1, 0);
 		}
 

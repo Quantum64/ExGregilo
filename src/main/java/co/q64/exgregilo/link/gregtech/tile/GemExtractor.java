@@ -52,13 +52,14 @@ public class GemExtractor extends GT_MetaTileEntity_BasicMachine {
 		this.map = map;
 	}
 
-	public GemExtractor(String aName, int aTier, String aDescription, ITexture[][][] aTextures, String aGUIName, String aNEIName) {
+	public GemExtractor(String aName, int aTier, String aDescription, ITexture[][][] aTextures, String aGUIName, String aNEIName, GemExtractorRecipes map) {
 		super(aName, aTier, 1, aDescription, aTextures, IN_SLOTS, OUT_SLOTS, aGUIName, aNEIName);
+		this.map = map;
 	}
 
 	@Override
 	public MetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-		return new GemExtractor(mName, mTier, mDescription, mTextures, mGUIName, mNEIName);
+		return new GemExtractor(mName, mTier, mDescription, mTextures, mGUIName, mNEIName, map);
 	}
 
 	@Override

@@ -30,7 +30,7 @@ public class ExNihilo extends LinkBase {
 	private @Inject SieveRegistryCleaner cleaner;
 
 	@Override
-	public void preloadLink() {
+	public void loadLink() {
 		if (configManager.getBoolean(ExNihilo.class, "removeDefaultSiftOres", true)) {
 			cleaner.removeDefaultOres();
 		}
