@@ -94,8 +94,7 @@ dependencies {
 	embed "com.google:guice-multibindings:q64"
 }
 
-processResources
-{
+processResources {
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
@@ -117,3 +116,12 @@ processResources
 jar {
     from configurations.embed.collect { it.isDirectory() ? it : zipTree(it) }
 }
+
+task renameJar(type: Copy, dependsOn: assemble) {
+	from "build/libs/"
+	into "build/libs/"
+	include "exgregilo-${version}.jar"
+	rename "exgregilo-${version}.jar", "exgregilo-latest.jar"
+}
+
+build.dependsOn renameJar

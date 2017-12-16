@@ -23,20 +23,20 @@ import exnihilo.registries.helpers.SiftingResult;
 
 @Singleton
 @ModLink(modName = "Ex Nihilo", modId = ModData.EX_NIHILO_ID)
-public class ExNihilo implements LinkBase {
+public class ExNihilo extends LinkBase {
 	private @Inject LinkManager linkManager;
 	private @Inject ConfigManager configManager;
 	private @Inject SieveRegistryCleaner cleaner;
 
 	@Override
-	public void postLoadLink() {
+	public void preloadLink() {
 		if (configManager.getBoolean(ExNihilo.class, "removeDefaultSiftOres", true)) {
 			cleaner.removeDefaultOres();
 		}
 	}
 
 	@Override
-	public void afterPostLoadLink() {
+	public void postloadLink() {
 		if (linkManager.isEnabled(GregTech.class)) {
 			GregTech gt = linkManager.getLink(GregTech.class);
 			for (Entry<Block, Map<ItemStack, Integer>> block : gt.getSiftingMap().entrySet()) {
@@ -45,11 +45,6 @@ public class ExNihilo implements LinkBase {
 				}
 			}
 		}
-	}
-
-	@Override
-	public void loadLink() {
-
 	}
 
 	public Block getDustBlock() {

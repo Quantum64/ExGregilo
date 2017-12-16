@@ -47,7 +47,7 @@ public class MetaGeneratedTools extends GT_MetaGenerated_Tool {
 		if (stats != null) {
 			list.add(tOffset + 0, EnumChatFormatting.WHITE + "Durability: " + EnumChatFormatting.GREEN + (maxDamage - getToolDamage(stack)) + " / " + maxDamage + EnumChatFormatting.GRAY);
 			list.add(tOffset + 1, EnumChatFormatting.WHITE + material.mDefaultLocalName + EnumChatFormatting.YELLOW + " lvl " + getHarvestLevel(stack, "") + EnumChatFormatting.GRAY);
-			list.add(tOffset + 2, EnumChatFormatting.WHITE + "Clicks Required: " + EnumChatFormatting.LIGHT_PURPLE + Math.max(Float.MIN_NORMAL, stats.getSpeedMultiplier() * (WireMesh.MAX_SPEED - getPrimaryMaterial(stack).mToolSpeed)) + EnumChatFormatting.GRAY);
+			list.add(tOffset + 2, EnumChatFormatting.WHITE + "Clicks Required: " + EnumChatFormatting.LIGHT_PURPLE + ((int) Math.ceil(Math.max(1, stats.getSpeedMultiplier() * (WireMesh.MAX_SPEED - getPrimaryMaterial(stack).mToolSpeed)))) + EnumChatFormatting.GRAY);
 		}
 	}
 

@@ -562,7 +562,7 @@ public class MachineRecipeHelper {
 				throw new IllegalArgumentException("MISSING TIER MAPPING FOR: " + aRecipe[i] + " AT TIER " + mTier);
 		}
 
-		if (!GT_ModHandler.addCraftingRecipe(tile.getStackForm(1), RecipeBits.DISMANTLEABLE | RecipeBits.BUFFERED | RecipeBits.NOT_REMOVABLE | RecipeBits.REVERSIBLE | RecipeBits.KEEPNBT, aRecipe)) {
+		if (!GT_ModHandler.addCraftingRecipe(tile.getStackForm(1), RecipeBits.DISMANTLEABLE | RecipeBits.BUFFERED | RecipeBits.NOT_REMOVABLE | RecipeBits.REVERSIBLE, aRecipe)) {
 			throw new IllegalArgumentException("INVALID CRAFTING RECIPE FOR: " + tile.getStackForm(1).getDisplayName());
 		}
 		logger.info("Added recipe: " + Arrays.asList(aRecipe));

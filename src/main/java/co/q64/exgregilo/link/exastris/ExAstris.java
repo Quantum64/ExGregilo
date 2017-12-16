@@ -13,19 +13,16 @@ import co.q64.exgregilo.link.gregtech.GregTech;
 
 @Singleton
 @ModLink(modId = ModData.EX_ASTRIS_ID, modName = "Ex Astris")
-public class ExAstris implements LinkBase {
+public class ExAstris extends LinkBase {
 	private @Inject LinkManager linkManager;
 
 	@Override
-	public void loadLink() {}
-
-	@Override
-	public void postLoadLink() {
+	public void loadLink() {
 		if (linkManager.isEnabled(GregTech.class)) {
 			linkManager.getLink(GregTech.class).removeRecipe(new ItemStack(ExAstrisBlock.SieveAutomatic, 1));
 		}
 	}
 
 	@Override
-	public void afterPostLoadLink() {}
+	public void postloadLink() {}
 }

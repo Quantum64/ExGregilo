@@ -1,11 +1,13 @@
 package co.q64.exgregilo.link.gregtech.tools;
 
+import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.SubTag;
 import gregtech.api.interfaces.IIconContainer;
 import gregtech.api.items.GT_MetaGenerated_Tool;
 import gregtech.api.util.GT_ModHandler;
+import gregtech.api.util.GT_OreDictUnificator;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
@@ -36,8 +38,11 @@ public class WireMesh extends CustomMetaTool {
 				Character.valueOf('W'), OrePrefixes.wireGt01.get(material), 
 				Character.valueOf('G'), OrePrefixes.gearGtSmall.get(material)});
 				//formatter:on
-				if (useNEI && added) {
-					linkManager.getLink(NEI.class).addItemVariant(linkManager.getLink(GregTech.class).getTools(), result);
+				if (added) {
+					GT_Values.RA.addAssemblerRecipe(GT_OreDictUnificator.get(OrePrefixes.wireGt01, material, 8), GT_OreDictUnificator.get(OrePrefixes.gearGtSmall, material, 1), result, 400, 2);
+					if (useNEI) {
+						linkManager.getLink(NEI.class).addItemVariant(linkManager.getLink(GregTech.class).getTools(), result);
+					}
 				}
 			}
 		}

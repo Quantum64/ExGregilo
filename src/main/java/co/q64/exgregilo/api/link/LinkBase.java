@@ -1,9 +1,11 @@
 package co.q64.exgregilo.api.link;
 
-public interface LinkBase {
-	public void loadLink();
+public abstract class LinkBase {
+	public void initLink() {};
 
-	public void postLoadLink();
+	public void preloadLink() {};
 
-	public void afterPostLoadLink();
+	public void loadLink() {};
+
+	public void postloadLink() {};
 }

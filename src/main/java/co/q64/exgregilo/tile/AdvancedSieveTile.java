@@ -112,7 +112,12 @@ public class AdvancedSieveTile extends TileEntity {
 				if (mesh != null && mesh.getItem() instanceof MetaGeneratedTools) {
 					MetaGeneratedTools tools = (MetaGeneratedTools) mesh.getItem();
 					IToolStats stats = tools.getToolStats(mesh);
-					volume -= 1f / (stats.getSpeedMultiplier() * (WireMesh.MAX_SPEED - MetaGeneratedTools.getPrimaryMaterial(mesh).mToolSpeed));
+					float amount = 1f / (stats.getSpeedMultiplier() * (WireMesh.MAX_SPEED - MetaGeneratedTools.getPrimaryMaterial(mesh).mToolSpeed));
+					if (amount < 0) {
+						volume = 0;
+					} else {
+						volume -= amount;
+					}
 				} else {
 					volume -= PROCESSING_INTERVAL;
 				}

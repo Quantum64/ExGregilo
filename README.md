@@ -1,5 +1,7 @@
 # ExGregilo
 
+[![Build Status](https://travis-ci.org/Quantum64/ExGregilo.svg?branch=master)](https://travis-ci.org/Quantum64/ExGregilo) [Latest dev build ](https://github.com/Quantum64/ExGregilo/releases/latest)
+
 This mod adds GregTech support for Ex Nihilo, new machines, and other things.  Check out the project page [here](https://minecraft.curseforge.com/projects/exgregilo).
 
 

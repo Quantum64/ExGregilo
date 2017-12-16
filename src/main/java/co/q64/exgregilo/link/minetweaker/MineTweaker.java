@@ -12,19 +12,16 @@ import co.q64.exgregilo.link.minetweaker.machines.ZenAutoSieve;
 
 @Singleton
 @ModLink(modName = "MineTweaker", modId = ModData.MINE_TWEAKER_ID)
-public class MineTweaker implements LinkBase {
+public class MineTweaker extends LinkBase {
 	private @Inject LinkManager linkManager;
 
 	@Override
-	public void loadLink() {
+	public void initLink() {
 		ZenAutoSieve.setLinkManager(linkManager);
 	}
 
 	@Override
-	public void postLoadLink() {
+	public void loadLink() {
 		MineTweakerAPI.registerClass(ZenAutoSieve.class);
 	}
-
-	@Override
-	public void afterPostLoadLink() {}
 }
