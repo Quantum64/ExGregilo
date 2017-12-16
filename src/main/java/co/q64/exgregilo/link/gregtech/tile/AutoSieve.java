@@ -17,7 +17,6 @@ import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
 import co.q64.exgregilo.link.gregtech.crafting.MachineRecipeHelper;
-import co.q64.exgregilo.link.gregtech.crafting.OreDictAddons;
 import co.q64.exgregilo.link.gregtech.crafting.RecipeMap;
 import co.q64.exgregilo.link.gregtech.gui.ExGT_GUIContainer_BasicMachine;
 import co.q64.exgregilo.link.gregtech.render.BlockTextures;
