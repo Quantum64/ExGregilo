@@ -10,13 +10,19 @@ import co.q64.com.google.inject.multibindings.Multibinder;
 import co.q64.exgregilo.api.binders.ConstantBinders.Author;
 import co.q64.exgregilo.api.binders.ConstantBinders.ConfigFile;
 import co.q64.exgregilo.api.binders.ConstantBinders.Name;
-import co.q64.exgregilo.api.binders.ModDataBinders.GUITexPath;
+import co.q64.exgregilo.api.binders.ModDataBinders.DomainPath;
+import co.q64.exgregilo.api.binders.ModDataBinders.GtGUITexPath;
 import co.q64.exgregilo.api.config.ConfigManager;
 import co.q64.exgregilo.api.link.LinkBase;
 import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.binders.ConstantPool;
 import co.q64.exgregilo.binders.ModDataPool;
 import co.q64.exgregilo.config.SimpleConfigManager;
+import co.q64.exgregilo.container.GregiloBlockContainer;
+import co.q64.exgregilo.container.GregiloItemContainer;
+import co.q64.exgregilo.container.blocks.AdvancedSieveContainer;
+import co.q64.exgregilo.container.blocks.GemSandContainer;
+import co.q64.exgregilo.container.items.GemShardsContainer;
 import co.q64.exgregilo.link.SimpleLinkManager;
 import co.q64.exgregilo.link.dreamcraft.DreamCraft;
 import co.q64.exgregilo.link.exastris.ExAstris;
@@ -48,7 +54,6 @@ public class ExGregiloModule extends AbstractModule {
 		bind(ConfigManager.class).to(SimpleConfigManager.class);
 
 		Multibinder<Class<? extends LinkBase>> links = Multibinder.newSetBinder(binder(), new TypeLiteral<Class<? extends LinkBase>>() {});
-
 		links.addBinding().toInstance(ExNihilo.class);
 		links.addBinding().toInstance(GregTech.class);
 		links.addBinding().toInstance(NEI.class);
@@ -56,6 +61,13 @@ public class ExGregiloModule extends AbstractModule {
 		links.addBinding().toInstance(ExCompressum.class);
 		links.addBinding().toInstance(MineTweaker.class);
 		links.addBinding().toInstance(DreamCraft.class);
+
+		Multibinder<GregiloItemContainer> items = Multibinder.newSetBinder(binder(), GregiloItemContainer.class);
+		items.addBinding().to(GemShardsContainer.class);
+
+		Multibinder<GregiloBlockContainer> blocks = Multibinder.newSetBinder(binder(), GregiloBlockContainer.class);
+		blocks.addBinding().to(AdvancedSieveContainer.class);
+		blocks.addBinding().to(GemSandContainer.class);
 
 		bind(Logger.class).toInstance(event.getModLog());
 		bind(Side.class).toInstance(event.getSide());
@@ -68,7 +80,8 @@ public class ExGregiloModule extends AbstractModule {
 		bindConstant().annotatedWith(Name.class).to(ConstantPool.NAME);
 		bindConstant().annotatedWith(Author.class).to(ConstantPool.AUTHOR);
 
-		bindConstant().annotatedWith(GUITexPath.class).to(ModDataPool.GUI_TEX_PATH);
+		bindConstant().annotatedWith(GtGUITexPath.class).to(ModDataPool.GT_GUI_TEX_PATH);
+		bindConstant().annotatedWith(DomainPath.class).to(ModDataPool.DOMAIN_PATH);
 	}
 
 }

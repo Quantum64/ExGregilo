@@ -1,26 +1,34 @@
 package co.q64.exgregilo.render;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import net.minecraft.client.model.ModelBase;
 import net.minecraft.client.model.ModelRenderer;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;
+import co.q64.exgregilo.api.binders.ModDataBinders.BlockTexPath;
 import co.q64.exgregilo.data.ModData;
 
+@Singleton
 public class AdvancedSieveModel extends ModelBase {
 	private static final String TEX_NAME = "ADVANCED_SIEVE.png";
 
-	ModelRenderer leg1;
-	ModelRenderer leg2;
-	ModelRenderer leg3;
-	ModelRenderer leg4;
-	ModelRenderer boxSide1;
-	ModelRenderer boxSide2;
-	ModelRenderer boxSide3;
-	ModelRenderer boxSide4;
+	private @Inject @BlockTexPath String blockTexPath;
 
-	public static final ResourceLocation TEXTURE = new ResourceLocation(ModData.MODID, ModData.BLOCK_TEX_PATH + TEX_NAME);
+	private ResourceLocation texture;
+	private ModelRenderer leg1;
+	private ModelRenderer leg2;
+	private ModelRenderer leg3;
+	private ModelRenderer leg4;
+	private ModelRenderer boxSide1;
+	private ModelRenderer boxSide2;
+	private ModelRenderer boxSide3;
+	private ModelRenderer boxSide4;
 
 	public AdvancedSieveModel() {
+		texture = new ResourceLocation(ModData.MODID, blockTexPath + TEX_NAME);
+
 		textureWidth = 128;
 		textureHeight = 128;
 		leg1 = new ModelRenderer(this, 0, 0);
@@ -105,5 +113,9 @@ public class AdvancedSieveModel extends ModelBase {
 
 	public void setRotationAngles(float f, float f1, float f2, float f3, float f4, float f5, Entity entity) {
 		super.setRotationAngles(f, f1, f2, f3, f4, f5, entity);
+	}
+
+	public ResourceLocation getTexture() {
+		return texture;
 	}
 }

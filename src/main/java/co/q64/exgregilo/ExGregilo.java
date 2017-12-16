@@ -10,6 +10,7 @@ import co.q64.exgregilo.api.binders.ConstantBinders.Name;
 import co.q64.exgregilo.api.config.ConfigManager;
 import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.data.ModData;
+import co.q64.exgregilo.data.ModIds;
 import co.q64.exgregilo.link.excompressum.ExCompressum;
 import co.q64.exgregilo.proxy.CommonProxy;
 import co.q64.exgregilo.util.BlockRegistration;
@@ -22,7 +23,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.event.FMLServerAboutToStartEvent;
 
-@Mod(modid = ModData.MODID, version = ModData.VERSION, dependencies = "after:" + ModData.EX_NIHILO_ID /*+ "; after:" + ModData.GREGTECH_ID */+ "; before:" + ModData.EX_COMPRESSUM_ID)
+@Mod(modid = ModData.MODID, version = ModData.VERSION, dependencies = "after:" + ModIds.EX_NIHILO_ID /*+ "; after:" + ModData.GREGTECH_ID */+ "; before:" + ModIds.EX_COMPRESSUM_ID)
 public class ExGregilo {
 	@SidedProxy(clientSide = "co.q64.exgregilo.proxy.ClientProxy", serverSide = "co.q64.exgregilo.proxy.ServerProxy")
 	public static CommonProxy staticAccessProxy;

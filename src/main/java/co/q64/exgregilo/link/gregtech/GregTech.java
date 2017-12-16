@@ -27,7 +27,10 @@ import org.apache.commons.lang3.text.WordUtils;
 import co.q64.exgregilo.api.link.LinkBase;
 import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.api.link.ModLink;
-import co.q64.exgregilo.data.ModData;
+import co.q64.exgregilo.block.AdvancedSieve;
+import co.q64.exgregilo.block.GemSand;
+import co.q64.exgregilo.data.ModIds;
+import co.q64.exgregilo.item.GemShards;
 import co.q64.exgregilo.link.exnihilo.ExNihilo;
 import co.q64.exgregilo.link.gregtech.crafting.MachineRecipeHelper;
 import co.q64.exgregilo.link.gregtech.crafting.OreDictAddons;
@@ -37,12 +40,10 @@ import co.q64.exgregilo.link.gregtech.recipe.GemExtractorRecipes;
 import co.q64.exgregilo.link.gregtech.tile.AutoSieve;
 import co.q64.exgregilo.link.gregtech.tile.GemExtractor;
 import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
-import co.q64.exgregilo.types.GregiloBlocks;
-import co.q64.exgregilo.types.GregiloItems;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @Singleton
-@ModLink(modName = "GregTech", modId = ModData.GREGTECH_ID)
+@ModLink(modName = "GregTech", modId = ModIds.GREGTECH_ID)
 public class GregTech extends LinkBase {
 	private static final int CHANCE_CONSTANT = 4;
 	private static final int DEFAULT_ID_START = 11264;
@@ -54,6 +55,10 @@ public class GregTech extends LinkBase {
 
 	private @Inject AutoSieveRecipes asr;
 	private @Inject GemExtractorRecipes ger;
+
+	private @Inject GemShards gemShards;
+	private @Inject GemSand gemSand;
+	private @Inject AdvancedSieve advancedSieve;
 
 	private Map<Block, Map<ItemStack, Integer>> sifting = new HashMap<Block, Map<ItemStack, Integer>>();
 	private Map<ItemStack, Integer> gems = new HashMap<ItemStack, Integer>();
@@ -117,7 +122,7 @@ public class GregTech extends LinkBase {
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Lapis, 1), 25);
 
 		// Gems
-		addGravel(new ItemStack(GregiloItems.GEM_SHARDS.getRealItem()), 50);
+		addGravel(new ItemStack(gemShards), 50);
 
 		// Salt
 		addSand(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.RockSalt, 1), 12);
@@ -209,22 +214,22 @@ public class GregTech extends LinkBase {
 			chances[i] = e.getValue() * CHANCE_CONSTANT;
 			i++;
 		}
-		ger.addRecipe(false, new ItemStack[] { (new ItemStack(GregiloBlocks.GEM_SAND.getRealBlock(), 1)) }, outputs, null, chances, new FluidStack[0], new FluidStack[0], -1, -1, 0);
+		ger.addRecipe(false, new ItemStack[] { (new ItemStack(gemSand, 1)) }, outputs, null, chances, new FluidStack[0], new FluidStack[0], -1, -1, 0);
 
 		//ItemStack shard = new ItemStack(GregiloItems.GEM_SHARDS.getRealItem());
 		//GT_Values.RA.addMixerRecipe(new ItemStack(Blocks.sand), shard, shard, shard, null, null, new ItemStack(this), 400, 16);
 
 		//formatter:off
-		GameRegistry.addRecipe(new ItemStack(GregiloBlocks.ADVANCED_SIEVE.getRealBlock(), 1), new Object[]{
+		GameRegistry.addRecipe(new ItemStack(advancedSieve, 1), new Object[]{
 		"   ", 
 		"RPR", 
 		"R R", 
 		Character.valueOf('P'), GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Iron, 1), 
 		Character.valueOf('R'), GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Iron, 1)});
-		GameRegistry.addShapelessRecipe(new ItemStack(GregiloBlocks.GEM_SAND.getRealBlock()), 
+		GameRegistry.addShapelessRecipe(new ItemStack(gemSand), 
 		new ItemStack(Blocks.sand), new ItemStack(Blocks.sand),
-		new ItemStack(GregiloItems.GEM_SHARDS.getRealItem()),
-		new ItemStack(GregiloItems.GEM_SHARDS.getRealItem()));
+		new ItemStack(gemShards),
+		new ItemStack(gemShards));
 		//formatter:on
 
 		if (linkManager.isEnabled(ExNihilo.class)) {

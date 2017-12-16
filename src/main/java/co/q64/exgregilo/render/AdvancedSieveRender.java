@@ -1,5 +1,8 @@
 package co.q64.exgregilo.render;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import net.minecraft.client.renderer.texture.TextureMap;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
@@ -12,14 +15,13 @@ import co.q64.exgregilo.tile.AdvancedSieveTile;
 import co.q64.exgregilo.tile.AdvancedSieveTile.SieveMode;
 import exnihilo.blocks.models.ModelSieveContents;
 
+@Singleton
 public class AdvancedSieveRender extends TileEntitySpecialRenderer {
-	private AdvancedSieveModel model;
-	private AdvancedSieveMeshModel mesh;
-	private ModelSieveContents contents;
+	private @Inject AdvancedSieveModel model;
+	private @Inject AdvancedSieveMeshModel mesh;
+	private @Inject ModelSieveContents contents;
 
-	public AdvancedSieveRender(AdvancedSieveModel model, AdvancedSieveMeshModel mesh) {
-		this.model = model;
-		this.mesh = mesh;
+	public AdvancedSieveRender() {
 		this.contents = new ModelSieveContents();
 	}
 
@@ -73,6 +75,6 @@ public class AdvancedSieveRender extends TileEntitySpecialRenderer {
 	}
 
 	public void bindSieveTexture() {
-		bindTexture(AdvancedSieveModel.TEXTURE);
+		bindTexture(model.getTexture());
 	}
 }

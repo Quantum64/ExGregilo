@@ -10,6 +10,8 @@ import co.q64.com.google.inject.BindingAnnotation;
 
 public interface ModDataBinders {
 	//formatter:off
-	public static @Target({ ElementType.FIELD }) @Retention(RUNTIME) @BindingAnnotation  @interface GUITexPath {}
+	public static @Target({ ElementType.FIELD }) @Retention(RUNTIME) @BindingAnnotation  @interface GtGUITexPath {}
+	public static @Target({ ElementType.FIELD }) @Retention(RUNTIME) @BindingAnnotation  @interface BlockTexPath {}
+	public static @Target({ ElementType.FIELD }) @Retention(RUNTIME) @BindingAnnotation  @interface DomainPath {}
 	//formatter:on
 }

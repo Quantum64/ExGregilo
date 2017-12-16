@@ -6,11 +6,11 @@ import javax.inject.Singleton;
 import co.q64.exgregilo.api.link.LinkBase;
 import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.api.link.ModLink;
-import co.q64.exgregilo.data.ModData;
+import co.q64.exgregilo.data.ModIds;
 import co.q64.exgregilo.link.gregtech.GregTech;
 
 @Singleton
-@ModLink(modName = "DreamCraft NH Core", modId = ModData.DREAMCRAFT_ID)
+@ModLink(modName = "DreamCraft NH Core", modId = ModIds.DREAMCRAFT_ID)
 public class DreamCraft extends LinkBase {
 	private static final int NH_OFFSET = 10000;
 
