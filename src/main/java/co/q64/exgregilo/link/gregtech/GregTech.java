@@ -21,6 +21,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.fluids.FluidStack;
+import net.minecraftforge.oredict.OreDictionary;
 
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -31,11 +32,13 @@ import co.q64.exgregilo.block.AdvancedSieve;
 import co.q64.exgregilo.block.GemSand;
 import co.q64.exgregilo.data.ModIds;
 import co.q64.exgregilo.item.GemShards;
+import co.q64.exgregilo.link.excompressum.ExCompressum;
 import co.q64.exgregilo.link.exnihilo.ExNihilo;
 import co.q64.exgregilo.link.gregtech.crafting.MachineRecipeHelper;
 import co.q64.exgregilo.link.gregtech.crafting.OreDictAddons;
 import co.q64.exgregilo.link.gregtech.item.ItemList;
 import co.q64.exgregilo.link.gregtech.recipe.AutoSieveRecipes;
+import co.q64.exgregilo.link.gregtech.recipe.CompressedHammerRecipes;
 import co.q64.exgregilo.link.gregtech.recipe.GemExtractorRecipes;
 import co.q64.exgregilo.link.gregtech.tile.AutoSieve;
 import co.q64.exgregilo.link.gregtech.tile.GemExtractor;
@@ -55,6 +58,7 @@ public class GregTech extends LinkBase {
 
 	private @Inject AutoSieveRecipes asr;
 	private @Inject GemExtractorRecipes ger;
+	private @Inject CompressedHammerRecipes chr;
 
 	private @Inject GemShards gemShards;
 	private @Inject GemSand gemSand;
@@ -193,7 +197,6 @@ public class GregTech extends LinkBase {
 			int i = 0;
 			for (Entry<ItemStack, Integer> e : getSubMap(b).entrySet()) {
 				outputs[i] = e.getKey();
-				//chances[i] = (int) Math.round(Math.ceil((1f / e.getValue()) * 100));
 				chances[i] = e.getValue() * CHANCE_CONSTANT;
 				i++;
 			}
@@ -202,7 +205,7 @@ public class GregTech extends LinkBase {
 			//	chances[i] = e.getValue() * CHANCE_CONSTANT;
 			//	i++;
 			//}
-			asr.addRecipe(false, new ItemStack[] { (new ItemStack(b, 1)) }, outputs, null, chances, new FluidStack[0], new FluidStack[0], -1, -1, 0);
+			asr.addRecipe(false, new ItemStack[] { (new ItemStack(b, 1)) }, outputs, null, chances, new FluidStack[0], new FluidStack[0], 512, 4, 0);
 		}
 
 		// Gemextractor recipie
@@ -214,10 +217,36 @@ public class GregTech extends LinkBase {
 			chances[i] = e.getValue() * CHANCE_CONSTANT;
 			i++;
 		}
-		ger.addRecipe(false, new ItemStack[] { (new ItemStack(gemSand, 1)) }, outputs, null, chances, new FluidStack[0], new FluidStack[0], -1, -1, 0);
+		ger.addRecipe(false, new ItemStack[] { (new ItemStack(gemSand, 1)) }, outputs, null, chances, new FluidStack[0], new FluidStack[0], 512, 4, 0);
 
 		//ItemStack shard = new ItemStack(GregiloItems.GEM_SHARDS.getRealItem());
 		//GT_Values.RA.addMixerRecipe(new ItemStack(Blocks.sand), shard, shard, shard, null, null, new ItemStack(this), 400, 16);
+
+		// Compressed hammer
+		if (linkManager.isEnabled(ExCompressum.class)) {
+			ExCompressum ec = linkManager.getLink(ExCompressum.class);
+			List<ItemStack> gravel = new ArrayList<ItemStack>(OreDictionary.getOres("compressedGravel1x"));
+			if (gravel.size() == 0) {
+				gravel.add(ec.getCompressedGravel());
+			}
+			for (ItemStack is : gravel) {
+				chr.addRecipe(false, new ItemStack[] { is }, new ItemStack[] { new ItemStack(Blocks.gravel, 9) }, null, new int[] { 1 }, new FluidStack[0], new FluidStack[0], 0, 0, 0);
+			}
+			List<ItemStack> sand = new ArrayList<ItemStack>(OreDictionary.getOres("compressedSand1x"));
+			if (sand.size() == 0) {
+				sand.add(ec.getCompressedSand());
+			}
+			for (ItemStack is : sand) {
+				chr.addRecipe(false, new ItemStack[] { is }, new ItemStack[] { new ItemStack(Blocks.sand, 9) }, null, new int[] { 1 }, new FluidStack[0], new FluidStack[0], 0, 0, 0);
+			}
+			List<ItemStack> dust = new ArrayList<ItemStack>(OreDictionary.getOres("compressedDust1x"));
+			if (dust.size() == 0) {
+				dust.add(ec.getCompressedDust());
+			}
+			for (ItemStack is : dust) {
+				chr.addRecipe(false, new ItemStack[] { is }, new ItemStack[] { new ItemStack(getDustBlock(), 9) }, null, new int[] { 1 }, new FluidStack[0], new FluidStack[0], 0, 0, 0);
+			}
+		}
 
 		//formatter:off
 		GameRegistry.addRecipe(new ItemStack(advancedSieve, 1), new Object[]{

@@ -29,17 +29,17 @@ public class WireMesh extends CustomMetaTool {
 		boolean useNEI = linkManager.isEnabled(NEI.class);
 		for (Materials material : Materials.values()) {
 			if (material.contains(SubTag.METAL) && material.mDurability > 0) {
-				ItemStack result = linkManager.getLink(GregTech.class).getTools().getMeshWithStats(MetaGeneratedTools.WIRE_MESH_ID, 1, material, material, null);
+				ItemStack result = linkManager.getLink(GregTech.class).getTools().getToolWithStats(MetaGeneratedTools.WIRE_MESH_ID, 1, material, material, null);
 				//formatter:off
 				boolean added = GT_ModHandler.addCraftingRecipe(result, GT_ModHandler.RecipeBits.DO_NOT_CHECK_FOR_COLLISIONS | GT_ModHandler.RecipeBits.BUFFERED, new Object[]{
 				"WWW", 
-				"WGW", 
+				"WPW", 
 				"WWW", 
 				Character.valueOf('W'), OrePrefixes.wireGt01.get(material), 
-				Character.valueOf('G'), OrePrefixes.gearGtSmall.get(material)});
+				Character.valueOf('P'), OrePrefixes.plate.get(material)});
 				//formatter:on
 				if (added) {
-					GT_Values.RA.addAssemblerRecipe(GT_OreDictUnificator.get(OrePrefixes.wireGt01, material, 8), GT_OreDictUnificator.get(OrePrefixes.gearGtSmall, material, 1), result, 400, 2);
+					GT_Values.RA.addAssemblerRecipe(GT_OreDictUnificator.get(OrePrefixes.wireGt01, material, 8), GT_OreDictUnificator.get(OrePrefixes.plate, material, 1), result, 400, 2);
 					if (useNEI) {
 						linkManager.getLink(NEI.class).addItemVariant(linkManager.getLink(GregTech.class).getTools(), result);
 					}
