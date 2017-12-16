@@ -2,8 +2,11 @@ language: java
 install: true
 jdk:
 - oraclejdk8
+before_script:
+- npm install --save github-remove-all-releases
 script:
 - gradle build
+- node cleanup.js
 notifications:
   email: false
 deploy:
