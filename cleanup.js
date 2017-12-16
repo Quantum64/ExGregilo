@@ -5,4 +5,4 @@ var AUTH = {
   token: process.env.TOKEN
 };
 
-githubRemoveAllReleases(AUTH, 'stevemaotest', 'github-remove-all-releases-test', callback);
+githubRemoveAllReleases(AUTH, 'stevemaotest', 'github-remove-all-releases-test', null);
