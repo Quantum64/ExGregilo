@@ -1,19 +1,23 @@
 package co.q64.exgregilo;
 
-import javax.inject.Inject;
+import java.text.DecimalFormat;
 
-import org.apache.logging.log4j.Logger;
+import javax.inject.Inject;
 
 import co.q64.com.google.inject.Guice;
 import co.q64.com.google.inject.Injector;
+import co.q64.exgregilo.api.binders.ConstantBinders.Author;
 import co.q64.exgregilo.api.binders.ConstantBinders.Name;
+import co.q64.exgregilo.api.binders.ConstantBinders.Version;
 import co.q64.exgregilo.api.config.ConfigManager;
 import co.q64.exgregilo.api.link.LinkManager;
+import co.q64.exgregilo.api.util.Logger;
 import co.q64.exgregilo.data.ModData;
 import co.q64.exgregilo.data.ModIds;
 import co.q64.exgregilo.link.excompressum.ExCompressum;
 import co.q64.exgregilo.proxy.CommonProxy;
 import co.q64.exgregilo.util.BlockRegistration;
+import co.q64.exgregilo.util.GregiloLogger;
 import co.q64.exgregilo.util.ItemRegistration;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -33,16 +37,22 @@ public class ExGregilo {
 	private @Inject BlockRegistration blockRegistration;
 	private @Inject ItemRegistration itemRegistration;
 
+	private @Inject DecimalFormat df;
 	private @Inject Logger logger;
 	private @Inject CommonProxy proxy;
 	private @Inject @Name String name;
+	private @Inject @Version String version;
+	private @Inject @Author String author;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
+		event.getModLog().info(GregiloLogger.PREFIX + "Creating injector... this can take some time.");
+		long now = System.currentTimeMillis();
 		Injector injector = Guice.createInjector(new ExGregiloModule(this, event, staticAccessProxy));
 		injector.injectMembers(this);
 		injector.injectMembers(proxy);
-		logger.info("This is " + name);
+		String time = df.format((System.currentTimeMillis() - now) / 1000f);
+		logger.info("Done! Injector creation took " + time + "s. This is " + name + " version " + version + " by " + author + ".");
 	}
 
 	@EventHandler

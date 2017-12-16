@@ -17,10 +17,8 @@ import javax.inject.Singleton;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-
-import org.apache.logging.log4j.Logger;
-
 import co.q64.exgregilo.api.link.LinkManager;
+import co.q64.exgregilo.api.util.Logger;
 import co.q64.exgregilo.link.gregtech.GregTech;
 import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
 

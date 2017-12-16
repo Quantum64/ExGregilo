@@ -15,8 +15,8 @@ import net.minecraft.item.Item;
 
 import org.apache.commons.lang3.tuple.ImmutablePair;
 import org.apache.commons.lang3.tuple.Pair;
-import org.apache.logging.log4j.Logger;
 
+import co.q64.exgregilo.api.util.Logger;
 import exnihilo.items.ores.ItemOre;
 import exnihilo.registries.SieveRegistry;
 import exnihilo.registries.helpers.SiftingResult;
