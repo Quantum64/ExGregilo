@@ -1,14 +1,11 @@
 package co.q64.exgregilo.link.gregtech.tools;
 
 import gregtech.api.GregTech_API;
-import gregtech.api.enums.GT_Values;
 import gregtech.api.enums.Materials;
-import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.SubTag;
 import gregtech.api.interfaces.IIconContainer;
 import gregtech.api.items.GT_MetaGenerated_Tool;
 import gregtech.api.util.GT_ModHandler;
-import gregtech.api.util.GT_OreDictUnificator;
 import gregtech.api.util.GT_Recipe;
 import gregtech.api.util.GT_Utility;
 import gregtech.common.items.GT_MetaGenerated_Tool_01;
@@ -24,12 +21,14 @@ import net.minecraft.block.material.Material;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import net.minecraftforge.event.world.BlockEvent;
 import co.q64.exgregilo.api.link.LinkManager;
+import co.q64.exgregilo.api.util.Logger;
 import co.q64.exgregilo.link.gregtech.GregTech;
 import co.q64.exgregilo.link.gregtech.recipe.CompressedHammerRecipes;
 import co.q64.exgregilo.link.gregtech.render.ItemTextures;
@@ -41,6 +40,7 @@ public class CompressedHammer extends CustomMetaTool {
 
 	private @Inject LinkManager linkManager;
 	private @Inject CompressedHammerRecipes chr;
+	private @Inject Logger logger;
 
 	public void addCrafting() {
 		boolean useNEI = linkManager.isEnabled(NEI.class);
@@ -137,7 +137,12 @@ public class CompressedHammer extends CustomMetaTool {
 
 	public boolean isMinableBlock(Block aBlock, byte aMetaData) {
 		String tTool = aBlock.getHarvestTool(aMetaData);
-		return ((tTool != null) && ((tTool.equals("hammer")) || (tTool.equals("pickaxe")))) || (aBlock.getMaterial() == Material.rock) || (aBlock.getMaterial() == Material.glass) || (aBlock.getMaterial() == Material.ice) || (aBlock.getMaterial() == Material.packedIce) || (chr.containsInput(new ItemStack(aBlock, 1, aMetaData)));
+		if (tTool != null) {
+			if (tTool.equals("hammer") || (tTool.equals("pickaxe"))) {
+				return true;
+			}
+		}
+		return (aBlock.getMaterial() == Material.rock) || (aBlock == Blocks.gravel) || (aBlock == Blocks.sand) | (chr.findRecipe(null, true, 2147483647L, null, new ItemStack[] { new ItemStack(aBlock, 1, aMetaData) }) != null);
 	}
 
 	public int convertBlockDrops(List<ItemStack> aDrops, ItemStack aStack, EntityPlayer aPlayer, Block aBlock, int aX, int aY, int aZ, byte aMetaData, int aFortune, boolean aSilkTouch, BlockEvent.HarvestDropsEvent aEvent) {

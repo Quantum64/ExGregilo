@@ -551,7 +551,7 @@ public class MachineRecipeHelper {
 				}
 				continue;
 			}
-
+			
 			if (aRecipe[i] instanceof X)
 				throw new IllegalArgumentException("MISSING TIER MAPPING FOR: " + aRecipe[i] + " AT TIER " + mTier);
 		}

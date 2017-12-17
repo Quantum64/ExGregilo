@@ -8,6 +8,7 @@ import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -40,8 +41,10 @@ import co.q64.exgregilo.link.gregtech.item.ItemList;
 import co.q64.exgregilo.link.gregtech.recipe.AutoSieveRecipes;
 import co.q64.exgregilo.link.gregtech.recipe.CompressedHammerRecipes;
 import co.q64.exgregilo.link.gregtech.recipe.GemExtractorRecipes;
+import co.q64.exgregilo.link.gregtech.recipe.IndustrialForgeHammerRecipes;
 import co.q64.exgregilo.link.gregtech.tile.AutoSieve;
 import co.q64.exgregilo.link.gregtech.tile.GemExtractor;
+import co.q64.exgregilo.link.gregtech.tile.IndustrialForgeHammer;
 import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -59,6 +62,7 @@ public class GregTech extends LinkBase {
 	private @Inject AutoSieveRecipes asr;
 	private @Inject GemExtractorRecipes ger;
 	private @Inject CompressedHammerRecipes chr;
+	private @Inject IndustrialForgeHammerRecipes ihr;
 
 	private @Inject GemShards gemShards;
 	private @Inject GemSand gemSand;
@@ -95,6 +99,15 @@ public class GregTech extends LinkBase {
 		ItemList.GEM_EXTRACTOR_LuV.set(new GemExtractor(id(15), "basicmachine.gemextractor.tier.06", "Advanced Gem Extractor V", 6, helper, ger).getStackForm(1L));
 		ItemList.GEM_EXTRACTOR_ZPM.set(new GemExtractor(id(16), "basicmachine.gemextractor.tier.07", "Advanced Gem Extractor VI", 7, helper, ger).getStackForm(1L));
 		ItemList.GEM_EXTRACTOR_UV.set(new GemExtractor(id(17), "basicmachine.gemextractor.tier.08", "Advanced Gem Extractor VII", 8, helper, ger).getStackForm(1L));
+
+		ItemList.INDUSTRIAL_HAMMER_LV.set(new IndustrialForgeHammer(id(20), "basicmachine.industrialhammer.tier.01", "Industrial Forge Hammer", 1, helper, ihr).getStackForm(1L));
+		ItemList.INDUSTRIAL_HAMMER_MV.set(new IndustrialForgeHammer(id(21), "basicmachine.industrialhammer.tier.02", "Advanced Industrial Forge Hammer", 2, helper, ihr).getStackForm(1L));
+		ItemList.INDUSTRIAL_HAMMER_HV.set(new IndustrialForgeHammer(id(22), "basicmachine.industrialhammer.tier.03", "Advanced Industrial Forge Hammer II", 3, helper, ihr).getStackForm(1L));
+		ItemList.INDUSTRIAL_HAMMER_EV.set(new IndustrialForgeHammer(id(23), "basicmachine.industrialhammer.tier.04", "Advanced Industrial Forge Hammer III", 4, helper, ihr).getStackForm(1L));
+		ItemList.INDUSTRIAL_HAMMER_IV.set(new IndustrialForgeHammer(id(24), "basicmachine.industrialhammer.tier.05", "Advanced Industrial Forge Hammer IV", 5, helper, ihr).getStackForm(1L));
+		ItemList.INDUSTRIAL_HAMMER_LuV.set(new IndustrialForgeHammer(id(25), "basicmachine.industrialhammer.tier.06", "Advanced Industrial Forge Hammer V", 6, helper, ihr).getStackForm(1L));
+		ItemList.INDUSTRIAL_HAMMER_ZPM.set(new IndustrialForgeHammer(id(26), "basicmachine.industrialhammer.tier.07", "Advanced Industrial Forge Hammer VI", 7, helper, ihr).getStackForm(1L));
+		ItemList.INDUSTRIAL_HAMMER_UV.set(new IndustrialForgeHammer(id(27), "basicmachine.industrialhammer.tier.08", "Advanced Industrial Forge Hammer VII", 8, helper, ihr).getStackForm(1L));
 	}
 
 	@Override
@@ -211,40 +224,53 @@ public class GregTech extends LinkBase {
 		// Gemextractor recipie
 		ItemStack[] outputs = new ItemStack[gems.size()];
 		int[] chances = new int[gems.size()];
-		int i = 0;
+		int index = 0;
 		for (Entry<ItemStack, Integer> e : gems.entrySet()) {
-			outputs[i] = e.getKey();
-			chances[i] = e.getValue() * CHANCE_CONSTANT;
-			i++;
+			outputs[index] = e.getKey();
+			chances[index] = e.getValue() * CHANCE_CONSTANT;
+			index++;
 		}
 		ger.addRecipe(false, new ItemStack[] { (new ItemStack(gemSand, 1)) }, outputs, null, chances, new FluidStack[0], new FluidStack[0], 512, 4, 0);
 
 		//ItemStack shard = new ItemStack(GregiloItems.GEM_SHARDS.getRealItem());
 		//GT_Values.RA.addMixerRecipe(new ItemStack(Blocks.sand), shard, shard, shard, null, null, new ItemStack(this), 400, 16);
 
-		// Compressed hammer
-		if (linkManager.isEnabled(ExCompressum.class)) {
-			ExCompressum ec = linkManager.getLink(ExCompressum.class);
-			List<ItemStack> gravel = new ArrayList<ItemStack>(OreDictionary.getOres("compressedGravel1x"));
-			if (gravel.size() == 0) {
-				gravel.add(ec.getCompressedGravel());
-			}
-			for (ItemStack is : gravel) {
-				chr.addRecipe(false, new ItemStack[] { is }, new ItemStack[] { new ItemStack(Blocks.gravel, 9) }, null, new int[] { 1 }, new FluidStack[0], new FluidStack[0], 0, 0, 0);
-			}
-			List<ItemStack> sand = new ArrayList<ItemStack>(OreDictionary.getOres("compressedSand1x"));
-			if (sand.size() == 0) {
-				sand.add(ec.getCompressedSand());
-			}
-			for (ItemStack is : sand) {
-				chr.addRecipe(false, new ItemStack[] { is }, new ItemStack[] { new ItemStack(Blocks.sand, 9) }, null, new int[] { 1 }, new FluidStack[0], new FluidStack[0], 0, 0, 0);
-			}
-			List<ItemStack> dust = new ArrayList<ItemStack>(OreDictionary.getOres("compressedDust1x"));
-			if (dust.size() == 0) {
-				dust.add(ec.getCompressedDust());
-			}
-			for (ItemStack is : dust) {
-				chr.addRecipe(false, new ItemStack[] { is }, new ItemStack[] { new ItemStack(getDustBlock(), 9) }, null, new int[] { 1 }, new FluidStack[0], new FluidStack[0], 0, 0, 0);
+		// Compressed hammer and industrial hammer
+		{
+			for (String s : Arrays.asList("Gravel", "Sand", "Dust", "Cobblestone")) {
+				for (int i = 1; i <= 8; i++) {
+					List<ItemStack> current = new ArrayList<ItemStack>(OreDictionary.getOres("compressed" + s + i + "x"));
+					List<ItemStack> previous = new ArrayList<ItemStack>(OreDictionary.getOres("compressed" + s + (i - 1) + "x"));
+					if (i == 1) {
+						if (linkManager.isEnabled(ExCompressum.class)) {
+							ExCompressum ec = linkManager.getLink(ExCompressum.class);
+							if (s.equals("Gravel")) {
+								current.add(ec.getCompressedGravel());
+							} else if (s.equals("Sand")) {
+								current.add(ec.getCompressedSand());
+							} else if (s.equals("Dust")) {
+								current.add(ec.getCompressedDust());
+							}
+						}
+						if (s.equals("Gravel")) {
+							previous.add(new ItemStack(Blocks.gravel));
+						} else if (s.equals("Sand")) {
+							previous.add(new ItemStack(Blocks.sand));
+						} else if (s.equals("Dust")) {
+							previous.add(new ItemStack(getDustBlock()));
+						}
+					}
+					if (current.size() == 0 || previous.size() == 0) {
+						continue;
+					}
+					for (ItemStack in : current) {
+						for (ItemStack out : previous) {
+							out = new ItemStack(out.getItem(), 9, out.getItemDamage());
+							chr.addRecipe(false, new ItemStack[] { in }, new ItemStack[] { out }, null, new int[] { 10000 }, new FluidStack[0], new FluidStack[0], 0, 0, 0);
+							ihr.addRecipe(false, new ItemStack[] { in }, new ItemStack[] { out }, null, new int[] { 10000 }, new FluidStack[0], new FluidStack[0], 128, 4, 0);
+						}
+					}
+				}
 			}
 		}
 
