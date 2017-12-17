@@ -117,7 +117,7 @@ public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 
 	@Override
 	public boolean allowPutStack(IGregTechTileEntity aBaseMetaTileEntity, int aIndex, byte aSide, ItemStack aStack) {
-		return super.allowPutStack(aBaseMetaTileEntity, aIndex, aSide, aStack) && GT_ModHandler.getSmeltingOutput(GT_Utility.copyAmount(64, aStack), false, null) != null;
+		return super.allowPutStack(aBaseMetaTileEntity, aIndex, aSide, aStack);
 	}
 
 	@Override
