@@ -237,26 +237,27 @@ public class GregTech extends LinkBase {
 
 		// Compressed hammer and industrial hammer
 		{
-			for (String s : Arrays.asList("Gravel", "Sand", "Dust", "Cobblestone")) {
+			List<String> hammerTypes = Arrays.asList("Dust", "Dust", "Sand", "Gravel", "Cobblestone");
+			for (int s = 1; s < hammerTypes.size(); s++) {
 				for (int i = 1; i <= 8; i++) {
-					List<ItemStack> current = new ArrayList<ItemStack>(OreDictionary.getOres("compressed" + s + i + "x"));
-					List<ItemStack> previous = new ArrayList<ItemStack>(OreDictionary.getOres("compressed" + s + (i - 1) + "x"));
+					List<ItemStack> current = new ArrayList<ItemStack>(OreDictionary.getOres("compressed" + hammerTypes.get(s) + i + "x"));
+					List<ItemStack> previous = new ArrayList<ItemStack>(OreDictionary.getOres("compressed" + hammerTypes.get(s - 1) + (i - 1) + "x"));
 					if (i == 1) {
 						if (linkManager.isEnabled(ExCompressum.class)) {
 							ExCompressum ec = linkManager.getLink(ExCompressum.class);
-							if (s.equals("Gravel")) {
+							if (hammerTypes.get(s).equals("Gravel")) {
 								current.add(ec.getCompressedGravel());
-							} else if (s.equals("Sand")) {
+							} else if (hammerTypes.get(s).equals("Sand")) {
 								current.add(ec.getCompressedSand());
-							} else if (s.equals("Dust")) {
+							} else if (hammerTypes.get(s).equals("Dust")) {
 								current.add(ec.getCompressedDust());
 							}
 						}
-						if (s.equals("Gravel")) {
+						if (hammerTypes.get(s - 1).equals("Gravel")) {
 							previous.add(new ItemStack(Blocks.gravel));
-						} else if (s.equals("Sand")) {
+						} else if (hammerTypes.get(s - 1).equals("Sand")) {
 							previous.add(new ItemStack(Blocks.sand));
-						} else if (s.equals("Dust")) {
+						} else if (hammerTypes.get(s - 1).equals("Dust")) {
 							previous.add(new ItemStack(getDustBlock()));
 						}
 					}

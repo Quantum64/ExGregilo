@@ -16,7 +16,7 @@ public class IndustrialForgeHammerRecipes extends GT_Recipe_Map {
 
 	@Inject
 	public IndustrialForgeHammerRecipes(NEITextureHelper nei) {
-		super(new HashSet<GT_Recipe>(100), "gt.recipe.industrialhammer", "Industeial Forge Hammer", null, nei.getNEITexture("basicmachines/industrialhammer"), 1, 1, 1, 0, 1, GT_Values.E, 0, GT_Values.E, true, true);
+		super(new HashSet<GT_Recipe>(100), "gt.recipe.industrialhammer", "Industrial Forge Hammer", null, nei.getNEITexture("basicmachines/industrialhammer"), 1, 1, 1, 0, 1, GT_Values.E, 0, GT_Values.E, true, true);
 	}
 
 }

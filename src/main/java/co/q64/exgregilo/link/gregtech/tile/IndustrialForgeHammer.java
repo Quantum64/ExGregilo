@@ -43,7 +43,7 @@ public class IndustrialForgeHammer extends GT_MetaTileEntity_BasicMachine {
 				Character.valueOf('H'), X.HULL, 
 				Character.valueOf('C'), X.CONVEYOR, 
 				Character.valueOf('W'), X.WIRE, 
-				Character.valueOf('A'), Blocks.anvil,
+				Character.valueOf('A'), X.MOTOR,
 				Character.valueOf('P'), X.PISTON });
 		
 //formatter:on
@@ -115,7 +115,7 @@ public class IndustrialForgeHammer extends GT_MetaTileEntity_BasicMachine {
 
 	@Override
 	public boolean allowPutStack(IGregTechTileEntity aBaseMetaTileEntity, int aIndex, byte aSide, ItemStack aStack) {
-		return super.allowPutStack(aBaseMetaTileEntity, aIndex, aSide, aStack) && GT_ModHandler.getSmeltingOutput(GT_Utility.copyAmount(64, aStack), false, null) != null;
+		return super.allowPutStack(aBaseMetaTileEntity, aIndex, aSide, aStack);
 	}
 
 	@Override
