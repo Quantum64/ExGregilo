@@ -118,7 +118,7 @@ public class GregTech extends LinkBase {
 		// Gem Shards
 		addGravel(new ItemStack(gemShards), 50);
 		//Naquadah
-		addCrushed(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Naquadah, 1), 100);
+		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Naquadah, 1), 100);
 		// Coal
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Lignite, 1), 10);
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Coal, 1), 15);
