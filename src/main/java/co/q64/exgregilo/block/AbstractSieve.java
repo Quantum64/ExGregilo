@@ -1,5 +1,6 @@
 package co.q64.exgregilo.block;
 
+import javax.inject.Inject;
 import javax.inject.Singleton;
 
 import net.minecraft.block.Block;
@@ -13,6 +14,7 @@ import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import co.q64.exgregilo.link.gregtech.GregTech;
 import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
 import co.q64.exgregilo.tile.AbstractSieveTile;
 import co.q64.exgregilo.tile.AbstractSieveTile.SieveMode;
@@ -20,6 +22,8 @@ import exnihilo.registries.SieveRegistry;
 
 @Singleton
 public abstract class AbstractSieve extends BlockContainer {
+	private @Inject GregTech gt;
+
 	public AbstractSieve() {
 		super(Material.rock);
 		setCreativeTab(CreativeTabs.tabDecorations);
@@ -65,7 +69,7 @@ public abstract class AbstractSieve extends BlockContainer {
 		if (sieve.mode == SieveMode.EMPTY && player.getCurrentEquippedItem() != null) {
 			ItemStack held = player.getCurrentEquippedItem();
 			if (held.getItem() instanceof MetaGeneratedTools) {
-				if (MetaGeneratedTools.getIdFromItem(held.getItem()) != getMeshId()) {
+				if (!held.getUnlocalizedName().equals(gt.getTools().getUnlocalizedName() + "." + getMeshId())) {
 					return true;
 				}
 				if (sieve.getMesh() != null) {

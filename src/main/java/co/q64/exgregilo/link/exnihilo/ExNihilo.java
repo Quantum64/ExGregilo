@@ -14,6 +14,7 @@ import co.q64.exgregilo.api.config.ConfigManager;
 import co.q64.exgregilo.api.link.LinkBase;
 import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.api.link.ModLink;
+import co.q64.exgregilo.api.util.Logger;
 import co.q64.exgregilo.data.ModIds;
 import co.q64.exgregilo.link.gregtech.GregTech;
 import exnihilo.ENBlocks;
@@ -27,6 +28,7 @@ public class ExNihilo extends LinkBase {
 	private @Inject LinkManager linkManager;
 	private @Inject ConfigManager configManager;
 	private @Inject SieveRegistryCleaner cleaner;
+	private @Inject Logger logger;
 
 	@Override
 	public void loadLink() {
@@ -41,6 +43,10 @@ public class ExNihilo extends LinkBase {
 			GregTech gt = linkManager.getLink(GregTech.class);
 			for (Entry<Block, Map<ItemStack, Integer>> block : gt.getSiftingMap().entrySet()) {
 				for (Entry<ItemStack, Integer> e : block.getValue().entrySet()) {
+					if (e.getKey() == null || e.getKey().getItem() == null) {
+						logger.error("NULL sieve drop! " + e.getValue());
+						continue;
+					}
 					SieveRegistry.register(block.getKey(), e.getKey().getItem(), e.getKey().getItemDamage(), e.getValue());
 				}
 			}

@@ -27,15 +27,15 @@ public class BasicMesh extends CustomMetaTool {
 
 	public void addCrafting() {
 		boolean useNEI = linkManager.isEnabled(NEI.class);
-		for (Materials material : Arrays.asList(Materials.Flint, Materials.Diamond)) {
+		for (Materials material : Arrays.asList(Materials.Flint, Materials.Diamond, Materials.Iron)) {
 			if (material.contains(SubTag.METAL) && material.mDurability > 0) {
 				ItemStack result = linkManager.getLink(GregTech.class).getTools().getToolWithStats(MetaGeneratedTools.BASIC_MESH_ID, 1, material, material, null);
 				//formatter:off
 				boolean added = GT_ModHandler.addCraftingRecipe(result, GT_ModHandler.RecipeBits.DO_NOT_CHECK_FOR_COLLISIONS | GT_ModHandler.RecipeBits.BUFFERED, new Object[]{
-				"III", // Fix this?
+				"III", // Fix this
 				"III", 
 				"III", 
-				Character.valueOf('I'), OrePrefixes.item.get(material)});
+				Character.valueOf('I'), OrePrefixes.dust.get(material)});
 				//formatter:on
 				if (added) {
 					if (useNEI) {

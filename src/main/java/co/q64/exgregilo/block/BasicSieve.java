@@ -31,7 +31,7 @@ public class BasicSieve extends AbstractSieve {
 
 	@Override
 	public int getMeshId() {
-		return MetaGeneratedTools.WIRE_MESH_ID;
+		return MetaGeneratedTools.BASIC_MESH_ID;
 	}
 
 	@Override
