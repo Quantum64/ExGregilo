@@ -9,8 +9,8 @@ before_script:
 - npm install --save github-remove-all-releases
 script:
 - gradle build
-- node cleanup-releases.js
-- sh cleanup-tags.sh
+- 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then node cleanup-releases.js; fi'
+- 'if [ "$TRAVIS_PULL_REQUEST" = "false" ]; then sh cleanup-tags.sh; fi'
 notifications:
   email: false
 deploy:
