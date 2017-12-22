@@ -25,5 +25,14 @@ public interface ModDataBinders {
 	
 	public static @Target({ ElementType.FIELD, ElementType.PARAMETER }) @Retention(RUNTIME) @BindingAnnotation  @interface GemSandBlockName {}
 	public static @Target({ ElementType.FIELD, ElementType.PARAMETER }) @Retention(RUNTIME) @BindingAnnotation  @interface GemSandTex {}
+	
+	public static @Target({ ElementType.FIELD, ElementType.PARAMETER }) @Retention(RUNTIME) @BindingAnnotation  @interface DustBlockName {}
+	public static @Target({ ElementType.FIELD, ElementType.PARAMETER }) @Retention(RUNTIME) @BindingAnnotation  @interface DustTex {}
+	
+	public static @Target({ ElementType.FIELD, ElementType.PARAMETER }) @Retention(RUNTIME) @BindingAnnotation  @interface CompressedBlockName {}
+	public static @Target({ ElementType.FIELD, ElementType.PARAMETER }) @Retention(RUNTIME) @BindingAnnotation  @interface CompressedTex {}
+	public static @Target({ ElementType.FIELD, ElementType.PARAMETER }) @Retention(RUNTIME) @BindingAnnotation  @interface CompressedGravelType {}
+	public static @Target({ ElementType.FIELD, ElementType.PARAMETER }) @Retention(RUNTIME) @BindingAnnotation  @interface CompressedSandType {}
+	public static @Target({ ElementType.FIELD, ElementType.PARAMETER }) @Retention(RUNTIME) @BindingAnnotation  @interface CompressedDustType {}
 	//formatter:on
 }

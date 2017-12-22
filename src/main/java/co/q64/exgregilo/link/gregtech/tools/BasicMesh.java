@@ -2,7 +2,6 @@ package co.q64.exgregilo.link.gregtech.tools;
 
 import gregtech.api.enums.Materials;
 import gregtech.api.enums.OrePrefixes;
-import gregtech.api.enums.SubTag;
 import gregtech.api.interfaces.IIconContainer;
 import gregtech.api.items.GT_MetaGenerated_Tool;
 import gregtech.api.util.GT_ModHandler;
@@ -28,19 +27,17 @@ public class BasicMesh extends CustomMetaTool {
 	public void addCrafting() {
 		boolean useNEI = linkManager.isEnabled(NEI.class);
 		for (Materials material : Arrays.asList(Materials.Flint, Materials.Diamond, Materials.Iron)) {
-			if (material.contains(SubTag.METAL) && material.mDurability > 0) {
-				ItemStack result = linkManager.getLink(GregTech.class).getTools().getToolWithStats(MetaGeneratedTools.BASIC_MESH_ID, 1, material, material, null);
-				//formatter:off
+			ItemStack result = linkManager.getLink(GregTech.class).getTools().getToolWithStats(MetaGeneratedTools.BASIC_MESH_ID, 1, material, material, null);
+			//formatter:off
 				boolean added = GT_ModHandler.addCraftingRecipe(result, GT_ModHandler.RecipeBits.DO_NOT_CHECK_FOR_COLLISIONS | GT_ModHandler.RecipeBits.BUFFERED, new Object[]{
 				"III", // Fix this
 				"III", 
 				"III", 
 				Character.valueOf('I'), OrePrefixes.dust.get(material)});
 				//formatter:on
-				if (added) {
-					if (useNEI) {
-						linkManager.getLink(NEI.class).addItemVariant(linkManager.getLink(GregTech.class).getTools(), result);
-					}
+			if (added) {
+				if (useNEI) {
+					linkManager.getLink(NEI.class).addItemVariant(linkManager.getLink(GregTech.class).getTools(), result);
 				}
 			}
 		}

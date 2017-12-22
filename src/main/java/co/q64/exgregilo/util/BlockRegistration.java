@@ -29,6 +29,7 @@ public class BlockRegistration {
 			} else {
 				GameRegistry.registerBlock(b.getBlock(), b.getItemBlock(), b.getName());
 			}
+			b.afterRegister();
 		}
 	}
 }

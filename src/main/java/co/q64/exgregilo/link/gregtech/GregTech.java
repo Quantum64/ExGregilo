@@ -30,6 +30,7 @@ import co.q64.exgregilo.api.link.LinkBase;
 import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.api.link.ModLink;
 import co.q64.exgregilo.block.AdvancedSieve;
+import co.q64.exgregilo.block.Dust;
 import co.q64.exgregilo.block.GemSand;
 import co.q64.exgregilo.data.ModIds;
 import co.q64.exgregilo.item.GemShards;
@@ -66,6 +67,7 @@ public class GregTech extends LinkBase {
 
 	private @Inject GemShards gemShards;
 	private @Inject GemSand gemSand;
+	private @Inject Dust dust;
 	private @Inject AdvancedSieve advancedSieve;
 
 	private Map<Block, Map<ItemStack, Integer>> sifting = new HashMap<Block, Map<ItemStack, Integer>>();
@@ -149,7 +151,7 @@ public class GregTech extends LinkBase {
 		//Redstone
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Redstone, 1), 12);
 		//Tungsten
-		//addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Tungsten, 1), 50); // NO CRUSHED FORM!
+		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Tungstate, 1), 50);
 
 		//===========
 		//== Sand ==
@@ -168,8 +170,6 @@ public class GregTech extends LinkBase {
 		// Nickel
 		addSand(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Garnierite, 1), 12);
 		addSand(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Nickel, 1), 50);
-		//Gypsum
-		//addSand(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Gypsum, 1), 17); // NO CRUSHED FORM!
 		//Calcite
 		addSand(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Calcite, 1), 17);
 
@@ -223,7 +223,7 @@ public class GregTech extends LinkBase {
 		List<Block> blocks = new ArrayList<Block>();
 		blocks.add(Blocks.gravel);
 		blocks.add(Blocks.sand);
-		blocks.add(getDustBlock());
+		blocks.addAll(getDustBlocks());
 		for (Block b : blocks) {
 			Map<ItemStack, Integer> additional = new HashMap<ItemStack, Integer>();
 			//if (linkManager.isEnabled(ExNihilo.class)) {
@@ -282,7 +282,7 @@ public class GregTech extends LinkBase {
 						} else if (hammerTypes.get(s - 1).equals("Sand")) {
 							previous.add(new ItemStack(Blocks.sand));
 						} else if (hammerTypes.get(s - 1).equals("Dust")) {
-							previous.add(new ItemStack(getDustBlock()));
+							previous.add(new ItemStack(dust));
 						}
 					}
 					if (current.size() == 0 || previous.size() == 0) {
@@ -300,20 +300,31 @@ public class GregTech extends LinkBase {
 		}
 
 		//formatter:off
+		
+		// Advanced sieve
 		GameRegistry.addRecipe(new ItemStack(advancedSieve, 1), new Object[]{
 		"   ", 
 		"RPR", 
 		"R R", 
-		Character.valueOf('P'), GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Iron, 1), 
+		Character.valueOf('P'), GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.Iron, 1), 
 		Character.valueOf('R'), GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Iron, 1)});
+		
+		// Basic sieve
+		GameRegistry.addRecipe(new ItemStack(advancedSieve, 1), new Object[]{
+		"   ", 
+		"RGR", 
+		"R R", 
+		Character.valueOf('G'), GT_OreDictUnificator.get(OrePrefixes.gear, Materials.Wood, 1), 
+		Character.valueOf('R'), GT_OreDictUnificator.get(OrePrefixes.stickLong, Materials.Wood, 1)});
+		
+		// Gem sand (replace with mixer recipe?)
 		GameRegistry.addShapelessRecipe(new ItemStack(gemSand), 
-		new ItemStack(Blocks.sand), new ItemStack(Blocks.sand),
-		new ItemStack(gemShards),
-		new ItemStack(gemShards));
+		new ItemStack(Blocks.sand), new ItemStack(gemShards),
+		new ItemStack(Blocks.sand), new ItemStack(gemShards));
 		//formatter:on
 
-		if (linkManager.isEnabled(ExNihilo.class)) {
-			ItemStack dust = new ItemStack(linkManager.getLink(ExNihilo.class).getDustBlock());
+		for (Block dustBlock : getDustBlocks()) {
+			ItemStack dust = new ItemStack(dustBlock);
 			ItemStack sand = new ItemStack(Blocks.sand);
 			GT_Values.RA.addForgeHammerRecipe(sand, dust, 16, 10);
 		}
@@ -342,8 +353,8 @@ public class GregTech extends LinkBase {
 	}
 
 	private void addDust(ItemStack is, int chance) {
-		if (linkManager.isEnabled(ExNihilo.class)) {
-			getSubMap(linkManager.getLink(ExNihilo.class).getDustBlock()).put(is, chance);
+		for (Block block : getDustBlocks()) {
+			getSubMap(block).put(is, chance);
 		}
 	}
 
@@ -351,11 +362,13 @@ public class GregTech extends LinkBase {
 		gems.put(is, chance);
 	}
 
-	private Block getDustBlock() {
+	private List<Block> getDustBlocks() {
+		List<Block> result = new ArrayList<Block>();
 		if (linkManager.isEnabled(ExNihilo.class)) {
-			return linkManager.getLink(ExNihilo.class).getDustBlock();
+			result.add(linkManager.getLink(ExNihilo.class).getDustBlock());
 		}
-		return Blocks.stonebrick;
+		result.add(dust);
+		return result;
 	}
 
 	public Map<Block, Map<ItemStack, Integer>> getSiftingMap() {
@@ -388,5 +401,13 @@ public class GregTech extends LinkBase {
 
 	public void removeRecipe(ItemStack output) {
 		GT_ModHandler.removeRecipeByOutput(output);
+	}
+
+	public void addCompressorRecipe(ItemStack in, ItemStack out, int time, int eu) {
+		GT_Values.RA.addCompressorRecipe(in, out, time, eu);
+	}
+
+	public void addExtractorRecipe(ItemStack in, ItemStack out, int time, int eu) {
+		GT_Values.RA.addExtractorRecipe(in, out, time, eu);
 	}
 }

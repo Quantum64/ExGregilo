@@ -19,4 +19,13 @@ public interface ModDataPool {
 
 	public static final String GEM_SAND_BLOCK_NAME = "gem_sand";
 	public static final String GEM_SAND_TEX = "GEM_SAND";
+	
+	public static final String DUST_BLOCK_NAME = "dust";
+	public static final String DUST_TEX = "DUST";
+	
+	public static final String COMPRESSED_BLOCK_NAME = "compressed";
+	public static final String COMPRESSED_TEX = "COMPRESSED";
+	public static final String COMPRESSED_GRAVEL_TYPE = "Gravel";
+	public static final String COMPRESSED_SAND_TYPE = "Sand";
+	public static final String COMPRESSED_DUST_TYPE = "Dust";
 }

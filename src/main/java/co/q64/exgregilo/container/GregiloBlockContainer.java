@@ -17,6 +17,8 @@ public abstract class GregiloBlockContainer extends GregiloContainer {
 		return null;
 	}
 
+	public void afterRegister() {}
+
 	public Block getBlock() {
 		return block;
 	}

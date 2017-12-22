@@ -36,6 +36,10 @@ public class ExCompressum extends LinkBase {
 				gt.removeRecipe(new ItemStack(ModItems.compressedHammerStone));
 				gt.removeRecipe(new ItemStack(ModItems.compressedHammerWood));
 			}
+
+			if (configManager.getBoolean(ExNihilo.class, "removeCompressed", true)) {
+				gt.removeRecipe(new ItemStack(ModBlocks.compressedBlock, 1));
+			}
 		}
 	}
 

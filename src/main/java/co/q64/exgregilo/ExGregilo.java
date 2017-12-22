@@ -2,6 +2,7 @@ package co.q64.exgregilo;
 
 import java.text.DecimalFormat;
 import java.util.List;
+import java.util.Set;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import javax.inject.Inject;
@@ -16,6 +17,7 @@ import co.q64.exgregilo.api.binders.ConstantBinders.Author;
 import co.q64.exgregilo.api.binders.ConstantBinders.Name;
 import co.q64.exgregilo.api.binders.ConstantBinders.Version;
 import co.q64.exgregilo.api.link.LinkManager;
+import co.q64.exgregilo.api.loader.InitLoader;
 import co.q64.exgregilo.api.util.Logger;
 import co.q64.exgregilo.data.ModData;
 import co.q64.exgregilo.data.ModIds;
@@ -50,6 +52,8 @@ public class ExGregilo {
 	private @Inject @Version String version;
 	private @Inject @Author String author;
 
+	private @Inject Set<InitLoader> loaders;
+
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
 		event.getModLog().info(GregiloLogger.PREFIX + "Creating injector... this can take some time.");
@@ -67,6 +71,9 @@ public class ExGregilo {
 		blockRegistration.registerBlocks();
 		itemRegistration.registerItems();
 		proxy.init();
+		for (InitLoader loader : loaders) {
+			loader.load();
+		}
 	}
 
 	@EventHandler
