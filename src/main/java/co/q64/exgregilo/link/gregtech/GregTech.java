@@ -149,7 +149,7 @@ public class GregTech extends LinkBase {
 		//Redstone
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Redstone, 1), 12);
 		//Tungsten
-		//addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Tungsten, 1), 50); // NO CRUSHED FORM!
+		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Tungstate, 1), 50); // NO CRUSHED FORM!
 
 		//===========
 		//== Sand ==
@@ -169,7 +169,7 @@ public class GregTech extends LinkBase {
 		addSand(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Garnierite, 1), 12);
 		addSand(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Nickel, 1), 50);
 		//Gypsum
-		//addSand(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Gypsum, 1), 17); // NO CRUSHED FORM!
+		addSand(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Gypsum, 1), 17); // NO CRUSHED FORM!
 		//Calcite
 		addSand(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Calcite, 1), 17);
 
