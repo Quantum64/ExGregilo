@@ -7,16 +7,16 @@ import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
 
 @Singleton
-public class AdvancedSieveItemRender extends AbstractSieveItemRender {
-	private @Inject AdvancedSieveRender asr;
+public class BasicSieveItemRender extends AbstractSieveItemRender {
+	private @Inject BasicSieveRender bsr;
 
 	@Override
 	public ResourceLocation getTexture() {
-		return asr.getTexture();
+		return bsr.getTexture();
 	}
 
 	@Override
 	public IIcon getMeshTexture() {
-		return asr.getMeshTexture();
+		return bsr.getMeshTexture();
 	}
 }

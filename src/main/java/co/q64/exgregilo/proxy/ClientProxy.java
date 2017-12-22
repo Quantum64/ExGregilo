@@ -15,7 +15,7 @@ import scala.util.Random;
 import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.container.blocks.AdvancedSieveContainer;
 import co.q64.exgregilo.link.gregtech.GregTech;
-import co.q64.exgregilo.render.AdvancedSieveRenderSetupHelper;
+import co.q64.exgregilo.render.SieveRenderSetupHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 
 @Singleton
@@ -24,7 +24,7 @@ public class ClientProxy extends CommonProxy {
 
 	private @Inject LinkManager linkManager;
 	private @Inject AdvancedSieveContainer asc;
-	private @Inject Provider<AdvancedSieveRenderSetupHelper> ascRenderSetupHelper;
+	private @Inject Provider<SieveRenderSetupHelper> ascRenderSetupHelper;
 
 	private List<String> splashes = new ArrayList<String>();
 	private Random r = new Random();

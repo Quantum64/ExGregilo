@@ -8,7 +8,7 @@ import net.minecraft.util.ResourceLocation;
 import co.q64.exgregilo.data.ModData;
 
 public enum ItemTextures implements IIconContainer, Runnable {
-	BLANK("BLANK"), WIRE_MESH("WIRE_MESH"), COMPRESSED_HAMMER("COMPRESSED_HAMMER");
+	BLANK("BLANK"), WIRE_MESH("WIRE_MESH"), COMPRESSED_HAMMER("COMPRESSED_HAMMER"), BASIC_MESH("BASIC_MESH");
 
 	private static final String BLANK_OVERLAY = "BLANK";
 	private String textureName;

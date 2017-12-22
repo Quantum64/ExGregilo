@@ -28,7 +28,6 @@ import net.minecraft.util.EnumChatFormatting;
 import net.minecraft.util.IChatComponent;
 import net.minecraftforge.event.world.BlockEvent;
 import co.q64.exgregilo.api.link.LinkManager;
-import co.q64.exgregilo.api.util.Logger;
 import co.q64.exgregilo.link.gregtech.GregTech;
 import co.q64.exgregilo.link.gregtech.recipe.CompressedHammerRecipes;
 import co.q64.exgregilo.link.gregtech.render.ItemTextures;
@@ -40,7 +39,6 @@ public class CompressedHammer extends CustomMetaTool {
 
 	private @Inject LinkManager linkManager;
 	private @Inject CompressedHammerRecipes chr;
-	private @Inject Logger logger;
 
 	public void addCrafting() {
 		boolean useNEI = linkManager.isEnabled(NEI.class);

@@ -17,15 +17,11 @@ import javax.inject.Singleton;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.api.util.Logger;
-import co.q64.exgregilo.link.gregtech.GregTech;
-import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
 
 @Singleton
 public class MachineRecipeHelper {
 	private @Inject Logger logger;
-	private @Inject LinkManager linkManager;
 
 	public void addMachineRecipe(MetaTileEntity tile, int mTier, Object[] aRecipe) {
 		for (int i = 3; i < aRecipe.length; i++) {
@@ -551,7 +547,7 @@ public class MachineRecipeHelper {
 				}
 				continue;
 			}
-			
+
 			if (aRecipe[i] instanceof X)
 				throw new IllegalArgumentException("MISSING TIER MAPPING FOR: " + aRecipe[i] + " AT TIER " + mTier);
 		}

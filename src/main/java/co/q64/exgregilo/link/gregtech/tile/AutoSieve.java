@@ -8,7 +8,6 @@ import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_BasicMachine;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_BasicMachine_GT_Recipe.X;
 import gregtech.api.objects.GT_RenderedTexture;
-import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_Recipe;
 import gregtech.api.util.GT_Recipe.GT_Recipe_Map;
 import gregtech.api.util.GT_Utility;
@@ -17,7 +16,6 @@ import net.minecraftforge.fluids.FluidStack;
 import co.q64.exgregilo.link.gregtech.crafting.MachineRecipeHelper;
 import co.q64.exgregilo.link.gregtech.recipe.AutoSieveRecipes;
 import co.q64.exgregilo.link.gregtech.render.BlockTextures;
-import cpw.mods.fml.common.FMLCommonHandler;
 
 public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 	private static final int IN_SLOTS = 1;

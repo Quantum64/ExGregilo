@@ -13,7 +13,7 @@ import org.lwjgl.opengl.GL11;
 import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
 
 @Singleton
-public class AdvancedSieveMeshModel {
+public class SieveMeshModel {
 	public void render(IIcon icon) {
 		render(icon, 1f, 1f, 1f);
 	}

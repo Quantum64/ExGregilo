@@ -112,17 +112,18 @@ public class GregTech extends LinkBase {
 
 	@Override
 	public void loadLink() {
-		
-		//Gravel Drops
-    
-		// Gem Shards
+		//============
+		//== Gravel ==
+		//============
+
+		// Gems
 		addGravel(new ItemStack(gemShards), 50);
 		//Naquadah
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Naquadah, 1), 100);
 		// Coal
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Lignite, 1), 10);
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Coal, 1), 15);
-		// Iron - Changed to Iron from Magnetite
+		// Iron
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Iron, 1), 6);
 		// Tin
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Cassiterite, 1), 33);
@@ -150,13 +151,12 @@ public class GregTech extends LinkBase {
 		//Tungsten
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Tungsten, 1), 50);
 
-		// Gems
-
-		addGravel(new ItemStack(GregiloItems.GEM_SHARDS.getRealItem()), 50);
 		
-		//Sand Drops
-    
-               // Salt
+		//===========
+		//== Sand ==
+		//===========
+		
+		// Salt
 		addSand(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.RockSalt, 1), 12);
 		addSand(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Salt, 1), 12);
 		addSand(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Lepidolite, 1), 25);
@@ -174,12 +174,13 @@ public class GregTech extends LinkBase {
 		//Calcite
 		addSand(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Calcite, 1), 17);
 
-		//Dust Drops
 		
+		//==========
+		//== Dust ==
+		//==========
+
 		// Iridium/Osmium
 		addDust(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Iridium, 1), 300);
-		//This is an alloy
-		//addDust(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Osmiridium, 1), 400);
 		addDust(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Platinum, 1), 300);
 		addDust(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Chrome, 1), 300);
 		addDust(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Osmium, 1), 500);
@@ -202,8 +203,11 @@ public class GregTech extends LinkBase {
 		// Lithium
 		addDust(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Lithium, 1), 100);
 
-		//Various gems (someone should probably modify these chances)
-		//Changed the chances a little
+		
+		//==========
+		//== Gems ==
+		//==========
+		
 		addGem(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Diamond, 1), 50);
 		addGem(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Emerald, 1), 40);
 		addGem(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Ruby, 1), 21);
