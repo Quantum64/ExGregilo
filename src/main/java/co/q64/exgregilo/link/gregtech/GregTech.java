@@ -203,6 +203,7 @@ public class GregTech extends LinkBase {
 		addDust(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Lithium, 1), 100);
 
 		//Various gems (someone should probably modify these chances)
+		//Changed the chances a little
 		addGem(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Diamond, 1), 50);
 		addGem(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Emerald, 1), 40);
 		addGem(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Ruby, 1), 21);
