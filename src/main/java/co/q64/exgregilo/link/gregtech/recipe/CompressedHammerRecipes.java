@@ -12,11 +12,11 @@ import javax.inject.Singleton;
 import co.q64.exgregilo.link.gregtech.gui.NEITextureHelper;
 
 @Singleton
-public class GemExtractorRecipes extends GT_Recipe_Map {
+public class CompressedHammerRecipes extends GT_Recipe_Map {
 
 	@Inject
-	public GemExtractorRecipes(NEITextureHelper nei) {
-		super(new HashSet<GT_Recipe>(100), "gt.recipe.gemextractor", "Gem Extractor", null, nei.getNEITexture("basicmachines/gemextractor"), 1, 6, 1, 0, 1, GT_Values.E, 0, GT_Values.E, true, true);
+	public CompressedHammerRecipes(NEITextureHelper nei) {
+		super(new HashSet<GT_Recipe>(100), "gt.recipe.compressedhammer", "Compressed Hammer", null, nei.getNEITexture("tools/compressedhammer"), 1, 1, 1, 0, 1, GT_Values.E, 0, GT_Values.E, true, true);
 	}
 
 }

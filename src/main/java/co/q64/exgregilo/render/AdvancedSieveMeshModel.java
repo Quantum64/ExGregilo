@@ -1,6 +1,9 @@
 package co.q64.exgregilo.render;
 
 import gregtech.api.items.GT_MetaGenerated_Tool;
+
+import javax.inject.Singleton;
+
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
@@ -9,6 +12,7 @@ import org.lwjgl.opengl.GL11;
 
 import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
 
+@Singleton
 public class AdvancedSieveMeshModel {
 	public void render(IIcon icon) {
 		render(icon, 1f, 1f, 1f);

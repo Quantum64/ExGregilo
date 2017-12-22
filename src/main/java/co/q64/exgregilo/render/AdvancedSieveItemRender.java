@@ -1,5 +1,8 @@
 package co.q64.exgregilo.render;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.TextureManager;
 import net.minecraft.client.renderer.texture.TextureMap;
@@ -10,14 +13,10 @@ import org.lwjgl.opengl.GL11;
 
 import co.q64.exgregilo.block.AdvancedSieve;
 
+@Singleton
 public class AdvancedSieveItemRender implements IItemRenderer {
-	private AdvancedSieveModel model;
-	private AdvancedSieveMeshModel mesh;
-
-	public AdvancedSieveItemRender(AdvancedSieveModel model, AdvancedSieveMeshModel mesh) {
-		this.model = model;
-		this.mesh = mesh;
-	}
+	private @Inject AdvancedSieveModel model;
+	private @Inject AdvancedSieveMeshModel mesh;
 
 	@Override
 	public boolean handleRenderType(ItemStack item, ItemRenderType type) {
@@ -131,7 +130,7 @@ public class AdvancedSieveItemRender implements IItemRenderer {
 	protected void bindTexture(int meta) {
 		TextureManager texturemanager = Minecraft.getMinecraft().getTextureManager();
 		if (texturemanager != null) {
-			texturemanager.bindTexture(AdvancedSieveModel.TEXTURE);
+			texturemanager.bindTexture(model.getTexture());
 		}
 	}
 

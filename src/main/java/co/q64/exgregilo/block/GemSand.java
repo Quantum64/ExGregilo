@@ -1,5 +1,7 @@
 package co.q64.exgregilo.block;
 
+import javax.inject.Singleton;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.creativetab.CreativeTabs;
@@ -8,6 +10,7 @@ import co.q64.exgregilo.data.ModData;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
+@Singleton
 public class GemSand extends Block {
 	public static final String BLOCK_NAME = "gem_sand";
 

@@ -14,7 +14,7 @@ import co.q64.exgregilo.api.config.ConfigManager;
 import co.q64.exgregilo.api.link.LinkBase;
 import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.api.link.ModLink;
-import co.q64.exgregilo.data.ModData;
+import co.q64.exgregilo.data.ModIds;
 import co.q64.exgregilo.link.gregtech.GregTech;
 import exnihilo.ENBlocks;
 import exnihilo.ENItems;
@@ -22,14 +22,14 @@ import exnihilo.registries.SieveRegistry;
 import exnihilo.registries.helpers.SiftingResult;
 
 @Singleton
-@ModLink(modName = "Ex Nihilo", modId = ModData.EX_NIHILO_ID)
+@ModLink(modName = "Ex Nihilo", modId = ModIds.EX_NIHILO_ID)
 public class ExNihilo extends LinkBase {
 	private @Inject LinkManager linkManager;
 	private @Inject ConfigManager configManager;
 	private @Inject SieveRegistryCleaner cleaner;
 
 	@Override
-	public void preloadLink() {
+	public void loadLink() {
 		if (configManager.getBoolean(ExNihilo.class, "removeDefaultSiftOres", true)) {
 			cleaner.removeDefaultOres();
 		}

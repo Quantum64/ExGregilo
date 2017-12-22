@@ -8,10 +8,11 @@ import co.q64.exgregilo.api.link.LinkBase;
 import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.api.link.ModLink;
 import co.q64.exgregilo.data.ModData;
+import co.q64.exgregilo.data.ModIds;
 import co.q64.exgregilo.link.minetweaker.machines.ZenAutoSieve;
 
 @Singleton
-@ModLink(modName = "MineTweaker", modId = ModData.MINE_TWEAKER_ID)
+@ModLink(modName = "MineTweaker", modId = ModIds.MINE_TWEAKER_ID)
 public class MineTweaker extends LinkBase {
 	private @Inject LinkManager linkManager;
 

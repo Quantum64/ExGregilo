@@ -17,11 +17,11 @@ import net.minecraftforge.fluids.FluidStack;
 import co.q64.exgregilo.link.gregtech.crafting.MachineRecipeHelper;
 import co.q64.exgregilo.link.gregtech.recipe.AutoSieveRecipes;
 import co.q64.exgregilo.link.gregtech.render.BlockTextures;
+import cpw.mods.fml.common.FMLCommonHandler;
 
 public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 	private static final int IN_SLOTS = 1;
 	private static final int OUT_SLOTS = 6;
-
 	private AutoSieveRecipes map;
 
 	public AutoSieve(int aID, String aName, String aNameRegional, int aTier, MachineRecipeHelper helper, AutoSieveRecipes map) {
@@ -52,20 +52,22 @@ public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 		this.map = map;
 	}
 
-	public AutoSieve(String aName, int aTier, String aDescription, ITexture[][][] aTextures, String aGUIName, String aNEIName) {
+	public AutoSieve(String aName, int aTier, String aDescription, ITexture[][][] aTextures, String aGUIName, String aNEIName, AutoSieveRecipes map) {
 		super(aName, aTier, 1, aDescription, aTextures, IN_SLOTS, OUT_SLOTS, aGUIName, aNEIName);
+		this.map = map;
 	}
 
 	@Override
 	public MetaTileEntity newMetaEntity(IGregTechTileEntity aTileEntity) {
-		return new AutoSieve(mName, mTier, mDescription, mTextures, mGUIName, mNEIName);
+		return new AutoSieve(mName, mTier, mDescription, mTextures, mGUIName, mNEIName, map);
 	}
 
 	@Override
 	public int checkRecipe() {
 		GT_Recipe_Map tMap = getRecipeList();
-		if (tMap == null)
+		if (tMap == null) {
 			return DID_NOT_FIND_RECIPE;
+		}
 		GT_Recipe tRecipe = tMap.findRecipe(getBaseMetaTileEntity(), mLastRecipe, false, GT_Values.V[mTier], new FluidStack[] { getFillableStack() }, getSpecialSlot(), getAllInputs());
 		if (tRecipe == null)
 			return DID_NOT_FIND_RECIPE;
@@ -77,8 +79,9 @@ public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 			return FOUND_RECIPE_BUT_DID_NOT_MEET_REQUIREMENTS;
 		}
 		*/
-		if (!tRecipe.isRecipeInputEqual(true, new FluidStack[] { getFillableStack() }, getAllInputs()))
+		if (!tRecipe.isRecipeInputEqual(true, new FluidStack[] { getFillableStack() }, getAllInputs())) {
 			return FOUND_RECIPE_BUT_DID_NOT_MEET_REQUIREMENTS;
+		}
 
 		boolean foundNull = false;
 		for (ItemStack is : getAllOutputs()) {
@@ -103,18 +106,13 @@ public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 		mOutputFluid = tRecipe.getFluidOutput(0);
 		//calculateOverclockedNess(tRecipe);
 		mMaxProgresstime = 512 / (1 << (mTier - 1));
-		mEUt = 4 * (1 << (mTier - 1)) * (1 << (mTier - 1));
+		mEUt = mTier * 4 * (1 << (mTier - 1)) * (1 << (mTier - 1));
 		return FOUND_AND_SUCCESSFULLY_USED_RECIPE;
 	}
 
 	@Override
 	public GT_Recipe_Map getRecipeList() {
 		return map;
-	}
-
-	@Override
-	public boolean allowPutStack(IGregTechTileEntity aBaseMetaTileEntity, int aIndex, byte aSide, ItemStack aStack) {
-		return super.allowPutStack(aBaseMetaTileEntity, aIndex, aSide, aStack) && GT_ModHandler.getSmeltingOutput(GT_Utility.copyAmount(64, aStack), false, null) != null;
 	}
 
 	@Override

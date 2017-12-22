@@ -1,5 +1,8 @@
 package co.q64.exgregilo.block;
 
+import javax.inject.Inject;
+import javax.inject.Singleton;
+
 import net.minecraft.block.Block;
 import net.minecraft.block.BlockContainer;
 import net.minecraft.block.material.Material;
@@ -12,6 +15,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.world.World;
+import co.q64.exgregilo.api.binders.ModDataBinders.DomainPath;
 import co.q64.exgregilo.data.ModData;
 import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
 import co.q64.exgregilo.tile.AdvancedSieveTile;
@@ -19,9 +23,12 @@ import co.q64.exgregilo.tile.AdvancedSieveTile.SieveMode;
 import cpw.mods.fml.common.registry.GameRegistry;
 import exnihilo.registries.SieveRegistry;
 
+@Singleton
 public class AdvancedSieve extends BlockContainer {
 	public static final String BLOCK_NAME = "advanced_sieve";
 
+	private @Inject @DomainPath String domainPath;
+	
 	private static final String MESH_TEXTURE = "SIEVE_MESH";
 	public static IIcon meshIcon;
 
@@ -36,7 +43,7 @@ public class AdvancedSieve extends BlockContainer {
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
 		blockIcon = Blocks.planks.getIcon(0, 0);
-		meshIcon = register.registerIcon(ModData.DOMAIN_PATH + MESH_TEXTURE);
+		meshIcon = register.registerIcon(domainPath + MESH_TEXTURE);
 	}
 
 	@Override

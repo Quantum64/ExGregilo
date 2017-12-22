@@ -10,13 +10,12 @@ import java.util.Set;
 import javax.inject.Inject;
 import javax.inject.Singleton;
 
-import org.apache.logging.log4j.Logger;
-
 import co.q64.com.google.inject.Injector;
 import co.q64.exgregilo.api.link.LinkBase;
 import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.api.link.MalformedLinkException;
 import co.q64.exgregilo.api.link.ModLink;
+import co.q64.exgregilo.api.util.Logger;
 import cpw.mods.fml.common.Loader;
 
 @Singleton

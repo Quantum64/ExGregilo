@@ -17,10 +17,8 @@ import javax.inject.Singleton;
 
 import net.minecraft.init.Blocks;
 import net.minecraft.item.ItemStack;
-
-import org.apache.logging.log4j.Logger;
-
 import co.q64.exgregilo.api.link.LinkManager;
+import co.q64.exgregilo.api.util.Logger;
 import co.q64.exgregilo.link.gregtech.GregTech;
 import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
 
@@ -553,11 +551,7 @@ public class MachineRecipeHelper {
 				}
 				continue;
 			}
-
-			if (aRecipe[i].equals(OreDictAddons.WIRE_MESH)) {
-				aRecipe[i] = linkManager.getLink(GregTech.class).getTools().getMeshWithStats(MetaGeneratedTools.WIRE_MESH_ID, 1, Materials.Tin, Materials.Tin, null);
-			}
-
+			
 			if (aRecipe[i] instanceof X)
 				throw new IllegalArgumentException("MISSING TIER MAPPING FOR: " + aRecipe[i] + " AT TIER " + mTier);
 		}
