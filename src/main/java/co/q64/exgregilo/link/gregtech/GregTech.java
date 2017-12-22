@@ -156,7 +156,7 @@ public class GregTech extends LinkBase {
 		
 		//Sand Drops
     
-    // Salt
+               // Salt
 		addSand(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.RockSalt, 1), 12);
 		addSand(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Salt, 1), 12);
 		addSand(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Lepidolite, 1), 25);
