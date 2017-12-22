@@ -116,15 +116,15 @@ public class GregTech extends LinkBase {
 		// Coal
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Lignite, 1), 10);
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Coal, 1), 10);
-		// Iron
-		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Magnetite, 1), 6);
+		// Iron - Changed to Iron from Magnetite
+		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Iron, 1), 8);
 		// Tin
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Cassiterite, 1), 33);
-		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Tin, 1), 33);
+		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Tin, 1), 10);
 		// Copper
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Chalcopyrite, 1), 10);
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Tetrahedrite, 1), 20);
-		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Copper, 1), 20);
+		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Copper, 1), 7);
 		// Bauxite
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Bauxite, 1), 33);
 		// Gold
@@ -137,6 +137,8 @@ public class GregTech extends LinkBase {
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Silver, 1), 50);
 		// Lapis
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Lapis, 1), 25);
+		//Tungsten
+		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Tungsten, 1), 50;
 
 		// Gems
 		addGravel(new ItemStack(gemShards), 50);
