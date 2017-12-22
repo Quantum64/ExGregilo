@@ -11,7 +11,7 @@ public interface ModDataPool {
 
 	public static final String BASIC_SIEVE_BLOCK_NAME = "basic_sieve";
 	public static final String BASIC_SIEVE_TEX = "basic_sieve.png";
-	public static final String BASIC_SIEVE_MESH = "SIEVE_MESH";
+	public static final String BASIC_SIEVE_MESH = "sieve_mesh";
 
 	public static final String ADVANCED_SIEVE_BLOCK_NAME = "advanced_sieve";
 	public static final String ADVANCED_SIEVE_TEX = "advanced_sieve.png";
