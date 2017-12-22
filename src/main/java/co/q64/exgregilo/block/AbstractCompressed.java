@@ -47,7 +47,7 @@ public abstract class AbstractCompressed extends Block {
 	@Override
 	public void registerBlockIcons(IIconRegister reg) {
 		for (int i = 0; i < 8; i++) {
-			this.icons[i] = reg.registerIcon(domain + tex + "_" + typeName.toUpperCase() + "_" + (i + 1) + "X");
+			this.icons[i] = reg.registerIcon(domain + tex + "_" + typeName.toLowerCase() + "_" + (i + 1) + "X");
 		}
 	}
 

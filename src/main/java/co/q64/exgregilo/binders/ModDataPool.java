@@ -10,21 +10,21 @@ public interface ModDataPool {
 	public static final String DOMAIN_PATH = MODID + ":";
 
 	public static final String BASIC_SIEVE_BLOCK_NAME = "basic_sieve";
-	public static final String BASIC_SIEVE_TEX = "BASIC_SIEVE.png";
+	public static final String BASIC_SIEVE_TEX = "basic_sieve.png";
 	public static final String BASIC_SIEVE_MESH = "SIEVE_MESH";
 
 	public static final String ADVANCED_SIEVE_BLOCK_NAME = "advanced_sieve";
-	public static final String ADVANCED_SIEVE_TEX = "ADVANCED_SIEVE.png";
-	public static final String ADVANCED_SIEVE_MESH = "SIEVE_MESH";
+	public static final String ADVANCED_SIEVE_TEX = "advanced_sieve.png";
+	public static final String ADVANCED_SIEVE_MESH = "sieve_mesh";
 
 	public static final String GEM_SAND_BLOCK_NAME = "gem_sand";
-	public static final String GEM_SAND_TEX = "GEM_SAND";
+	public static final String GEM_SAND_TEX = "gem_sand";
 	
 	public static final String DUST_BLOCK_NAME = "dust";
-	public static final String DUST_TEX = "DUST";
+	public static final String DUST_TEX = "dust";
 	
 	public static final String COMPRESSED_BLOCK_NAME = "compressed";
-	public static final String COMPRESSED_TEX = "COMPRESSED";
+	public static final String COMPRESSED_TEX = "compressed";
 	public static final String COMPRESSED_GRAVEL_TYPE = "Gravel";
 	public static final String COMPRESSED_SAND_TYPE = "Sand";
 	public static final String COMPRESSED_DUST_TYPE = "Dust";
