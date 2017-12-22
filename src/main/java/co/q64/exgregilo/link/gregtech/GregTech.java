@@ -149,7 +149,7 @@ public class GregTech extends LinkBase {
 		//Redstone
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Redstone, 1), 12);
 		//Tungsten
-		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Tungsten, 1), 50); // NO CRUSHED FORM!
+		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Tungstate, 1), 50); // NO CRUSHED FORM!
 
 		//===========
 		//== Sand ==
