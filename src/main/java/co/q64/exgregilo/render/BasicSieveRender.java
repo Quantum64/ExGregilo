@@ -5,16 +5,17 @@ import javax.inject.Singleton;
 
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
-import co.q64.exgregilo.api.binders.ModDataBinders.AdvancedSieveTex;
+import co.q64.exgregilo.api.binders.ModDataBinders.BasicSieveTex;
 import co.q64.exgregilo.api.binders.ModDataBinders.BlockTexPath;
-import co.q64.exgregilo.block.AdvancedSieve;
+import co.q64.exgregilo.block.BasicSieve;
 import co.q64.exgregilo.data.ModData;
 
 @Singleton
-public class AdvancedSieveRender extends AbstractSieveRender {
-	private @Inject @AdvancedSieveTex String tex;
+public class BasicSieveRender extends AbstractSieveRender {
+	private @Inject @BasicSieveTex String tex;
 	private @Inject @BlockTexPath String blockTexPath;
-	private @Inject AdvancedSieve sieve;
+	private @Inject BasicSieve sieve;
+
 	private ResourceLocation texture;
 
 	@Inject

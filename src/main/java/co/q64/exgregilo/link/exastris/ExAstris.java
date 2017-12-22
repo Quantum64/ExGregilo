@@ -8,7 +8,6 @@ import co.q64.com.google.inject.Singleton;
 import co.q64.exgregilo.api.link.LinkBase;
 import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.api.link.ModLink;
-import co.q64.exgregilo.data.ModData;
 import co.q64.exgregilo.data.ModIds;
 import co.q64.exgregilo.link.gregtech.GregTech;
 

@@ -4,10 +4,10 @@ import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
 import net.minecraft.item.ItemStack;
 
-public class AdvancedSieveItemBlock extends ItemBlock {
-	private static final String NAME = "exgregilo.advancedsieve";
+public class BasicSieveItemBlock extends ItemBlock {
+	private static final String NAME = "exgregilo.basicsieve";
 
-	public AdvancedSieveItemBlock(Block block) {
+	public BasicSieveItemBlock(Block block) {
 		super(block);
 		setHasSubtypes(true);
 	}
