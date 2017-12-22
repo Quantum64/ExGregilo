@@ -25,10 +25,32 @@ public class WireMesh extends CustomMetaTool {
 
 	private @Inject LinkManager linkManager;
 
+	//Declare an ArrayList of non-metallic materials for the wire mesh recipe generator
+	private List<Materials> nonMetalMeshes = new ArrayList<>(Arrays.asList(
+		Materials.Flint,
+		Materials.Diamond
+		));
+
 	public void addCrafting() {
 		boolean useNEI = linkManager.isEnabled(NEI.class);
 		for (Materials material : Materials.values()) {
 			if (material.contains(SubTag.METAL) && material.mDurability > 0) {
+				ItemStack result = linkManager.getLink(GregTech.class).getTools().getToolWithStats(MetaGeneratedTools.WIRE_MESH_ID, 1, material, material, null);
+				//formatter:off
+				boolean added = GT_ModHandler.addCraftingRecipe(result, GT_ModHandler.RecipeBits.DO_NOT_CHECK_FOR_COLLISIONS | GT_ModHandler.RecipeBits.BUFFERED, new Object[]{
+				"WWW", 
+				"WPW", 
+				"WWW", 
+				Character.valueOf('W'), OrePrefixes.wireGt01.get(material), 
+				Character.valueOf('P'), OrePrefixes.plate.get(material)});
+				//formatter:on
+				if (added) {
+					GT_Values.RA.addAssemblerRecipe(GT_OreDictUnificator.get(OrePrefixes.wireGt01, material, 8), GT_OreDictUnificator.get(OrePrefixes.plate, material, 1), result, 400, 2);
+					if (useNEI) {
+						linkManager.getLink(NEI.class).addItemVariant(linkManager.getLink(GregTech.class).getTools(), result);
+					}
+				}
+			} else if (nonMetalMeshes.contains(material)) {
 				ItemStack result = linkManager.getLink(GregTech.class).getTools().getToolWithStats(MetaGeneratedTools.WIRE_MESH_ID, 1, material, material, null);
 				//formatter:off
 				boolean added = GT_ModHandler.addCraftingRecipe(result, GT_ModHandler.RecipeBits.DO_NOT_CHECK_FOR_COLLISIONS | GT_ModHandler.RecipeBits.BUFFERED, new Object[]{
