@@ -11,6 +11,7 @@ import javax.inject.Singleton;
 
 import co.q64.exgregilo.link.gregtech.gui.NEITextureHelper;
 
+
 @Singleton
 public class IndustrialForgeHammerRecipes extends GT_Recipe_Map {
 

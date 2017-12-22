@@ -40,7 +40,7 @@ public class MetaGeneratedTools extends GT_MetaGenerated_Tool {
 	public WireMesh getWireMesh() {
 		return wireMesh;
 	}
-
+	
 	@SuppressWarnings({ "unchecked", "rawtypes" /*Why it's like this, I have no idea*/})
 	@Override
 	public void addAdditionalToolTips(List list, ItemStack stack, EntityPlayer player) {

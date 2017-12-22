@@ -138,7 +138,7 @@ public class GregTech extends LinkBase {
 		// Lapis
 		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Lapis, 1), 25);
 		//Tungsten
-		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Tungsten, 1), 50;
+		addGravel(GT_OreDictUnificator.get(OrePrefixes.crushed, Materials.Tungsten, 1), 50);
 
 		// Gems
 		addGravel(new ItemStack(gemShards), 50);

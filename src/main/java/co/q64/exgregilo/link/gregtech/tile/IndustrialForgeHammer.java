@@ -114,11 +114,6 @@ public class IndustrialForgeHammer extends GT_MetaTileEntity_BasicMachine {
 	}
 
 	@Override
-	public boolean allowPutStack(IGregTechTileEntity aBaseMetaTileEntity, int aIndex, byte aSide, ItemStack aStack) {
-		return super.allowPutStack(aBaseMetaTileEntity, aIndex, aSide, aStack);
-	}
-
-	@Override
 	public void startSoundLoop(byte aIndex, double aX, double aY, double aZ) {
 		super.startSoundLoop(aIndex, aX, aY, aZ);
 		if (aIndex == 1)

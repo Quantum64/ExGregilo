@@ -106,18 +106,13 @@ public class AutoSieve extends GT_MetaTileEntity_BasicMachine {
 		mOutputFluid = tRecipe.getFluidOutput(0);
 		//calculateOverclockedNess(tRecipe);
 		mMaxProgresstime = 512 / (1 << (mTier - 1));
-		mEUt = 4 * (1 << (mTier - 1)) * (1 << (mTier - 1));
+		mEUt = mTier * 4 * (1 << (mTier - 1)) * (1 << (mTier - 1));
 		return FOUND_AND_SUCCESSFULLY_USED_RECIPE;
 	}
 
 	@Override
 	public GT_Recipe_Map getRecipeList() {
 		return map;
-	}
-
-	@Override
-	public boolean allowPutStack(IGregTechTileEntity aBaseMetaTileEntity, int aIndex, byte aSide, ItemStack aStack) {
-		return super.allowPutStack(aBaseMetaTileEntity, aIndex, aSide, aStack);
 	}
 
 	@Override
