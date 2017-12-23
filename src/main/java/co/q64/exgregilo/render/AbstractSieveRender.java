@@ -13,17 +13,12 @@ import org.lwjgl.opengl.GL11;
 
 import co.q64.exgregilo.tile.AbstractSieveTile;
 import co.q64.exgregilo.tile.AbstractSieveTile.SieveMode;
-import exnihilo.blocks.models.ModelSieveContents;
 
 @Singleton
 public abstract class AbstractSieveRender extends TileEntitySpecialRenderer {
 	private @Inject SieveModel model;
 	private @Inject SieveMeshModel mesh;
-	private @Inject ModelSieveContents contents;
-
-	public AbstractSieveRender() {
-		this.contents = new ModelSieveContents();
-	}
+	private @Inject SieveContentsModel contents;
 
 	@Override
 	public void renderTileEntityAt(TileEntity tileentity, double x, double y, double z, float f) {

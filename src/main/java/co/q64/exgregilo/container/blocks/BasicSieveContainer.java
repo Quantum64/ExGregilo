@@ -13,7 +13,6 @@ import co.q64.exgregilo.api.link.LinkBase;
 import co.q64.exgregilo.block.BasicSieve;
 import co.q64.exgregilo.block.BasicSieveItemBlock;
 import co.q64.exgregilo.container.GregiloBlockContainer;
-import co.q64.exgregilo.link.exnihilo.ExNihilo;
 import co.q64.exgregilo.link.gregtech.GregTech;
 
 @Singleton
@@ -38,6 +37,6 @@ public class BasicSieveContainer extends GregiloBlockContainer {
 
 	@Override
 	public List<Class<? extends LinkBase>> getRequired() {
-		return require(GregTech.class).require(ExNihilo.class);
+		return require(GregTech.class);
 	}
 }

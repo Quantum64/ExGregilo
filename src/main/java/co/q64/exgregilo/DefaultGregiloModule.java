@@ -28,6 +28,9 @@ import co.q64.exgregilo.api.binders.ModDataBinders.DustTex;
 import co.q64.exgregilo.api.binders.ModDataBinders.GemSandBlockName;
 import co.q64.exgregilo.api.binders.ModDataBinders.GemSandTex;
 import co.q64.exgregilo.api.binders.ModDataBinders.GtGUITexPath;
+import co.q64.exgregilo.api.binders.ModDataBinders.HeavySieveBlockName;
+import co.q64.exgregilo.api.binders.ModDataBinders.HeavySieveMesh;
+import co.q64.exgregilo.api.binders.ModDataBinders.HeavySieveTex;
 import co.q64.exgregilo.api.binders.ModDataBinders.ModId;
 import co.q64.exgregilo.api.config.ConfigManager;
 import co.q64.exgregilo.api.link.LinkBase;
@@ -47,6 +50,7 @@ import co.q64.exgregilo.container.blocks.CompressedGravelContainer;
 import co.q64.exgregilo.container.blocks.CompressedSandContainer;
 import co.q64.exgregilo.container.blocks.DustContainer;
 import co.q64.exgregilo.container.blocks.GemSandContainer;
+import co.q64.exgregilo.container.blocks.HeavySieveContainer;
 import co.q64.exgregilo.container.items.GemShardsContainer;
 import co.q64.exgregilo.link.SimpleLinkManager;
 import co.q64.exgregilo.link.dreamcraft.DreamCraft;
@@ -60,6 +64,7 @@ import co.q64.exgregilo.loader.init.CompressedLoader;
 import co.q64.exgregilo.proxy.CommonProxy;
 import co.q64.exgregilo.render.AdvancedSieveRenderPackage;
 import co.q64.exgregilo.render.BasicSieveRenderPackage;
+import co.q64.exgregilo.render.HeavySieveRenderPackage;
 import co.q64.exgregilo.util.GregiloLogger;
 import cpw.mods.fml.common.LoaderState.ModState;
 import cpw.mods.fml.common.ModMetadata;
@@ -103,10 +108,12 @@ public class DefaultGregiloModule extends ExGregiloModule {
 		blocks.addBinding().to(CompressedSandContainer.class);
 		blocks.addBinding().to(CompressedDustContainer.class);
 		blocks.addBinding().to(DustContainer.class);
+		blocks.addBinding().to(HeavySieveContainer.class);
 
 		Multibinder<SieveRenderPackage> sieveRenderPacks = Multibinder.newSetBinder(binder(), SieveRenderPackage.class);
 		sieveRenderPacks.addBinding().to(BasicSieveRenderPackage.class);
 		sieveRenderPacks.addBinding().to(AdvancedSieveRenderPackage.class);
+		sieveRenderPacks.addBinding().to(HeavySieveRenderPackage.class);
 
 		Multibinder<InitLoader> loaders = Multibinder.newSetBinder(binder(), InitLoader.class);
 		loaders.addBinding().to(CompressedLoader.class);
@@ -135,7 +142,11 @@ public class DefaultGregiloModule extends ExGregiloModule {
 
 		bindConstant().annotatedWith(BasicSieveBlockName.class).to(ModDataPool.BASIC_SIEVE_BLOCK_NAME);
 		bindConstant().annotatedWith(BasicSieveMesh.class).to(ModDataPool.BASIC_SIEVE_MESH);
-		bindConstant().annotatedWith(BasicSieveTex.class).to(ModDataPool.BASIC_SIEVE_TEX);
+		bindConstant().annotatedWith(BasicSieveTex.class).to(ModDataPool.BASIC_SIEVE_TEX);	
+		
+		bindConstant().annotatedWith(HeavySieveBlockName.class).to(ModDataPool.HEAVY_SIEVE_BLOCK_NAME);
+		bindConstant().annotatedWith(HeavySieveMesh.class).to(ModDataPool.HEAVY_SIEVE_MESH);
+		bindConstant().annotatedWith(HeavySieveTex.class).to(ModDataPool.HEAVY_SIEVE_TEX);
 
 		bindConstant().annotatedWith(GemSandBlockName.class).to(ModDataPool.GEM_SAND_BLOCK_NAME);
 		bindConstant().annotatedWith(GemSandTex.class).to(ModDataPool.GEM_SAND_TEX);

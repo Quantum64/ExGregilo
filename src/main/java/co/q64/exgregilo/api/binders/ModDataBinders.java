@@ -23,6 +23,10 @@ public interface ModDataBinders {
 	public static @Target({ ElementType.FIELD, ElementType.PARAMETER }) @Retention(RUNTIME) @BindingAnnotation  @interface AdvancedSieveMesh {}
 	public static @Target({ ElementType.FIELD, ElementType.PARAMETER }) @Retention(RUNTIME) @BindingAnnotation  @interface AdvancedSieveTex {}
 	
+	public static @Target({ ElementType.FIELD, ElementType.PARAMETER }) @Retention(RUNTIME) @BindingAnnotation  @interface HeavySieveBlockName {}
+	public static @Target({ ElementType.FIELD, ElementType.PARAMETER }) @Retention(RUNTIME) @BindingAnnotation  @interface HeavySieveMesh {}
+	public static @Target({ ElementType.FIELD, ElementType.PARAMETER }) @Retention(RUNTIME) @BindingAnnotation  @interface HeavySieveTex {}
+	
 	public static @Target({ ElementType.FIELD, ElementType.PARAMETER }) @Retention(RUNTIME) @BindingAnnotation  @interface GemSandBlockName {}
 	public static @Target({ ElementType.FIELD, ElementType.PARAMETER }) @Retention(RUNTIME) @BindingAnnotation  @interface GemSandTex {}
 	

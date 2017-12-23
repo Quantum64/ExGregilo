@@ -1,6 +1,7 @@
 package co.q64.exgregilo.block;
 
 import javax.inject.Inject;
+import javax.inject.Provider;
 import javax.inject.Singleton;
 
 import net.minecraft.client.renderer.texture.IIconRegister;
@@ -19,6 +20,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 public class BasicSieve extends AbstractSieve {
 	private @Inject @DomainPath String domainPath;
 	private @Inject @BasicSieveMesh String mesh;
+	private @Inject Provider<BasicSieveTile> tileProvider;
 
 	private IIcon meshIcon;
 
@@ -36,7 +38,7 @@ public class BasicSieve extends AbstractSieve {
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
-		return new BasicSieveTile();
+		return tileProvider.get();
 	}
 
 	@Override

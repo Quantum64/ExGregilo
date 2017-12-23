@@ -10,7 +10,7 @@ import co.q64.exgregilo.data.ModData;
 public enum ItemTextures implements IIconContainer, Runnable {
 	BLANK("blank"), WIRE_MESH("wire_mesh"), COMPRESSED_HAMMER("compressed_hammer"), BASIC_MESH("basic_mesh");
 
-	private static final String BLANK_OVERLAY = "BLANK";
+	private static final String BLANK_OVERLAY = "blank";
 	private String textureName;
 	private String overlayName;
 	private IIcon mIcon;

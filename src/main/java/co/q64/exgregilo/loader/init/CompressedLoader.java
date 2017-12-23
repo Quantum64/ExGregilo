@@ -38,10 +38,10 @@ public class CompressedLoader implements InitLoader {
 	public void load() {
 		boolean gt = linkManager.isEnabled(GregTech.class);
 		List<Block> dusts = new ArrayList<Block>();
-		dusts.add(dust);
 		if (linkManager.isEnabled(ExNihilo.class)) {
 			dusts.add(linkManager.getLink(ExNihilo.class).getDustBlock());
 		}
+		dusts.add(dust);
 		Map<AbstractCompressed, Block> blocks = new HashMap<AbstractCompressed, Block>();
 		blocks.put(cgravel, Blocks.gravel);
 		blocks.put(csand, Blocks.sand);

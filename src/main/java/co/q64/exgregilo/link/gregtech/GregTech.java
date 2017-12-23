@@ -30,8 +30,10 @@ import co.q64.exgregilo.api.link.LinkBase;
 import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.api.link.ModLink;
 import co.q64.exgregilo.block.AdvancedSieve;
+import co.q64.exgregilo.block.BasicSieve;
 import co.q64.exgregilo.block.Dust;
 import co.q64.exgregilo.block.GemSand;
+import co.q64.exgregilo.block.HeavySieve;
 import co.q64.exgregilo.data.ModIds;
 import co.q64.exgregilo.item.GemShards;
 import co.q64.exgregilo.link.excompressum.ExCompressum;
@@ -47,6 +49,7 @@ import co.q64.exgregilo.link.gregtech.tile.AutoSieve;
 import co.q64.exgregilo.link.gregtech.tile.GemExtractor;
 import co.q64.exgregilo.link.gregtech.tile.IndustrialForgeHammer;
 import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
+import co.q64.exgregilo.util.SieveRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
 @Singleton
@@ -69,8 +72,10 @@ public class GregTech extends LinkBase {
 	private @Inject GemSand gemSand;
 	private @Inject Dust dust;
 	private @Inject AdvancedSieve advancedSieve;
+	private @Inject HeavySieve heavySieve;
+	private @Inject BasicSieve basicSieve;
+	private @Inject SieveRegistry sieveRegistry;
 
-	private Map<Block, Map<ItemStack, Integer>> sifting = new HashMap<Block, Map<ItemStack, Integer>>();
 	private Map<ItemStack, Integer> gems = new HashMap<ItemStack, Integer>();
 	private int idStart = DEFAULT_ID_START + DEFAULT_ID_OFFSET;
 
@@ -229,10 +234,10 @@ public class GregTech extends LinkBase {
 			//if (linkManager.isEnabled(ExNihilo.class)) {
 			//	additional.putAll(linkManager.getLink(ExNihilo.class).getAdditionalResults(b));
 			//}
-			ItemStack[] outputs = new ItemStack[getSubMap(b).size() + additional.size()];
-			int[] chances = new int[getSubMap(b).size() + additional.size()];
+			ItemStack[] outputs = new ItemStack[sieveRegistry.getSubMap(b).size() + additional.size()];
+			int[] chances = new int[sieveRegistry.getSubMap(b).size() + additional.size()];
 			int i = 0;
-			for (Entry<ItemStack, Integer> e : getSubMap(b).entrySet()) {
+			for (Entry<ItemStack, Integer> e : sieveRegistry.getSubMap(b).entrySet()) {
 				outputs[i] = e.getKey();
 				chances[i] = e.getValue() * CHANCE_CONSTANT;
 				i++;
@@ -306,11 +311,19 @@ public class GregTech extends LinkBase {
 		"   ", 
 		"RPR", 
 		"R R", 
-		Character.valueOf('P'), GT_OreDictUnificator.get(OrePrefixes.plateDense, Materials.Iron, 1), 
+		Character.valueOf('P'), GT_OreDictUnificator.get(OrePrefixes.plate, Materials.Iron, 1), 
 		Character.valueOf('R'), GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Iron, 1)});
 		
+		// Heavy sieve
+		GameRegistry.addRecipe(new ItemStack(heavySieve, 1), new Object[]{
+		"   ", 
+		"RPR", 
+		"R R", 
+		Character.valueOf('P'), GT_OreDictUnificator.get(OrePrefixes.plateDouble, Materials.Steel, 1), 
+		Character.valueOf('R'), GT_OreDictUnificator.get(OrePrefixes.stick, Materials.Steel, 1)});
+		
 		// Basic sieve
-		GameRegistry.addRecipe(new ItemStack(advancedSieve, 1), new Object[]{
+		GameRegistry.addRecipe(new ItemStack(basicSieve, 1), new Object[]{
 		"   ", 
 		"RGR", 
 		"R R", 
@@ -335,26 +348,17 @@ public class GregTech extends LinkBase {
 
 	}
 
-	public Map<ItemStack, Integer> getSubMap(Block block) {
-		Map<ItemStack, Integer> map = sifting.get(block);
-		if (map == null) {
-			map = new HashMap<ItemStack, Integer>();
-			sifting.put(block, map);
-		}
-		return map;
-	}
-
 	private void addGravel(ItemStack is, int chance) {
-		getSubMap(Blocks.gravel).put(is, chance);
+		sieveRegistry.getSubMap(Blocks.gravel).put(is, chance);
 	}
 
 	private void addSand(ItemStack is, int chance) {
-		getSubMap(Blocks.sand).put(is, chance);
+		sieveRegistry.getSubMap(Blocks.sand).put(is, chance);
 	}
 
 	private void addDust(ItemStack is, int chance) {
 		for (Block block : getDustBlocks()) {
-			getSubMap(block).put(is, chance);
+			sieveRegistry.getSubMap(block).put(is, chance);
 		}
 	}
 
@@ -372,7 +376,7 @@ public class GregTech extends LinkBase {
 	}
 
 	public Map<Block, Map<ItemStack, Integer>> getSiftingMap() {
-		return sifting;
+		return sieveRegistry.getSiftingMap();
 	}
 
 	public MetaGeneratedTools getTools() {
@@ -409,5 +413,9 @@ public class GregTech extends LinkBase {
 
 	public void addExtractorRecipe(ItemStack in, ItemStack out, int time, int eu) {
 		GT_Values.RA.addExtractorRecipe(in, out, time, eu);
+	}
+
+	public Map<ItemStack, Integer> getSubMap(Block block) {
+		return sieveRegistry.getSubMap(block);
 	}
 }

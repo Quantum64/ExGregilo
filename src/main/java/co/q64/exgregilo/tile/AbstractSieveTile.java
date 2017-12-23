@@ -1,12 +1,8 @@
 package co.q64.exgregilo.tile;
 
-import exnihilo.particles.ParticleSieve;
-import exnihilo.registries.SieveRegistry;
-import exnihilo.registries.helpers.SiftingResult;
 import gregtech.api.interfaces.IToolStats;
 
-import java.util.ArrayList;
-import java.util.Iterator;
+import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
@@ -18,8 +14,10 @@ import net.minecraft.network.Packet;
 import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
+import co.q64.exgregilo.link.gregtech.tools.AdvancedMesh;
 import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
-import co.q64.exgregilo.link.gregtech.tools.WireMesh;
+import co.q64.exgregilo.render.SieveParticle;
+import co.q64.exgregilo.util.SieveRegistry;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -29,14 +27,12 @@ public abstract class AbstractSieveTile extends TileEntity {
 	private static final float PROCESSING_INTERVAL = 0.075f;
 	private static final int UPDATE_INTERVAL = 20;
 
+	private SieveRegistry registry;
 	public Block content;
 	public int contentMeta = 0;
-
 	private ItemStack mesh;
-
 	private float volume = 0;
 	public SieveMode mode = SieveMode.EMPTY;
-
 	private int timer = 0;
 	private boolean update = false;
 	private boolean particleMode = false;
@@ -55,7 +51,8 @@ public abstract class AbstractSieveTile extends TileEntity {
 		mode = SieveMode.EMPTY;
 	}
 
-	public void addSievable(Block block, int blockMeta) {
+	public void addSievable(SieveRegistry registry, Block block, int blockMeta) {
+		this.registry = registry;
 		this.content = block;
 		this.contentMeta = blockMeta;
 		this.mode = SieveMode.FILLED;
@@ -112,7 +109,7 @@ public abstract class AbstractSieveTile extends TileEntity {
 				if (mesh != null && mesh.getItem() instanceof MetaGeneratedTools) {
 					MetaGeneratedTools tools = (MetaGeneratedTools) mesh.getItem();
 					IToolStats stats = tools.getToolStats(mesh);
-					float amount = 1f / (stats.getSpeedMultiplier() * (WireMesh.MAX_SPEED - MetaGeneratedTools.getPrimaryMaterial(mesh).mToolSpeed));
+					float amount = 1f / (stats.getSpeedMultiplier() * (AdvancedMesh.MAX_SPEED - MetaGeneratedTools.getPrimaryMaterial(mesh).mToolSpeed));
 					if (amount < 0) {
 						volume = 0;
 					} else {
@@ -138,22 +135,14 @@ public abstract class AbstractSieveTile extends TileEntity {
 						}
 					}
 				}
-				ArrayList<SiftingResult> rewards = SieveRegistry.getSiftingOutput(content, contentMeta);
-				if (rewards != null && rewards.size() > 0) {
-					Iterator<SiftingResult> it = rewards.iterator();
-					while (it.hasNext()) {
-						SiftingResult reward = it.next();
-
-						if (worldObj.rand.nextInt(reward.rarity) == 0) {
-							EntityItem entityitem = new EntityItem(worldObj, (double) xCoord + 0.5D, (double) yCoord + 1.5D, (double) zCoord + 0.5D, new ItemStack(reward.item, 1, reward.meta));
-
-							double f3 = 0.05F;
-							entityitem.motionX = worldObj.rand.nextGaussian() * f3;
-							entityitem.motionY = (0.2d);
-							entityitem.motionZ = worldObj.rand.nextGaussian() * f3;
-							worldObj.spawnEntityInWorld(entityitem);
-						}
-					}
+				List<ItemStack> rewards = getRewards();
+				for (ItemStack reward : rewards) {
+					EntityItem entityitem = new EntityItem(worldObj, (double) xCoord + 0.5D, (double) yCoord + 1.5D, (double) zCoord + 0.5D, reward);
+					double f3 = 0.05F;
+					entityitem.motionX = worldObj.rand.nextGaussian() * f3;
+					entityitem.motionY = (0.2d);
+					entityitem.motionZ = worldObj.rand.nextGaussian() * f3;
+					worldObj.spawnEntityInWorld(entityitem);
 				}
 			}
 		} else {
@@ -169,7 +158,7 @@ public abstract class AbstractSieveTile extends TileEntity {
 			IIcon icon = block.getIcon(0, blockMeta);
 
 			for (int x = 0; x < 4; x++) {
-				ParticleSieve dust = new ParticleSieve(worldObj, xCoord + 0.8d * worldObj.rand.nextFloat() + 0.15d, yCoord + 0.69d, zCoord + 0.8d * worldObj.rand.nextFloat() + 0.15d, 0.0d, 0.0d, 0.0d, icon);
+				SieveParticle dust = new SieveParticle(worldObj, xCoord + 0.8d * worldObj.rand.nextFloat() + 0.15d, yCoord + 0.69d, zCoord + 0.8d * worldObj.rand.nextFloat() + 0.15d, 0.0d, 0.0d, 0.0d, icon);
 				Minecraft.getMinecraft().effectRenderer.addEffect(dust);
 			}
 		}
@@ -197,6 +186,22 @@ public abstract class AbstractSieveTile extends TileEntity {
 
 	public ItemStack getMesh() {
 		return mesh;
+	}
+
+	public Block getContent() {
+		return content;
+	}
+
+	public int getContentMeta() {
+		return contentMeta;
+	}
+	
+	public SieveRegistry getRegistry() {
+		return registry;
+	}
+
+	public List<ItemStack> getRewards() {
+		return registry.getResult(content);
 	}
 
 	@Override
@@ -250,7 +255,6 @@ public abstract class AbstractSieveTile extends TileEntity {
 	public Packet getDescriptionPacket() {
 		NBTTagCompound tag = new NBTTagCompound();
 		this.writeToNBT(tag);
-
 		return new S35PacketUpdateTileEntity(this.xCoord, this.yCoord, this.zCoord, this.blockMetadata, tag);
 	}
 
@@ -259,5 +263,4 @@ public abstract class AbstractSieveTile extends TileEntity {
 		NBTTagCompound tag = pkt.func_148857_g();
 		this.readFromNBT(tag);
 	}
-
 }

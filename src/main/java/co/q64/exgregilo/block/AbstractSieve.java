@@ -18,11 +18,12 @@ import co.q64.exgregilo.link.gregtech.GregTech;
 import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
 import co.q64.exgregilo.tile.AbstractSieveTile;
 import co.q64.exgregilo.tile.AbstractSieveTile.SieveMode;
-import exnihilo.registries.SieveRegistry;
+import co.q64.exgregilo.util.SieveRegistry;
 
 @Singleton
 public abstract class AbstractSieve extends BlockContainer {
 	private @Inject GregTech gt;
+	private @Inject SieveRegistry registry;
 
 	public AbstractSieve() {
 		super(Material.rock);
@@ -80,8 +81,8 @@ public abstract class AbstractSieve extends BlockContainer {
 				return true;
 			}
 			if (sieve.getMesh() != null) {
-				if (SieveRegistry.registered(Block.getBlockFromItem(held.getItem()), held.getItemDamage())) {
-					sieve.addSievable(Block.getBlockFromItem(held.getItem()), held.getItemDamage());
+				if (registry.siftable(Block.getBlockFromItem(held.getItem()))) {
+					sieve.addSievable(registry, Block.getBlockFromItem(held.getItem()), held.getItemDamage());
 					removeCurrentItem(player);
 				}
 			}
@@ -103,7 +104,7 @@ public abstract class AbstractSieve extends BlockContainer {
 		return true;
 	}
 
-	private boolean isHuman(EntityPlayer player) {
+	protected boolean isHuman(EntityPlayer player) {
 		boolean isHuman = (player instanceof EntityPlayerMP);
 		if (player.toString().contains("CoFH")) {
 			isHuman = false;
@@ -111,7 +112,7 @@ public abstract class AbstractSieve extends BlockContainer {
 		return isHuman;
 	}
 
-	private void removeCurrentItem(EntityPlayer player) {
+	protected void removeCurrentItem(EntityPlayer player) {
 		ItemStack item = player.getCurrentEquippedItem();
 		if (!player.capabilities.isCreativeMode) {
 			item.stackSize -= 1;

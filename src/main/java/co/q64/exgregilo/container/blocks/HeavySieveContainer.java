@@ -8,17 +8,17 @@ import javax.inject.Singleton;
 
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
-import co.q64.exgregilo.api.binders.ModDataBinders.AdvancedSieveBlockName;
+import co.q64.exgregilo.api.binders.ModDataBinders.HeavySieveBlockName;
 import co.q64.exgregilo.api.link.LinkBase;
-import co.q64.exgregilo.block.AdvancedSieve;
-import co.q64.exgregilo.block.AdvancedSieveItemBlock;
+import co.q64.exgregilo.block.HeavySieve;
+import co.q64.exgregilo.block.HeavySieveItemBlock;
 import co.q64.exgregilo.container.GregiloBlockContainer;
 import co.q64.exgregilo.link.gregtech.GregTech;
 
 @Singleton
-public class AdvancedSieveContainer extends GregiloBlockContainer {
-	private @Inject Provider<AdvancedSieve> provider;
-	private @Inject @AdvancedSieveBlockName String name;
+public class HeavySieveContainer extends GregiloBlockContainer {
+	private @Inject Provider<HeavySieve> provider;
+	private @Inject @HeavySieveBlockName String name;
 
 	@Override
 	public Provider<? extends Block> getBlockProvider() {
@@ -32,7 +32,7 @@ public class AdvancedSieveContainer extends GregiloBlockContainer {
 
 	@Override
 	public Class<? extends ItemBlock> getItemBlock() {
-		return AdvancedSieveItemBlock.class;
+		return HeavySieveItemBlock.class;
 	}
 
 	@Override

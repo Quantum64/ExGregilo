@@ -20,7 +20,7 @@ import co.q64.exgregilo.link.gregtech.render.ItemTextures;
 import co.q64.exgregilo.link.nei.NEI;
 
 @Singleton
-public class WireMesh extends CustomMetaTool {
+public class AdvancedMesh extends CustomMetaTool {
 	public static final int MAX_SPEED = 14;
 
 	private @Inject LinkManager linkManager;

@@ -17,12 +17,16 @@ public interface ModDataPool {
 	public static final String ADVANCED_SIEVE_TEX = "advanced_sieve.png";
 	public static final String ADVANCED_SIEVE_MESH = "sieve_mesh";
 
+	public static final String HEAVY_SIEVE_BLOCK_NAME = "heavy_sieve";
+	public static final String HEAVY_SIEVE_TEX = "heavy_sieve.png";
+	public static final String HEAVY_SIEVE_MESH = "sieve_mesh";
+
 	public static final String GEM_SAND_BLOCK_NAME = "gem_sand";
 	public static final String GEM_SAND_TEX = "gem_sand";
-	
+
 	public static final String DUST_BLOCK_NAME = "dust";
 	public static final String DUST_TEX = "dust";
-	
+
 	public static final String COMPRESSED_BLOCK_NAME = "compressed";
 	public static final String COMPRESSED_TEX = "compressed";
 	public static final String COMPRESSED_GRAVEL_TYPE = "Gravel";
