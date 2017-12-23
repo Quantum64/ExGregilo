@@ -85,21 +85,21 @@ public class HeavySieve extends AbstractSieve {
 			if (sieve.getMesh() != null) {
 				for (ItemStack is : OreDictionary.getOres("compressedGravel1x")) {
 					if (is.getItem() == held.getItem() && is.getItemDamage() == held.getItemDamage()) {
-						sieve.addSievable(registry, Blocks.gravel, 0);
+						sieve.addSievable(Blocks.gravel, 0);
 						removeCurrentItem(player);
 						break;
 					}
 				}
 				for (ItemStack is : OreDictionary.getOres("compressedSand1x")) {
 					if (is.getItem() == held.getItem() && is.getItemDamage() == held.getItemDamage()) {
-						sieve.addSievable(registry, Blocks.sand, 0);
+						sieve.addSievable(Blocks.sand, 0);
 						removeCurrentItem(player);
 						break;
 					}
 				}
 				for (ItemStack is : OreDictionary.getOres("compressedDust1x")) {
 					if (is.getItem() == held.getItem() && is.getItemDamage() == held.getItemDamage()) {
-						sieve.addSievable(registry, dust, 0);
+						sieve.addSievable(dust, 0);
 						removeCurrentItem(player);
 						break;
 					}
@@ -111,11 +111,11 @@ public class HeavySieve extends AbstractSieve {
 				return true;
 			}
 			if (world.isRemote) {
-				sieve.processContents(false);
+				sieve.processContents(registry, false);
 			} else {
 				if (sieve.mode != SieveMode.EMPTY) {
 					if (isHuman(player)) {
-						sieve.processContents(false);
+						sieve.processContents(registry, false);
 					}
 				}
 			}

@@ -51,8 +51,7 @@ public abstract class AbstractSieveTile extends TileEntity {
 		mode = SieveMode.EMPTY;
 	}
 
-	public void addSievable(SieveRegistry registry, Block block, int blockMeta) {
-		this.registry = registry;
+	public void addSievable(Block block, int blockMeta) {
 		this.content = block;
 		this.contentMeta = blockMeta;
 		this.mode = SieveMode.FILLED;
@@ -100,7 +99,8 @@ public abstract class AbstractSieveTile extends TileEntity {
 		}
 	}
 
-	public void processContents(boolean creative) {
+	public void processContents(SieveRegistry registry, boolean creative) {
+		this.registry = registry;
 		if (creative) {
 			volume = 0;
 		} else {
@@ -195,7 +195,7 @@ public abstract class AbstractSieveTile extends TileEntity {
 	public int getContentMeta() {
 		return contentMeta;
 	}
-	
+
 	public SieveRegistry getRegistry() {
 		return registry;
 	}

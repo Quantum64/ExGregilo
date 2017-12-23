@@ -82,7 +82,7 @@ public abstract class AbstractSieve extends BlockContainer {
 			}
 			if (sieve.getMesh() != null) {
 				if (registry.siftable(Block.getBlockFromItem(held.getItem()))) {
-					sieve.addSievable(registry, Block.getBlockFromItem(held.getItem()), held.getItemDamage());
+					sieve.addSievable(Block.getBlockFromItem(held.getItem()), held.getItemDamage());
 					removeCurrentItem(player);
 				}
 			}
@@ -92,11 +92,11 @@ public abstract class AbstractSieve extends BlockContainer {
 				return true;
 			}
 			if (world.isRemote) {
-				sieve.processContents(false);
+				sieve.processContents(registry, false);
 			} else {
 				if (sieve.mode != SieveMode.EMPTY) {
 					if (isHuman(player)) {
-						sieve.processContents(false);
+						sieve.processContents(registry, false);
 					}
 				}
 			}
