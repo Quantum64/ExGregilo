@@ -32,4 +32,6 @@ public interface ModDataPool {
 	public static final String COMPRESSED_GRAVEL_TYPE = "Gravel";
 	public static final String COMPRESSED_SAND_TYPE = "Sand";
 	public static final String COMPRESSED_DUST_TYPE = "Dust";
+
+	public static final String GREG_CRUCIBLE_BLOCK_NAME = "greg_crucible";
 }

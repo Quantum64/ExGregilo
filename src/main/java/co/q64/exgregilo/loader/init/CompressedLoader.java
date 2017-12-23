@@ -57,7 +57,7 @@ public class CompressedLoader implements InitLoader {
 					GameRegistry.addShapelessRecipe(new ItemStack(entry.getValue(), 9), new ItemStack(entry.getKey(), 1, 0));
 					if (gt) {
 						linkManager.getLink(GregTech.class).addCompressorRecipe(new ItemStack(entry.getValue(), 9, 0), new ItemStack(entry.getKey(), 1, i), 100, 10);
-						linkManager.getLink(GregTech.class).addExtractorRecipe(new ItemStack(entry.getKey(), 1, 0), new ItemStack(entry.getValue(), 9, 0), 100, 10);
+						linkManager.getLink(GregTech.class).addCuttingRecipe(new ItemStack(entry.getKey(), 1, 0), new ItemStack(entry.getValue(), 9, 0), 100, 10);
 					}
 				} else if (i < 4 || !gt) {
 					GameRegistry.addShapedRecipe(new ItemStack(entry.getKey(), 1, i), "BBB", "BBB", "BBB", Character.valueOf('B'), new ItemStack(entry.getKey(), 1, i - 1));
@@ -65,7 +65,7 @@ public class CompressedLoader implements InitLoader {
 				}
 				if (i > 0 && gt) {
 					linkManager.getLink(GregTech.class).addCompressorRecipe(new ItemStack(entry.getKey(), 9, i - 1), new ItemStack(entry.getKey(), 1, i), 100, 10);
-					linkManager.getLink(GregTech.class).addExtractorRecipe(new ItemStack(entry.getKey(), 1, 0), new ItemStack(entry.getKey(), 9, i - 1), 100, 10);
+					linkManager.getLink(GregTech.class).addCuttingRecipe(new ItemStack(entry.getKey(), 1, 0), new ItemStack(entry.getKey(), 9, i - 1), 100, 10);
 				}
 			}
 		}

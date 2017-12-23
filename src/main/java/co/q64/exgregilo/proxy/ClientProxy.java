@@ -14,6 +14,8 @@ import net.minecraftforge.common.MinecraftForge;
 import scala.util.Random;
 import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.container.blocks.AdvancedSieveContainer;
+import co.q64.exgregilo.link.exnihilo.ExNihilo;
+import co.q64.exgregilo.link.exnihilo.render.ExNihiloRenderSetupHelper;
 import co.q64.exgregilo.link.gregtech.GregTech;
 import co.q64.exgregilo.render.SieveRenderSetupHelper;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
@@ -25,6 +27,7 @@ public class ClientProxy extends CommonProxy {
 	private @Inject LinkManager linkManager;
 	private @Inject AdvancedSieveContainer asc;
 	private @Inject Provider<SieveRenderSetupHelper> ascRenderSetupHelper;
+	private @Inject Provider<ExNihiloRenderSetupHelper> enRenderSetupHelper;
 
 	private List<String> splashes = new ArrayList<String>();
 	private Random r = new Random();
@@ -37,6 +40,9 @@ public class ClientProxy extends CommonProxy {
 		}
 		if (asc.isRegistered()) {
 			ascRenderSetupHelper.get().setup();
+		}
+		if (linkManager.isEnabled(ExNihilo.class)) {
+			enRenderSetupHelper.get().setup();
 		}
 	}
 

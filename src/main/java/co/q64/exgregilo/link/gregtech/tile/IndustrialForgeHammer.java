@@ -1,18 +1,14 @@
 package co.q64.exgregilo.link.gregtech.tile;
 
 import gregtech.api.GregTech_API;
-import gregtech.api.enums.GT_Values;
 import gregtech.api.interfaces.ITexture;
 import gregtech.api.interfaces.tileentity.IGregTechTileEntity;
 import gregtech.api.metatileentity.MetaTileEntity;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_BasicMachine;
 import gregtech.api.metatileentity.implementations.GT_MetaTileEntity_BasicMachine_GT_Recipe.X;
 import gregtech.api.objects.GT_RenderedTexture;
-import gregtech.api.util.GT_Recipe;
 import gregtech.api.util.GT_Recipe.GT_Recipe_Map;
 import gregtech.api.util.GT_Utility;
-import net.minecraft.item.ItemStack;
-import net.minecraftforge.fluids.FluidStack;
 import co.q64.exgregilo.link.gregtech.crafting.MachineRecipeHelper;
 import co.q64.exgregilo.link.gregtech.recipe.IndustrialForgeHammerRecipes;
 import co.q64.exgregilo.link.gregtech.render.BlockTextures;
@@ -58,6 +54,7 @@ public class IndustrialForgeHammer extends GT_MetaTileEntity_BasicMachine {
 		return new IndustrialForgeHammer(mName, mTier, mDescription, mTextures, mGUIName, mNEIName, map);
 	}
 
+	/*
 	@Override
 	public int checkRecipe() {
 		GT_Recipe_Map tMap = getRecipeList();
@@ -69,12 +66,6 @@ public class IndustrialForgeHammer extends GT_MetaTileEntity_BasicMachine {
 			return DID_NOT_FIND_RECIPE;
 		if (tRecipe.mCanBeBuffered)
 			mLastRecipe = tRecipe;
-		/*
-		if (!canOutput(tRecipe)) {
-			mOutputBlocked++;
-			return FOUND_RECIPE_BUT_DID_NOT_MEET_REQUIREMENTS;
-		}
-		*/
 		if (!tRecipe.isRecipeInputEqual(true, new FluidStack[] { getFillableStack() }, getAllInputs())) {
 			return FOUND_RECIPE_BUT_DID_NOT_MEET_REQUIREMENTS;
 		}
@@ -105,6 +96,7 @@ public class IndustrialForgeHammer extends GT_MetaTileEntity_BasicMachine {
 		mEUt = 4 * (1 << (mTier - 1)) * (1 << (mTier - 1));
 		return FOUND_AND_SUCCESSFULLY_USED_RECIPE;
 	}
+	*/
 
 	@Override
 	public GT_Recipe_Map getRecipeList() {

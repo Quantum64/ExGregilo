@@ -6,6 +6,7 @@ import gregtech.api.enums.OrePrefixes;
 import gregtech.api.enums.SubTag;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_OreDictUnificator;
+import gregtech.common.items.GT_MetaGenerated_Tool_01;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -21,6 +22,7 @@ import net.minecraft.block.Block;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fluids.FluidStack;
 import net.minecraftforge.oredict.OreDictionary;
 
@@ -43,12 +45,15 @@ import co.q64.exgregilo.link.gregtech.crafting.OreDictAddons;
 import co.q64.exgregilo.link.gregtech.item.ItemList;
 import co.q64.exgregilo.link.gregtech.recipe.AutoSieveRecipes;
 import co.q64.exgregilo.link.gregtech.recipe.CompressedHammerRecipes;
+import co.q64.exgregilo.link.gregtech.recipe.ElectricCrucibleRecipes;
 import co.q64.exgregilo.link.gregtech.recipe.GemExtractorRecipes;
 import co.q64.exgregilo.link.gregtech.recipe.IndustrialForgeHammerRecipes;
 import co.q64.exgregilo.link.gregtech.tile.AutoSieve;
+import co.q64.exgregilo.link.gregtech.tile.ElectricCrucible;
 import co.q64.exgregilo.link.gregtech.tile.GemExtractor;
 import co.q64.exgregilo.link.gregtech.tile.IndustrialForgeHammer;
 import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
+import co.q64.exgregilo.link.nei.NEI;
 import co.q64.exgregilo.util.SieveRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -67,6 +72,7 @@ public class GregTech extends LinkBase {
 	private @Inject GemExtractorRecipes ger;
 	private @Inject CompressedHammerRecipes chr;
 	private @Inject IndustrialForgeHammerRecipes ihr;
+	private @Inject ElectricCrucibleRecipes ecr;
 
 	private @Inject GemShards gemShards;
 	private @Inject GemSand gemSand;
@@ -81,6 +87,16 @@ public class GregTech extends LinkBase {
 
 	@Override
 	public void preloadLink() {
+		GT_ModHandler.addCraftingRecipe(GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(GT_MetaGenerated_Tool_01.HARDHAMMER, 1, Materials.Stone, Materials.Iron.mHandleMaterial, null), GT_ModHandler.RecipeBits.DO_NOT_CHECK_FOR_COLLISIONS | GT_ModHandler.RecipeBits.BUFFERED, new Object[] { "XX ", "XXS", "XX ", 'X', OrePrefixes.block.get(Materials.Cobblestone), 'S', OrePrefixes.stick.get(Materials.Iron.mHandleMaterial) });
+		GT_ModHandler.addCraftingRecipe(GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(GT_MetaGenerated_Tool_01.HARDHAMMER, 1, Materials.Diamond, Materials.Iron.mHandleMaterial, null), GT_ModHandler.RecipeBits.DO_NOT_CHECK_FOR_COLLISIONS | GT_ModHandler.RecipeBits.BUFFERED, new Object[] { "XX ", "XXS", "XX ", 'X', OrePrefixes.gem.get(Materials.Diamond), 'S', OrePrefixes.stick.get(Materials.Iron.mHandleMaterial) });
+		if (linkManager.isEnabled(NEI.class)) {
+			NEI nei = linkManager.getLink(NEI.class);
+			nei.addItemVariant(GT_MetaGenerated_Tool_01.INSTANCE, GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(GT_MetaGenerated_Tool_01.HARDHAMMER, 1, Materials.Stone, Materials.Stone.mHandleMaterial, null));
+			nei.addItemVariant(GT_MetaGenerated_Tool_01.INSTANCE, GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(GT_MetaGenerated_Tool_01.HARDHAMMER, 1, Materials.Iron, Materials.Iron.mHandleMaterial, null));
+			nei.addItemVariant(GT_MetaGenerated_Tool_01.INSTANCE, GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(GT_MetaGenerated_Tool_01.HARDHAMMER, 1, Materials.Gold, Materials.Gold.mHandleMaterial, null));
+			nei.addItemVariant(GT_MetaGenerated_Tool_01.INSTANCE, GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(GT_MetaGenerated_Tool_01.HARDHAMMER, 1, Materials.Diamond, Materials.Iron.mHandleMaterial, null));
+		}
+
 		tools.addCrafting();
 
 		if (linkManager.isEnabled(ExNihilo.class)) {
@@ -115,6 +131,15 @@ public class GregTech extends LinkBase {
 		ItemList.INDUSTRIAL_HAMMER_LuV.set(new IndustrialForgeHammer(id(25), "basicmachine.industrialhammer.tier.06", "Advanced Industrial Forge Hammer V", 6, helper, ihr).getStackForm(1L));
 		ItemList.INDUSTRIAL_HAMMER_ZPM.set(new IndustrialForgeHammer(id(26), "basicmachine.industrialhammer.tier.07", "Advanced Industrial Forge Hammer VI", 7, helper, ihr).getStackForm(1L));
 		ItemList.INDUSTRIAL_HAMMER_UV.set(new IndustrialForgeHammer(id(27), "basicmachine.industrialhammer.tier.08", "Advanced Industrial Forge Hammer VII", 8, helper, ihr).getStackForm(1L));
+
+		ItemList.ELECTRIC_CRUCIBLE_LV.set(new ElectricCrucible(id(30), "basicmachine.electriccrucible.tier.01", "Electric Crucible", 1, helper, ecr).getStackForm(1L));
+		ItemList.ELECTRIC_CRUCIBLE_MV.set(new ElectricCrucible(id(31), "basicmachine.electriccrucible.tier.02", "Advanced Electric Crucible", 2, helper, ecr).getStackForm(1L));
+		ItemList.ELECTRIC_CRUCIBLE_HV.set(new ElectricCrucible(id(32), "basicmachine.electriccrucible.tier.03", "Advanced Electric Crucible II", 3, helper, ecr).getStackForm(1L));
+		ItemList.ELECTRIC_CRUCIBLE_EV.set(new ElectricCrucible(id(33), "basicmachine.electriccrucible.tier.04", "Advanced Electric Crucible III", 4, helper, ecr).getStackForm(1L));
+		ItemList.ELECTRIC_CRUCIBLE_IV.set(new ElectricCrucible(id(34), "basicmachine.electriccrucible.tier.05", "Advanced Electric Crucible IV", 5, helper, ecr).getStackForm(1L));
+		ItemList.ELECTRIC_CRUCIBLE_LuV.set(new ElectricCrucible(id(35), "basicmachine.electriccrucible.tier.06", "Advanced Electric Crucible V", 6, helper, ecr).getStackForm(1L));
+		ItemList.ELECTRIC_CRUCIBLE_ZPM.set(new ElectricCrucible(id(36), "basicmachine.electriccrucible.tier.07", "Advanced Electric Crucible VI", 7, helper, ecr).getStackForm(1L));
+		ItemList.ELECTRIC_CRUCIBLE_UV.set(new ElectricCrucible(id(37), "basicmachine.electriccrucible.tier.08", "Advanced Electric Crucible VII", 8, helper, ecr).getStackForm(1L));
 	}
 
 	@Override
@@ -325,10 +350,10 @@ public class GregTech extends LinkBase {
 		// Basic sieve
 		GameRegistry.addRecipe(new ItemStack(basicSieve, 1), new Object[]{
 		"   ", 
-		"RGR", 
-		"R R", 
-		Character.valueOf('G'), GT_OreDictUnificator.get(OrePrefixes.gear, Materials.Wood, 1), 
-		Character.valueOf('R'), GT_OreDictUnificator.get(OrePrefixes.stickLong, Materials.Wood, 1)});
+		"LML", 
+		"L L", 
+		Character.valueOf('M'), getTools().getToolWithStats(MetaGeneratedTools.BASIC_MESH_ID, 1, Materials.Wood, Materials.Wood, null), 
+		Character.valueOf('L'), new ItemStack(Blocks.log)});
 		
 		// Gem sand (replace with mixer recipe?)
 		GameRegistry.addShapelessRecipe(new ItemStack(gemSand), 
@@ -341,6 +366,12 @@ public class GregTech extends LinkBase {
 			ItemStack sand = new ItemStack(Blocks.sand);
 			GT_Values.RA.addForgeHammerRecipe(sand, dust, 16, 10);
 		}
+
+		// Electric crucible
+		ecr.addRecipe(false, new ItemStack[] { (new ItemStack(Blocks.stone)) }, new ItemStack[0], null, new int[0], new FluidStack[0], new FluidStack[] { new FluidStack(FluidRegistry.LAVA, 250) }, 2048, 32, 0);
+		ecr.addRecipe(false, new ItemStack[] { (new ItemStack(Blocks.cobblestone)) }, new ItemStack[0], null, new int[0], new FluidStack[0], new FluidStack[] { new FluidStack(FluidRegistry.LAVA, 250) }, 2048, 32, 0);
+		ecr.addRecipe(false, new ItemStack[] { (new ItemStack(Blocks.gravel)) }, new ItemStack[0], null, new int[0], new FluidStack[0], new FluidStack[] { new FluidStack(FluidRegistry.LAVA, 250) }, 2048, 32, 0);
+		ecr.addRecipe(false, new ItemStack[] { (new ItemStack(Blocks.netherrack)) }, new ItemStack[0], null, new int[0], new FluidStack[0], new FluidStack[] { new FluidStack(FluidRegistry.LAVA, 1000) }, 2048, 32, 0);
 	}
 
 	@Override
@@ -405,14 +436,15 @@ public class GregTech extends LinkBase {
 
 	public void removeRecipe(ItemStack output) {
 		GT_ModHandler.removeRecipeByOutput(output);
+		GT_ModHandler.removeFurnaceSmelting(output);
 	}
 
 	public void addCompressorRecipe(ItemStack in, ItemStack out, int time, int eu) {
 		GT_Values.RA.addCompressorRecipe(in, out, time, eu);
 	}
 
-	public void addExtractorRecipe(ItemStack in, ItemStack out, int time, int eu) {
-		GT_Values.RA.addExtractorRecipe(in, out, time, eu);
+	public void addCuttingRecipe(ItemStack in, ItemStack out, int time, int eu) {
+		GT_Values.RA.addCutterRecipe(in, out, null, time, eu);
 	}
 
 	public Map<ItemStack, Integer> getSubMap(Block block) {

@@ -38,5 +38,7 @@ public interface ModDataBinders {
 	public static @Target({ ElementType.FIELD, ElementType.PARAMETER }) @Retention(RUNTIME) @BindingAnnotation  @interface CompressedGravelType {}
 	public static @Target({ ElementType.FIELD, ElementType.PARAMETER }) @Retention(RUNTIME) @BindingAnnotation  @interface CompressedSandType {}
 	public static @Target({ ElementType.FIELD, ElementType.PARAMETER }) @Retention(RUNTIME) @BindingAnnotation  @interface CompressedDustType {}
+	
+	public static @Target({ ElementType.FIELD, ElementType.PARAMETER }) @Retention(RUNTIME) @BindingAnnotation  @interface GregCrucibleBlockName {}
 	//formatter:on
 }

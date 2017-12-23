@@ -27,6 +27,7 @@ import co.q64.exgregilo.api.binders.ModDataBinders.DustBlockName;
 import co.q64.exgregilo.api.binders.ModDataBinders.DustTex;
 import co.q64.exgregilo.api.binders.ModDataBinders.GemSandBlockName;
 import co.q64.exgregilo.api.binders.ModDataBinders.GemSandTex;
+import co.q64.exgregilo.api.binders.ModDataBinders.GregCrucibleBlockName;
 import co.q64.exgregilo.api.binders.ModDataBinders.GtGUITexPath;
 import co.q64.exgregilo.api.binders.ModDataBinders.HeavySieveBlockName;
 import co.q64.exgregilo.api.binders.ModDataBinders.HeavySieveMesh;
@@ -57,6 +58,7 @@ import co.q64.exgregilo.link.dreamcraft.DreamCraft;
 import co.q64.exgregilo.link.exastris.ExAstris;
 import co.q64.exgregilo.link.excompressum.ExCompressum;
 import co.q64.exgregilo.link.exnihilo.ExNihilo;
+import co.q64.exgregilo.link.exnihilo.container.GregCrucibleContainer;
 import co.q64.exgregilo.link.gregtech.GregTech;
 import co.q64.exgregilo.link.minetweaker.MineTweaker;
 import co.q64.exgregilo.link.nei.NEI;
@@ -109,6 +111,7 @@ public class DefaultGregiloModule extends ExGregiloModule {
 		blocks.addBinding().to(CompressedDustContainer.class);
 		blocks.addBinding().to(DustContainer.class);
 		blocks.addBinding().to(HeavySieveContainer.class);
+		blocks.addBinding().to(GregCrucibleContainer.class);
 
 		Multibinder<SieveRenderPackage> sieveRenderPacks = Multibinder.newSetBinder(binder(), SieveRenderPackage.class);
 		sieveRenderPacks.addBinding().to(BasicSieveRenderPackage.class);
@@ -142,8 +145,8 @@ public class DefaultGregiloModule extends ExGregiloModule {
 
 		bindConstant().annotatedWith(BasicSieveBlockName.class).to(ModDataPool.BASIC_SIEVE_BLOCK_NAME);
 		bindConstant().annotatedWith(BasicSieveMesh.class).to(ModDataPool.BASIC_SIEVE_MESH);
-		bindConstant().annotatedWith(BasicSieveTex.class).to(ModDataPool.BASIC_SIEVE_TEX);	
-		
+		bindConstant().annotatedWith(BasicSieveTex.class).to(ModDataPool.BASIC_SIEVE_TEX);
+
 		bindConstant().annotatedWith(HeavySieveBlockName.class).to(ModDataPool.HEAVY_SIEVE_BLOCK_NAME);
 		bindConstant().annotatedWith(HeavySieveMesh.class).to(ModDataPool.HEAVY_SIEVE_MESH);
 		bindConstant().annotatedWith(HeavySieveTex.class).to(ModDataPool.HEAVY_SIEVE_TEX);
@@ -159,5 +162,7 @@ public class DefaultGregiloModule extends ExGregiloModule {
 		bindConstant().annotatedWith(CompressedGravelType.class).to(ModDataPool.COMPRESSED_GRAVEL_TYPE);
 		bindConstant().annotatedWith(CompressedSandType.class).to(ModDataPool.COMPRESSED_SAND_TYPE);
 		bindConstant().annotatedWith(CompressedDustType.class).to(ModDataPool.COMPRESSED_DUST_TYPE);
+
+		bindConstant().annotatedWith(GregCrucibleBlockName.class).to(ModDataPool.GREG_CRUCIBLE_BLOCK_NAME);
 	}
 }
