@@ -6,6 +6,7 @@ import java.util.List;
 
 import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
+import net.minecraft.enchantment.Enchantment;
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -201,7 +202,20 @@ public abstract class AbstractSieveTile extends TileEntity {
 	}
 
 	public List<ItemStack> getRewards() {
-		return registry.getResult(content);
+		return registry.getResult(content, getLuck());
+	}
+
+	public int getLuck() {
+		if (getMesh() == null || getMesh().getEnchantmentTagList() == null) {
+			return 0;
+		}
+		for (int i = 0; i < getMesh().getEnchantmentTagList().tagCount(); i++) {
+			NBTTagCompound tag = getMesh().getEnchantmentTagList().getCompoundTagAt(i);
+			if (tag.getShort("id") == Enchantment.fortune.effectId) {
+				return tag.getShort("lvl");
+			}
+		}
+		return 0;
 	}
 
 	@Override

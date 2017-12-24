@@ -7,6 +7,7 @@ import gregtech.api.interfaces.IIconContainer;
 import gregtech.api.items.GT_MetaGenerated_Tool;
 import gregtech.api.util.GT_ModHandler;
 import gregtech.api.util.GT_Recipe;
+import gregtech.api.util.GT_Recipe.GT_Recipe_Map;
 import gregtech.api.util.GT_Utility;
 import gregtech.common.items.GT_MetaGenerated_Tool_01;
 import gregtech.common.items.behaviors.Behaviour_Prospecting;
@@ -30,6 +31,7 @@ import net.minecraftforge.event.world.BlockEvent;
 import co.q64.exgregilo.api.link.LinkManager;
 import co.q64.exgregilo.link.gregtech.GregTech;
 import co.q64.exgregilo.link.gregtech.recipe.CompressedHammerRecipes;
+import co.q64.exgregilo.link.gregtech.recipe.SilkHammerRecipes;
 import co.q64.exgregilo.link.gregtech.render.ItemTextures;
 import co.q64.exgregilo.link.nei.NEI;
 
@@ -39,6 +41,7 @@ public class CompressedHammer extends CustomMetaTool {
 
 	private @Inject LinkManager linkManager;
 	private @Inject CompressedHammerRecipes chr;
+	private @Inject SilkHammerRecipes shr;
 
 	public void addCrafting() {
 		boolean useNEI = linkManager.isEnabled(NEI.class);
@@ -144,11 +147,12 @@ public class CompressedHammer extends CustomMetaTool {
 	}
 
 	public int convertBlockDrops(List<ItemStack> aDrops, ItemStack aStack, EntityPlayer aPlayer, Block aBlock, int aX, int aY, int aZ, byte aMetaData, int aFortune, boolean aSilkTouch, BlockEvent.HarvestDropsEvent aEvent) {
+		GT_Recipe_Map target = aSilkTouch ? shr : chr;
 		int rConversions = 0;
-		GT_Recipe tRecipe = chr.findRecipe(null, true, 2147483647L, null, new ItemStack[] { new ItemStack(aBlock, 1, aMetaData) });
+		GT_Recipe tRecipe = target.findRecipe(null, true, 2147483647L, null, new ItemStack[] { new ItemStack(aBlock, 1, aMetaData) });
 		if ((tRecipe == null) || (aBlock.hasTileEntity(aMetaData))) {
 			for (ItemStack tDrop : aDrops) {
-				tRecipe = chr.findRecipe(null, true, 2147483647L, null, new ItemStack[] { GT_Utility.copyAmount(1L, new Object[] { tDrop }) });
+				tRecipe = target.findRecipe(null, true, 2147483647L, null, new ItemStack[] { GT_Utility.copyAmount(1L, new Object[] { tDrop }) });
 				if (tRecipe != null) {
 					ItemStack tHammeringOutput = tRecipe.getOutput(0);
 					if (tHammeringOutput != null) {

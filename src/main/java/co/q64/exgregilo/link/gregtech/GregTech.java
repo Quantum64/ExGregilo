@@ -48,6 +48,7 @@ import co.q64.exgregilo.link.gregtech.recipe.CompressedHammerRecipes;
 import co.q64.exgregilo.link.gregtech.recipe.ElectricCrucibleRecipes;
 import co.q64.exgregilo.link.gregtech.recipe.GemExtractorRecipes;
 import co.q64.exgregilo.link.gregtech.recipe.IndustrialForgeHammerRecipes;
+import co.q64.exgregilo.link.gregtech.recipe.SilkHammerRecipes;
 import co.q64.exgregilo.link.gregtech.tile.AutoSieve;
 import co.q64.exgregilo.link.gregtech.tile.ElectricCrucible;
 import co.q64.exgregilo.link.gregtech.tile.GemExtractor;
@@ -71,6 +72,7 @@ public class GregTech extends LinkBase {
 	private @Inject AutoSieveRecipes asr;
 	private @Inject GemExtractorRecipes ger;
 	private @Inject CompressedHammerRecipes chr;
+	private @Inject SilkHammerRecipes shr;
 	private @Inject IndustrialForgeHammerRecipes ihr;
 	private @Inject ElectricCrucibleRecipes ecr;
 
@@ -87,7 +89,7 @@ public class GregTech extends LinkBase {
 
 	@Override
 	public void preloadLink() {
-		GT_ModHandler.addCraftingRecipe(GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(GT_MetaGenerated_Tool_01.HARDHAMMER, 1, Materials.Stone, Materials.Iron.mHandleMaterial, null), GT_ModHandler.RecipeBits.DO_NOT_CHECK_FOR_COLLISIONS | GT_ModHandler.RecipeBits.BUFFERED, new Object[] { "XX ", "XXS", "XX ", 'X', OrePrefixes.block.get(Materials.Cobblestone), 'S', OrePrefixes.stick.get(Materials.Iron.mHandleMaterial) });
+		GT_ModHandler.addCraftingRecipe(GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(GT_MetaGenerated_Tool_01.HARDHAMMER, 1, Materials.Stone, Materials.Iron.mHandleMaterial, null), GT_ModHandler.RecipeBits.DO_NOT_CHECK_FOR_COLLISIONS | GT_ModHandler.RecipeBits.BUFFERED, new Object[] { "XX ", "XXS", "XX ", 'X', new ItemStack(Blocks.cobblestone), 'S', OrePrefixes.stick.get(Materials.Iron.mHandleMaterial) });
 		GT_ModHandler.addCraftingRecipe(GT_MetaGenerated_Tool_01.INSTANCE.getToolWithStats(GT_MetaGenerated_Tool_01.HARDHAMMER, 1, Materials.Diamond, Materials.Iron.mHandleMaterial, null), GT_ModHandler.RecipeBits.DO_NOT_CHECK_FOR_COLLISIONS | GT_ModHandler.RecipeBits.BUFFERED, new Object[] { "XX ", "XXS", "XX ", 'X', OrePrefixes.gem.get(Materials.Diamond), 'S', OrePrefixes.stick.get(Materials.Iron.mHandleMaterial) });
 		if (linkManager.isEnabled(NEI.class)) {
 			NEI nei = linkManager.getLink(NEI.class);
@@ -232,6 +234,13 @@ public class GregTech extends LinkBase {
 		addDust(GT_OreDictUnificator.get(OrePrefixes.dustTiny, Materials.Lithium, 1), 100);
 
 		//==========
+		//== Dirt ==
+		//==========
+		for (int i = 1; i <= 10; i += 2) {
+			addDirt(new ItemStack(Blocks.cobblestone), i);
+		}
+
+		//==========
 		//== Gems ==
 		//==========
 
@@ -295,6 +304,7 @@ public class GregTech extends LinkBase {
 			for (int s = 1; s < hammerTypes.size(); s++) {
 				for (int i = 1; i <= 8; i++) {
 					List<ItemStack> current = new ArrayList<ItemStack>(OreDictionary.getOres("compressed" + hammerTypes.get(s) + i + "x"));
+					List<ItemStack> previousSilk = new ArrayList<ItemStack>(OreDictionary.getOres("compressed" + hammerTypes.get(s - 1) + i + "x"));
 					List<ItemStack> previous = new ArrayList<ItemStack>(OreDictionary.getOres("compressed" + hammerTypes.get(s - 1) + (i - 1) + "x"));
 					if (i == 1) {
 						if (linkManager.isEnabled(ExCompressum.class)) {
@@ -323,6 +333,9 @@ public class GregTech extends LinkBase {
 							out = new ItemStack(out.getItem(), 9, out.getItemDamage());
 							chr.addRecipe(false, new ItemStack[] { in }, new ItemStack[] { out }, null, new int[] { 10000 }, new FluidStack[0], new FluidStack[0], 0, 0, 0);
 							ihr.addRecipe(false, new ItemStack[] { in }, new ItemStack[] { out }, null, new int[] { 10000 }, new FluidStack[0], new FluidStack[0], 128, 4, 0);
+						}
+						for (ItemStack out : previousSilk) {
+							shr.addRecipe(false, new ItemStack[] { in }, new ItemStack[] { out }, null, new int[] { 10000 }, new FluidStack[0], new FluidStack[0], 0, 0, 0);
 						}
 					}
 				}
@@ -385,6 +398,10 @@ public class GregTech extends LinkBase {
 
 	private void addSand(ItemStack is, int chance) {
 		sieveRegistry.getSubMap(Blocks.sand).put(is, chance);
+	}
+
+	private void addDirt(ItemStack is, int chance) {
+		sieveRegistry.getSubMap(Blocks.dirt).put(is, chance);
 	}
 
 	private void addDust(ItemStack is, int chance) {

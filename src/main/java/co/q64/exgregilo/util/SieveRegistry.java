@@ -31,18 +31,22 @@ public class SieveRegistry {
 		return map;
 	}
 
-	public List<ItemStack> getResult(Block block) {
+	public List<ItemStack> getResult(Block block, int luck) {
 		Map<ItemStack, Integer> map = sifting.get(block);
 		if (map == null) {
 			return Collections.emptyList();
 		}
 		List<ItemStack> result = new ArrayList<ItemStack>();
 		for (Entry<ItemStack, Integer> e : map.entrySet()) {
-			if (random.nextInt(e.getValue()) == 0) {
+			if (random.nextInt(e.getValue()) <= luck) {
 				result.add(e.getKey());
 			}
 		}
 		return result;
+	}
+
+	public List<ItemStack> getResult(Block block) {
+		return getResult(block, 0);
 	}
 
 	public Map<Block, Map<ItemStack, Integer>> getSiftingMap() {
