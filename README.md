@@ -114,6 +114,7 @@ Texture creation is the most valuable way that you can currently contribute. I h
 - [X] Gem shards - Could be improved with a more “GregTech Look”
 - [ ] Gem sand - Exists but I really hate this texture
 - [X] Compressed hammer GUI
+- [ ] Compressed silk hammer GUI - Currently the same as compressed hammer
 - [X] Advanced rendered sieve mesh - This is the actual texture rendered in the sieve block
 - [X] Basic rendered sieve mesh - Same is above, probably fine
 - [ ] Rendered heavy sieve mesh - I want this to look different, currently it’s the same
@@ -121,7 +122,7 @@ Texture creation is the most valuable way that you can currently contribute. I h
 
 
 ### Translations
-If you speak multiple languages, translating ExGregilo into another language is an appreciated contribution. Fork the repository and create a new file for your language [here](https://github.com/Quantum64/ExGregilo/tree/master/src/main/resources/assets/exgregilo/lang). If the file already exists, you can check if it needs to be updated with new entries. Copy or translate the entries from [here](https://github.com/Quantum64/ExGregilo/blob/master/src/main/resources/assets/exgregilo/lang/en_US.lang) into your language file. Check back from time to time for new entries that need to be translated. Once your changes are finished, submit a pull request so they can be included in the next release.
+If you speak multiple languages, translating ExGregilo into another language is an appreciated contribution. Fork the repository and create a new file for your language [here](https://github.com/Quantum64/ExGregilo/tree/master/src/main/resources/assets/exgregilo/lang). If the file already exists, you can check if it needs to be updated with new entries. Copy and translate the entries from [here](https://github.com/Quantum64/ExGregilo/blob/master/src/main/resources/assets/exgregilo/lang/en_US.lang) into your language file. Check back from time to time for new entries that need to be translated. Once your changes are finished, submit a pull request so they can be included in the next release.
 
 ### Programming
 
