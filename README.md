@@ -1,5 +1,6 @@
 # ExGregilo
-![Version](https://img.shields.io/badge/minecraft-1.7.10-orange.svg?style=for-the-badge) ![Gregtech](https://img.shields.io/badge/gregtech-5.09.31-red.svg?style=for-the-badge)
+![Version](https://img.shields.io/badge/minecraft-1.7.10-orange.svg?style=for-the-badge) 
+[![Gregtech](https://img.shields.io/badge/gregtech-5.09.31-red.svg?style=for-the-badge)](https://github.com/Blood-Asp/GT5-Unofficial)
 
 [![Build Status](https://travis-ci.org/Quantum64/ExGregilo.svg?branch=master)](https://travis-ci.org/Quantum64/ExGregilo) 
 [![Dev builds](https://img.shields.io/badge/download-dev-orange.svg)](https://github.com/Quantum64/ExGregilo/releases/latest)
