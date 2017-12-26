@@ -147,6 +147,6 @@ Although the programming style of this mod can be hard to wrap your head around,
 In accordance with the GPLv3 license, you can use this code for pretty much whatever. That means you have full permission to include this mod in an unmodified or modified form in your modpacks. Just remember that any distributed modified version (or any mod that uses any code from this mod) are required to be open source and state changes to comply with the GPLv3 license.
 
 ## Donate
-Programming takes a lot of effort and a lot of coffee. If you want to support the development of this mod, you can send Ethereum (ETH) or ERC20 tokens to this address: ```adf06b287a6571c7971ef65c2102d9fdd3907fd5```. The only thing you get from donating is the satisfaction of knowing that you contributed to the development of this mod. Any support is greatly appreciated.
+Programming takes a lot of effort and a lot of coffee. If you want to support the development of this mod, you can send Ethereum (ETH) or ERC20 tokens to this address: ```0xadf06b287a6571c7971ef65c2102d9fdd3907fd5```. The only thing you get from donating is the satisfaction of knowing that you contributed to the development of this mod. Any support is greatly appreciated.
 
 
