@@ -46,7 +46,7 @@ public class BasicMesh extends CustomMetaTool {
 
 	@Override
 	public float getBaseDamage() {
-		return 1.0f;
+		return 10.0f;
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class BasicMesh extends CustomMetaTool {
 
 	@Override
 	public float getMaxDurabilityMultiplier() {
-		return 0.01f;
+		return 0.1f;
 	}
 
 	@Override
