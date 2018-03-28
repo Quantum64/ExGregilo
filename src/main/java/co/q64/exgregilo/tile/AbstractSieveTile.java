@@ -129,7 +129,7 @@ public abstract class AbstractSieveTile extends TileEntity {
 				if (mesh != null) {
 					if (mesh.getItem() instanceof MetaGeneratedTools) {
 						MetaGeneratedTools tool = (MetaGeneratedTools) mesh.getItem();
-						tool.doDamage(mesh, 1);
+						tool.doDamage(mesh, 10);
 						if (MetaGeneratedTools.getToolMaxDamage(mesh) - MetaGeneratedTools.getToolDamage(mesh) <= 0) {
 							mesh = null;
 							update();
