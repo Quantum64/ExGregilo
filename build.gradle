@@ -78,13 +78,13 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 	
 	compile "exnihilo:Ex-Nihilo:1.38-53:deobf"
-    compile "railcraft:RailCraft_1.7.10:9.12.2.0"
     compile "codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev"
 	compile "com.enderio:EnderIO:1.7.10-2.3.0.417_beta:dev"
-	compile "co.q64.libs:ExAstris:1.7.10-1.16-36"
-	compile "co.q64.libs:ExCompressum:1.7.10-1.1.149"
-	compile "co.q64.libs:GregTech:5.09.31"
-	compile "co.q64.libs:MineTweaker:1.7.10-3.0.10B"
+    compile "railcraft:RailCraft_1.7.10:9.12.2.0"
+	compile "ex-astris:ExAstris-MC1.7.10:1.16-36"
+	compile "ex-compressum:excompressum-mc1.7.10:1.1.149"
+	compile "gregtech-5-unofficial:gregtech:5.09.31"
+	compile "minetweaker3:MineTweaker3:1.7.10-3.0.10B"
 	
 	embed "com.google:guice:q64"
 	embed "com.google:guice-multibindings:q64"
