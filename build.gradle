@@ -15,25 +15,10 @@ buildscript {
     }
 }
 
-apply plugin: 'forge'
-
-version = "1.1.0"
-group= "co.q64.exgregilo" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "exgregilo"
-
-minecraft {
-    version = "1.7.10-10.13.4.1558-1.7.10"
-    runDir = "eclipse"
-}
-
-configurations {
-    embed
-    compile.extendsFrom(embed)
-}
 
 repositories {
 	maven {
-        name 'curseforge'
+        name 'CurseForge'
         url "https://minecraft.curseforge.com/api/maven/"
 	}
     maven {
@@ -68,6 +53,22 @@ repositories {
     
 }
 
+apply plugin: 'forge'
+
+version = "1.1.0"
+group= "co.q64.exgregilo" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "exgregilo"
+
+minecraft {
+    version = "1.7.10-10.13.4.1558-1.7.10"
+    runDir = "eclipse"
+}
+
+configurations {
+    embed
+    compile.extendsFrom(embed)
+}
+
 dependencies {
     // you may put jars on which you depend on in ./libs
     // or you may define them like so..
@@ -86,10 +87,11 @@ dependencies {
     compile "railcraft:RailCraft_1.7.10:9.12.2.0"
     compile "codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev"
 	compile "com.enderio:EnderIO:1.7.10-2.3.0.417_beta:dev"
-	compile "ex-astris:ExAstris-MC1.7.10:1.16-36"
-	compile "ex-compressum:excompressum-mc1.7.10:1.1.149"
     compile "gregtech-5-unofficial:gregtech:5.09.31"
-	compile "minetweaker3:MineTweaker3:1.7.10-3.0.10B"
+    compile "co.q64.libs:ExAstris:1.7.10-1.16-36"
+	compile "co.q64.libs:ExCompressum:1.7.10-1.1.149"
+	compile "co.q64.libs:MineTweaker:1.7.10-3.0.10B"
+	
 	
 	embed "com.google:guice:q64"
 	embed "com.google:guice-multibindings:q64"
