@@ -8,13 +8,14 @@ import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.ResourceLocation;
-
 import org.lwjgl.opengl.GL11;
-
 import co.q64.exgregilo.tile.AbstractSieveTile;
 import co.q64.exgregilo.tile.AbstractSieveTile.SieveMode;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Singleton
+@SideOnly(Side.CLIENT)
 public abstract class AbstractSieveRender extends TileEntitySpecialRenderer {
 	private @Inject SieveModel model;
 	private @Inject SieveMeshModel mesh;
@@ -26,6 +27,7 @@ public abstract class AbstractSieveRender extends TileEntitySpecialRenderer {
 		renderMesh(tileentity, x, y, z, f);
 		renderContents(tileentity, x, y, z, f);
 	}
+
 
 	private void renderTable(TileEntity tileentity, double x, double y, double z, float f) {
 		GL11.glPushMatrix();

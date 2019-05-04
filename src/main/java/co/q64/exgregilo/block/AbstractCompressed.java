@@ -16,6 +16,8 @@ import co.q64.exgregilo.api.binders.ModDataBinders.CompressedBlockName;
 import co.q64.exgregilo.api.binders.ModDataBinders.CompressedTex;
 import co.q64.exgregilo.api.binders.ModDataBinders.DomainPath;
 import co.q64.exgregilo.api.binders.ModDataBinders.ModId;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Singleton
 public abstract class AbstractCompressed extends Block {
@@ -45,6 +47,7 @@ public abstract class AbstractCompressed extends Block {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister reg) {
 		for (int i = 0; i < 8; i++) {
 			this.icons[i] = reg.registerIcon(domain + tex + "_" + typeName.toLowerCase() + "_" + (i + 1) + "x");

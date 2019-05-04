@@ -8,8 +8,8 @@ import co.q64.exgregilo.block.AbstractSieve;
 import co.q64.exgregilo.block.BasicSieve;
 import co.q64.exgregilo.tile.AbstractSieveTile;
 import co.q64.exgregilo.tile.BasicSieveTile;
-
 @Singleton
+
 public class BasicSieveRenderPackage implements SieveRenderPackage {
 	private @Inject BasicSieve sieve;
 	private @Inject BasicSieveRender render;

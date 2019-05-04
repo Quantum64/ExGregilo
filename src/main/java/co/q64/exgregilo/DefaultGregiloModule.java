@@ -72,6 +72,7 @@ import cpw.mods.fml.common.LoaderState.ModState;
 import cpw.mods.fml.common.ModMetadata;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class DefaultGregiloModule extends ExGregiloModule {
 	private ExGregilo mod;
@@ -113,11 +114,15 @@ public class DefaultGregiloModule extends ExGregiloModule {
 		blocks.addBinding().to(HeavySieveContainer.class);
 		blocks.addBinding().to(GregCrucibleContainer.class);
 
+		
+		
 		Multibinder<SieveRenderPackage> sieveRenderPacks = Multibinder.newSetBinder(binder(), SieveRenderPackage.class);
+		 if(event.getSide()==Side.CLIENT) {
 		sieveRenderPacks.addBinding().to(BasicSieveRenderPackage.class);
 		sieveRenderPacks.addBinding().to(AdvancedSieveRenderPackage.class);
 		sieveRenderPacks.addBinding().to(HeavySieveRenderPackage.class);
-
+		 }
+		
 		Multibinder<InitLoader> loaders = Multibinder.newSetBinder(binder(), InitLoader.class);
 		loaders.addBinding().to(CompressedLoader.class);
 

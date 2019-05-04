@@ -15,31 +15,19 @@ buildscript {
     }
 }
 
-apply plugin: 'forge'
-
-version = "1.1.0"
-group= "co.q64.exgregilo" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "exgregilo"
-
-minecraft {
-    version = "1.7.10-10.13.4.1558-1.7.10"
-    runDir = "eclipse"
-}
-
-configurations {
-    embed
-    compile.extendsFrom(embed)
-}
 
 repositories {
+
+
+	maven {
+        name 'CurseForge'
+        url "https://minecraft.curseforge.com/api/maven/"
+	}
     maven {
         name 'tterrag'
         url 'http://maven.tterrag.com/'
     }
-	//maven {
-    //    name 'greg'
-    //    url 'http://files.minecraftforge.net/maven/'
-	//}
+
     maven { // This is needed to get my meta tools to compile
         name = "ic2, forestry"
         url = "http://maven.ic2.player.to/"
@@ -56,15 +44,36 @@ repositories {
         name 'tterrag Repo'
         url "http://maven.tterrag.com"
     }
-    ivy {
-        name 'Railcraft'
-        artifactPattern "http://addons-origin.cursecdn.com/files/2219/321/[module]_[revision].[ext]"
-    }
     maven { // The repo from which to get waila
         name "Mobius Repo"
         url "http://mobiusstrip.eu/maven"
     }
+	maven {
+	name 'guice'
+	url "https://github.com/Quantum64/ExGregilo/tree/gh-pages" 
+	}
+	ivy {
+        name "MineTweaker3"
+        artifactPattern "http://minetweaker3.powerofbytes.com/download/[module]-([classifier]-)[revision].[ext]"
+    }
+	
     
+}
+
+apply plugin: 'forge'
+
+version = "1.1.1"
+group= "co.q64.exgregilo" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+archivesBaseName = "exgregilo"
+
+minecraft {
+    version = "1.7.10-10.13.4.1558-1.7.10"
+    runDir = "eclipse"
+}
+
+configurations {
+    embed
+    compile.extendsFrom(embed)
 }
 
 dependencies {
@@ -81,15 +90,15 @@ dependencies {
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
 	
-	compile "exnihilo:Ex-Nihilo:1.38-53:deobf"
-    compile name: 'Railcraft', version: '1.7.10-9.4.0.0', ext: 'jar'
+    compile "exnihilo:Ex-Nihilo:1.38-53:deobf"
+    compile "railcraft:RailCraft_1.7.10:9.12.2.0"
     compile "codechicken:NotEnoughItems:1.7.10-1.0.5.120:dev"
 	compile "com.enderio:EnderIO:1.7.10-2.3.0.417_beta:dev"
-	compile "co.q64.libs:ExAstris:1.7.10-1.16-36"
+    compile "gregtech-5-unofficial:gregtech:5.09.31:dev"
+	compile "exastris:Ex-Astris:MC1.7.10-1.16-36"
+	//compile "excompressum:excompressum-mc1.7.10-1.1.149"
+	compile "minetweaker3:MineTweaker3:1.7.10-3.0.10B"
 	compile "co.q64.libs:ExCompressum:1.7.10-1.1.149"
-	compile "co.q64.libs:GregTech:5.09.31"
-	compile "co.q64.libs:MineTweaker:1.7.10-3.0.10B"
-	
 	embed "com.google:guice:q64"
 	embed "com.google:guice-multibindings:q64"
 }

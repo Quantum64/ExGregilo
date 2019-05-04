@@ -19,7 +19,8 @@ import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
 import co.q64.exgregilo.tile.AbstractSieveTile;
 import co.q64.exgregilo.tile.AbstractSieveTile.SieveMode;
 import co.q64.exgregilo.util.SieveRegistry;
-
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 @Singleton
 public abstract class AbstractSieve extends BlockContainer {
 	private @Inject GregTech gt;
@@ -32,6 +33,7 @@ public abstract class AbstractSieve extends BlockContainer {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
 		blockIcon = Blocks.planks.getIcon(0, 0);
 	}

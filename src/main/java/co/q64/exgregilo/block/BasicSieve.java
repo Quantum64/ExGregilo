@@ -15,6 +15,8 @@ import co.q64.exgregilo.api.binders.ModDataBinders.ModId;
 import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
 import co.q64.exgregilo.tile.BasicSieveTile;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Singleton
 public class BasicSieve extends AbstractSieve {
@@ -42,6 +44,7 @@ public class BasicSieve extends AbstractSieve {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
 		super.registerBlockIcons(register);
 		meshIcon = register.registerIcon(domainPath + mesh);
