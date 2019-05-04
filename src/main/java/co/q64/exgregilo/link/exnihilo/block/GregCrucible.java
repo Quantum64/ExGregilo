@@ -19,6 +19,9 @@ import co.q64.exgregilo.link.exnihilo.tile.GregCrucibleTile;
 import cpw.mods.fml.common.registry.GameRegistry;
 import exnihilo.ENBlocks;
 import exnihilo.blocks.tileentities.TileEntityCrucible;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
 
 @Singleton
 public class GregCrucible extends BlockContainer {
@@ -34,6 +37,7 @@ public class GregCrucible extends BlockContainer {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
 		blockIcon = Blocks.stone.getIcon(0, 0);
 	}

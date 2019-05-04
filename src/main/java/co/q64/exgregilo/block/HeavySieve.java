@@ -23,6 +23,8 @@ import co.q64.exgregilo.tile.AbstractSieveTile.SieveMode;
 import co.q64.exgregilo.tile.HeavySieveTile;
 import co.q64.exgregilo.util.SieveRegistry;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Singleton
 public class HeavySieve extends AbstractSieve {
@@ -53,6 +55,7 @@ public class HeavySieve extends AbstractSieve {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
 		super.registerBlockIcons(register);
 		meshIcon = register.registerIcon(domainPath + mesh);

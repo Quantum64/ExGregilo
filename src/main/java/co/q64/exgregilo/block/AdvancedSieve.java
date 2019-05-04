@@ -3,7 +3,6 @@ package co.q64.exgregilo.block;
 import javax.inject.Inject;
 import javax.inject.Provider;
 import javax.inject.Singleton;
-
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.IIcon;
@@ -15,6 +14,8 @@ import co.q64.exgregilo.api.binders.ModDataBinders.ModId;
 import co.q64.exgregilo.link.gregtech.tools.MetaGeneratedTools;
 import co.q64.exgregilo.tile.AdvancedSieveTile;
 import cpw.mods.fml.common.registry.GameRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 @Singleton
 public class AdvancedSieve extends AbstractSieve {
@@ -25,6 +26,7 @@ public class AdvancedSieve extends AbstractSieve {
 	private IIcon meshIcon;
 
 	@Inject
+
 	public AdvancedSieve(@ModId String modId, @AdvancedSieveBlockName String name) {
 		super();
 		setBlockName(modId + "." + name);
@@ -42,6 +44,7 @@ public class AdvancedSieve extends AbstractSieve {
 	}
 
 	@Override
+	@SideOnly(Side.CLIENT)
 	public void registerBlockIcons(IIconRegister register) {
 		super.registerBlockIcons(register);
 		meshIcon = register.registerIcon(domainPath + mesh);

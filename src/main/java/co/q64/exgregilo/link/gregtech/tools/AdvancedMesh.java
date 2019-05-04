@@ -35,11 +35,11 @@ public class AdvancedMesh extends CustomMetaTool {
 				"WWW", 
 				"WPW", 
 				"WWW", 
-				Character.valueOf('W'), OrePrefixes.wireGt01.get(material), 
+				Character.valueOf('W'), OrePrefixes.bolt.get(material), 
 				Character.valueOf('P'), OrePrefixes.plate.get(material)});
 				//formatter:on
 				if (added) {
-					GT_Values.RA.addAssemblerRecipe(GT_OreDictUnificator.get(OrePrefixes.wireGt01, material, 8), GT_OreDictUnificator.get(OrePrefixes.plate, material, 1), result, 400, 2);
+					GT_Values.RA.addAssemblerRecipe(GT_OreDictUnificator.get(OrePrefixes.bolt, material, 8), GT_OreDictUnificator.get(OrePrefixes.plate, material, 1), result, 400, 2);
 					if (useNEI) {
 						linkManager.getLink(NEI.class).addItemVariant(linkManager.getLink(GregTech.class).getTools(), result);
 					}

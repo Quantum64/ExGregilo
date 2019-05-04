@@ -8,7 +8,6 @@ import co.q64.exgregilo.block.AbstractSieve;
 import co.q64.exgregilo.block.HeavySieve;
 import co.q64.exgregilo.tile.AbstractSieveTile;
 import co.q64.exgregilo.tile.HeavySieveTile;
-
 @Singleton
 public class HeavySieveRenderPackage implements SieveRenderPackage {
 	private @Inject HeavySieve sieve;
